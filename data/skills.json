@@ -1,0 +1,17 @@
+[
+  { "_id": "1",  "name": "Python",                   "level": 95, "category": "frontend", "order": 1 },
+  { "_id": "2",  "name": "PyTorch",                  "level": 90, "category": "frontend", "order": 2 },
+  { "_id": "3",  "name": "TensorFlow / Keras",       "level": 82, "category": "frontend", "order": 3 },
+  { "_id": "4",  "name": "Scikit-learn",             "level": 92, "category": "frontend", "order": 4 },
+  { "_id": "5",  "name": "LangChain / LangGraph",    "level": 88, "category": "backend",  "order": 5 },
+  { "_id": "6",  "name": "HuggingFace Transformers", "level": 90, "category": "backend",  "order": 6 },
+  { "_id": "7",  "name": "RAG & Vector DBs",         "level": 85, "category": "backend",  "order": 7 },
+  { "_id": "8",  "name": "Pandas / NumPy",           "level": 95, "category": "database", "order": 8 },
+  { "_id": "9",  "name": "SQL / PostgreSQL",         "level": 80, "category": "database", "order": 9 },
+  { "_id": "10", "name": "Apache Spark",             "level": 68, "category": "database", "order": 10 },
+  { "_id": "11", "name": "Docker / Kubernetes",      "level": 78, "category": "devops",   "order": 11 },
+  { "_id": "12", "name": "AWS / GCP",                "level": 80, "category": "devops",   "order": 12 },
+  { "_id": "13", "name": "MLflow / W&B",             "level": 85, "category": "devops",   "order": 13 },
+  { "_id": "14", "name": "Computer Vision (CV2)",    "level": 82, "category": "other",    "order": 14 },
+  { "_id": "15", "name": "FastAPI / REST APIs",      "level": 88, "category": "other",    "order": 15 }
+]

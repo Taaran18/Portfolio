@@ -1,0 +1,65 @@
+[
+  {
+    "_id": "1",
+    "title": "DocuMind — Enterprise RAG Platform",
+    "description": "Multi-tenant RAG system that lets enterprises chat with their internal documents using GPT-4 + Pinecone.",
+    "technologies": ["Python", "LangChain", "FastAPI", "Pinecone", "OpenAI", "Next.js"],
+    "liveUrl": "https://example.com",
+    "githubUrl": "https://github.com/Taaran18",
+    "imageUrl": "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&auto=format&fit=crop",
+    "featured": true,
+    "order": 1
+  },
+  {
+    "_id": "2",
+    "title": "NeuralSense — Real-Time CV Pipeline",
+    "description": "Real-time object detection & segmentation achieving 30 FPS on edge devices using YOLO v9.",
+    "technologies": ["Python", "PyTorch", "YOLO", "OpenCV", "TensorRT", "ONNX"],
+    "liveUrl": "https://example.com",
+    "githubUrl": "https://github.com/Taaran18",
+    "imageUrl": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&auto=format&fit=crop",
+    "featured": true,
+    "order": 2
+  },
+  {
+    "_id": "3",
+    "title": "FinSight — Market Prediction Engine",
+    "description": "Transformer-based time-series forecasting for equity markets with explainable AI (SHAP) dashboard.",
+    "technologies": ["Python", "PyTorch", "Transformers", "SHAP", "Plotly", "FastAPI"],
+    "githubUrl": "https://github.com/Taaran18",
+    "imageUrl": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&auto=format&fit=crop",
+    "featured": true,
+    "order": 3
+  },
+  {
+    "_id": "4",
+    "title": "AutoTrain CLI",
+    "description": "Open-source CLI to fine-tune LLMs with QLoRA in 3 commands. 500+ GitHub stars.",
+    "technologies": ["Python", "HuggingFace", "PEFT", "QLoRA", "CLI", "CUDA"],
+    "githubUrl": "https://github.com/Taaran18",
+    "imageUrl": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&auto=format&fit=crop",
+    "featured": false,
+    "order": 4
+  },
+  {
+    "_id": "5",
+    "title": "SentimentScope",
+    "description": "Multi-lingual sentiment analysis API supporting 15 languages, serving 1M+ requests/month.",
+    "technologies": ["Python", "XLM-R", "FastAPI", "Docker", "Kubernetes", "Redis"],
+    "liveUrl": "https://example.com",
+    "githubUrl": "https://github.com/Taaran18",
+    "imageUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop",
+    "featured": false,
+    "order": 5
+  },
+  {
+    "_id": "6",
+    "title": "ML Experiment Tracker",
+    "description": "Lightweight MLflow alternative with a beautiful UI — track runs, compare metrics, version datasets.",
+    "technologies": ["Python", "FastAPI", "SQLite", "Next.js", "Recharts"],
+    "githubUrl": "https://github.com/Taaran18",
+    "imageUrl": "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?w=800&auto=format&fit=crop",
+    "featured": false,
+    "order": 6
+  }
+]

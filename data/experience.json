@@ -1,0 +1,51 @@
+[
+  {
+    "_id": "1",
+    "company": "AI Startup (Stealth)",
+    "role": "AI Engineer",
+    "description": "Designing and shipping production LLM applications including a multi-agent RAG platform for enterprise knowledge management.",
+    "responsibilities": [
+      "Built a multi-agent RAG system with LangGraph, cutting retrieval latency by 40%",
+      "Fine-tuned Llama 3 on proprietary data using QLoRA, achieving 15% accuracy gain over GPT-3.5",
+      "Designed vector search pipeline with Pinecone + reranking for 10M+ document corpus",
+      "Deployed FastAPI inference endpoints on AWS ECS with auto-scaling"
+    ],
+    "technologies": ["Python", "LangChain", "LangGraph", "Llama 3", "Pinecone", "FastAPI", "AWS", "Docker"],
+    "startDate": "2023-08",
+    "current": true,
+    "order": 1
+  },
+  {
+    "_id": "2",
+    "company": "Data Analytics Firm",
+    "role": "Machine Learning Engineer",
+    "description": "Developed and maintained ML models powering a B2B predictive analytics product used by 50+ enterprise clients.",
+    "responsibilities": [
+      "Built XGBoost and transformer-based forecasting models, improving MAPE by 22%",
+      "Designed feature engineering pipelines processing 500GB+ of time-series data daily",
+      "Implemented MLflow-based experiment tracking and model registry",
+      "Created automated retraining triggers on data drift with Evidently AI"
+    ],
+    "technologies": ["Python", "XGBoost", "PyTorch", "Scikit-learn", "MLflow", "Airflow", "PostgreSQL"],
+    "startDate": "2022-05",
+    "endDate": "2023-07",
+    "current": false,
+    "order": 2
+  },
+  {
+    "_id": "3",
+    "company": "Research Lab (University)",
+    "role": "AI Research Intern",
+    "description": "Contributed to NLP research on low-resource language understanding, resulting in a published workshop paper.",
+    "responsibilities": [
+      "Implemented cross-lingual transfer learning experiments with mBERT and XLM-R",
+      "Ran ablation studies and benchmark evaluations on 8 downstream NLP tasks",
+      "Co-authored a workshop paper on few-shot prompting for low-resource languages"
+    ],
+    "technologies": ["Python", "HuggingFace", "PyTorch", "NLTK", "Jupyter", "LaTeX"],
+    "startDate": "2021-06",
+    "endDate": "2022-04",
+    "current": false,
+    "order": 3
+  }
+]
