@@ -1,23 +1,39 @@
-# Portfolio
+# Taaran Jain — AI Engineer Portfolio
 
-My personal portfolio website built to showcase my work as an AI Engineer.
+Personal portfolio website built to showcase my work, research, and experience as an AI Engineer.
 
-## Live Site
-
-Coming soon on Vercel.
+**Live:** [taaranjain-portfolio.vercel.app](https://taaranjain-portfolio.vercel.app)
 
 ## Features
 
-- Interactive 3D background with mouse tracking
-- Sections: About, Experience, Projects, Skills, Contact
-- Light / Dark mode toggle
-- Admin panel to manage content
-- Fully responsive
+- **3D Neural Network** background — live animation with signal pulses flowing through layers, reacts to mouse movement
+- **Sections** — About, Experience, Leadership, Projects, Research, Skills, Certifications, Contact
+- **Light / Dark mode** with smooth transitions
+- **Framer Motion** scroll and entrance animations throughout
+- **Custom cursor** with lagging ring effect
+- **Contact form** powered by Nodemailer (Gmail SMTP)
+- Fully responsive across all screen sizes
 
-## Setup
+## Tech Stack
+
+- **Framework** — Next.js 14 (App Router)
+- **3D** — Three.js via @react-three/fiber + @react-three/drei
+- **Animations** — Framer Motion
+- **Styling** — Tailwind CSS + CSS Variables
+- **Email** — Nodemailer
+- **Deployment** — Vercel
+
+## Run Locally
 
 ```bash
 npm install
-cp .env.local.example .env.local
 npm run dev
+```
+
+Add a `.env.local` file with:
+
+```env
+EMAIL_USER=your@gmail.com
+EMAIL_APP_PASSWORD=your_app_password
+NEXTAUTH_SECRET=any_random_secret
 ```
