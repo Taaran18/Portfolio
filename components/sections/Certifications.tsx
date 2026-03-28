@@ -165,7 +165,7 @@ export default function Certifications() {
               </span>
 
               {/* Description */}
-              <p className="text-slate-500 dark:text-slate-400 text-xs leading-relaxed mb-4 flex-1">
+              <p className="text-slate-500 dark:text-slate-400 text-xs leading-relaxed mb-4 flex-1 text-justify">
                 {cert.description}
               </p>
 

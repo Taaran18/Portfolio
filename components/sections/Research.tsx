@@ -12,6 +12,7 @@ interface Paper {
   year: string
   summary: string
   link: string
+  category: string
 }
 
 const PUBLISHED: Paper[] = [
@@ -21,6 +22,7 @@ const PUBLISHED: Paper[] = [
     year: 'Nov 2024',
     summary: 'A systematic review of DRL methods applied to algorithmic trading — benchmarking frameworks like AlphaOptimizerNet, QTNet, and FinRL against challenges of market volatility, transaction costs, and the exploration-exploitation tradeoff. Evaluates DDQN and RDMM approaches and outlines what is still needed before DRL systems are production-robust.',
     link: 'https://drive.google.com/file/d/1JrQr3GPGTdiZVVmTB8NyQrjBRennxn4-/view?usp=sharing',
+    category: 'Finance',
   },
   {
     id: 'p2',
@@ -28,6 +30,7 @@ const PUBLISHED: Paper[] = [
     year: 'Apr 2024',
     summary: 'Presents a multi-modal diagnostic system combining deep learning and NLP to automate disease detection, medical image analysis, and drug identification. Integrates Gemini for real-time AI insights on a Django/React Native stack — targeting reduced diagnostic time, human error, and cost, especially in remote and underserved healthcare settings.',
     link: 'https://drive.google.com/file/d/1xuDjC77PjfrImIh8O-SiCckdHI8ioUfh/view?usp=sharing',
+    category: 'Healthcare',
   },
 ]
 
@@ -45,17 +48,7 @@ function PaperCard({ paper, i }: { paper: Paper; i: number }) {
         hover:border-cyan-500/30 hover:shadow-xl hover:shadow-cyan-500/10
         hover:scale-[1.02] transition-all duration-300 flex flex-col gap-3 block"
     >
-      <div className="flex items-start justify-between gap-4">
-        <h3 className="text-slate-900 dark:text-white font-bold text-sm leading-snug group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors flex-1">
-          {paper.title}
-        </h3>
-        <ExternalLink size={14} className="text-slate-400 group-hover:text-cyan-500 transition-colors shrink-0 mt-0.5" />
-      </div>
-
       <div className="flex flex-wrap items-center gap-2">
-        {paper.authors && (
-          <span className="text-xs text-slate-400 font-mono">{paper.authors}</span>
-        )}
         {paper.venue && (
           <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-cyan-500/10 border border-cyan-500/20 text-cyan-600 dark:text-cyan-400">
             {paper.venue}
@@ -64,9 +57,23 @@ function PaperCard({ paper, i }: { paper: Paper; i: number }) {
         <span className="text-xs text-slate-400 font-mono">{paper.year}</span>
       </div>
 
-      <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+      <h3 className="text-slate-900 dark:text-white font-bold text-sm leading-snug group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors flex-1">
+        {paper.title}
+      </h3>
+
+      <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed flex-1 text-justify">
         {paper.summary}
       </p>
+
+      <div className="flex items-center justify-between pt-2 mt-auto">
+        <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-500/10 border border-purple-500/20 text-purple-500 dark:text-purple-400">
+          {paper.category}
+        </span>
+        <div className="flex items-center gap-1.5 text-xs text-slate-400 group-hover:text-cyan-500 transition-colors">
+          <span>View Paper</span>
+          <ExternalLink size={12} />
+        </div>
+      </div>
     </motion.a>
   )
 }

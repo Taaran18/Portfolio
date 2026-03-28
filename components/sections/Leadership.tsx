@@ -196,7 +196,7 @@ export default function Leadership() {
               <p className="text-slate-400 text-xs font-mono mb-4">{role.period}</p>
 
               {/* Description */}
-              <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-4">
+              <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-4 text-justify">
                 {role.description}
               </p>
 
