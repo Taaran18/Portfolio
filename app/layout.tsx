@@ -10,7 +10,7 @@ const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mon
 export const metadata: Metadata = {
   title: 'Taaran Jain — AI Engineer',
   description:
-    'AI Engineer & Data Scientist specialising in LLMs, deep learning, and production ML systems. Building intelligent systems that create real-world impact.',
+    'AI Engineer & Data Scientist specialising in LLMs, deep learning, and production ML systems.',
   keywords: ['AI engineer', 'machine learning', 'deep learning', 'LLM', 'data scientist', 'portfolio'],
   authors: [{ name: 'Taaran Jain' }],
   openGraph: {

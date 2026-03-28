@@ -11,7 +11,7 @@ export default function Footer() {
     <footer className="py-12 px-6 border-t border-black/5 dark:border-white/5">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         <p className="text-slate-400 dark:text-slate-500 text-sm font-mono">
-          &copy; {new Date().getFullYear()} Taaran Jain. Built with Next.js &amp; Three.js
+          &copy; {new Date().getFullYear()} Taaran Jain. All rights reserved.
         </p>
         <div className="flex items-center gap-5">
           {socialLinks.map(({ icon: Icon, href, label }) => (

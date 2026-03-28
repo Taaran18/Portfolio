@@ -1,86 +1,82 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ExternalLink, Github, Star } from 'lucide-react'
 import Image from 'next/image'
 import SectionHeader from '@/components/ui/SectionHeader'
 import type { Project } from '@/types'
 
-const SEED_PROJECTS: Project[] = [
+const PROJECTS: Project[] = [
   {
     _id: '1',
-    title: 'DocuMind — Enterprise RAG Platform',
-    description: 'Multi-tenant RAG system that lets enterprises chat with their internal documents using GPT-4 + Pinecone.',
-    technologies: ['Python', 'LangChain', 'FastAPI', 'Pinecone', 'OpenAI', 'Next.js'],
-    liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com/Taaran18',
-    imageUrl: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&auto=format&fit=crop',
+    title: 'WhatsApp Lead Automation',
+    description: 'A full-stack platform for large-scale WhatsApp outreach — dual-mode connectivity (QR or Meta Business API), scheduled campaigns, lead management with tagging, and real-time delivery analytics, all from a single dashboard.',
+    technologies: ['Next.js', 'FastAPI', 'PostgreSQL', 'Node.js', 'WhatsApp API', 'Supabase'],
+    liveUrl: 'https://one-to-many-automation.vercel.app',
+    githubUrl: 'https://github.com/Taaran18/one-to-many-automation',
+    imageUrl: 'https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=800&auto=format&fit=crop',
     featured: true,
     order: 1,
   },
   {
     _id: '2',
-    title: 'NeuralSense — Real-Time CV Pipeline',
-    description: 'Real-time object detection & segmentation system achieving 30 FPS on edge devices using YOLO v9.',
-    technologies: ['Python', 'PyTorch', 'YOLO', 'OpenCV', 'TensorRT', 'ONNX'],
-    liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com/Taaran18',
-    imageUrl: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&auto=format&fit=crop',
+    title: 'OmniChat Pro',
+    description: 'A high-performance conversational AI platform with RAG-lite document processing, real-time response streaming, live token cost tracking, and a premium adaptive UI — all in a strictly modular Streamlit architecture.',
+    technologies: ['Python', 'Streamlit', 'OpenAI API', 'PyPDF', 'CSS'],
+    liveUrl: 'https://omnichat-pro.streamlit.app/',
+    githubUrl: 'https://github.com/Taaran18/OmniChat-Pro',
+    imageUrl: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&auto=format&fit=crop',
     featured: true,
     order: 2,
   },
   {
     _id: '3',
-    title: 'FinSight — Market Prediction Engine',
-    description: 'Transformer-based time-series forecasting for equity markets with explainable AI (SHAP) dashboard.',
-    technologies: ['Python', 'PyTorch', 'Transformers', 'SHAP', 'Plotly', 'FastAPI'],
-    githubUrl: 'https://github.com/Taaran18',
-    imageUrl: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&auto=format&fit=crop',
+    title: 'Self-Driven Car',
+    description: 'A neuroevolution simulator where AI learns to drive using NEAT — evolving neural networks across generations through mutation, crossover, and speciation. A 9-input network (8 ray-cast sensors + velocity) learns steering and acceleration with zero explicit rules.',
+    technologies: ['Python', 'NEAT', 'Pygame', 'Streamlit', 'Neuroevolution'],
+    liveUrl: 'https://self-driven-car-neat.streamlit.app/',
+    githubUrl: 'https://github.com/Taaran18/Self-Driven-Car',
+    imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop',
     featured: true,
     order: 3,
   },
   {
     _id: '4',
-    title: 'AutoTrain CLI',
-    description: 'Open-source CLI to fine-tune LLMs with QLoRA in 3 commands. 500+ GitHub stars.',
-    technologies: ['Python', 'HuggingFace', 'PEFT', 'QLoRA', 'CLI', 'CUDA'],
-    githubUrl: 'https://github.com/Taaran18',
-    imageUrl: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&auto=format&fit=crop',
-    featured: false,
+    title: 'MLInsights',
+    description: 'Upload a dataset, get a trained ML model — no code needed. Auto-trains 30+ classification, regression, and clustering models, compares performance side-by-side, and exports cleaned data, model files, and PDF reports.',
+    technologies: ['Next.js', 'FastAPI', 'Scikit-learn', 'XGBoost', 'LightGBM', 'CatBoost'],
+    liveUrl: 'https://ml-insights-flax.vercel.app',
+    githubUrl: 'https://github.com/Taaran18/MLInsights',
+    imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop',
+    featured: true,
     order: 4,
   },
   {
     _id: '5',
-    title: 'SentimentScope',
-    description: 'Multi-lingual sentiment analysis API supporting 15 languages, serving 1M+ requests/month.',
-    technologies: ['Python', 'XLM-R', 'FastAPI', 'Docker', 'Kubernetes', 'Redis'],
-    liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com/Taaran18',
-    imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop',
+    title: 'AlgoVisualiser',
+    description: 'An interactive DSA learning platform that animates 70+ algorithms step-by-step — with playback controls, adjustable speed, and dark/light mode. Covers everything from sorting and graphs to dynamic programming and backtracking.',
+    technologies: ['Next.js', 'TypeScript', 'FastAPI', 'Tailwind CSS', 'Framer Motion'],
+    liveUrl: 'https://algo-visualiser-mu.vercel.app',
+    githubUrl: 'https://github.com/Taaran18/AlgoVisualiser',
+    imageUrl: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&auto=format&fit=crop',
     featured: false,
     order: 5,
-  },
-  {
-    _id: '6',
-    title: 'ML Experiment Tracker',
-    description: 'Lightweight MLflow alternative with a beautiful UI — track runs, compare metrics, version datasets.',
-    technologies: ['Python', 'FastAPI', 'SQLite', 'Next.js', 'Recharts'],
-    githubUrl: 'https://github.com/Taaran18',
-    imageUrl: 'https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?w=800&auto=format&fit=crop',
-    featured: false,
-    order: 6,
   },
 ]
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
-      className="group relative glass rounded-2xl overflow-hidden border border-black/5 dark:border-white/5 hover:border-cyan-500/30 dark:hover:border-cyan-400/30 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/10 hover:-translate-y-1"
+      initial={{ opacity: 0, scale: 0.82, y: 40 }}
+      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.6, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
+      className="group relative glass rounded-2xl overflow-hidden border border-black/5 dark:border-white/5
+        hover:border-cyan-500/30 dark:hover:border-cyan-400/30
+        hover:shadow-xl hover:shadow-cyan-500/10
+        hover:scale-[1.03]
+        transition-all duration-300 flex flex-col h-full"
     >
       {project.imageUrl && (
         <div className="relative h-48 overflow-hidden">
@@ -88,7 +84,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             src={project.imageUrl}
             alt={project.title}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-60 dark:opacity-60 group-hover:opacity-80"
+            className="object-cover group-hover:scale-110 transition-transform duration-500 opacity-60 group-hover:opacity-85"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-transparent to-transparent" />
@@ -100,11 +96,11 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </div>
       )}
 
-      <div className="p-6">
+      <div className="p-6 flex flex-col flex-1">
         <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
           {project.title}
         </h3>
-        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-4">{project.description}</p>
+        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-4 text-justify">{project.description}</p>
 
         <div className="flex flex-wrap gap-1.5 mb-5">
           {project.technologies.slice(0, 4).map((t) => (
@@ -113,25 +109,23 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             </span>
           ))}
           {project.technologies.length > 4 && (
-            <span className="px-2 py-0.5 rounded text-xs font-mono text-slate-400">
-              +{project.technologies.length - 4}
-            </span>
+            <span className="px-2 py-0.5 rounded text-xs font-mono text-slate-400">+{project.technologies.length - 4}</span>
           )}
         </div>
 
-        <div className="flex items-center gap-4">
-          {project.githubUrl && (
+        <div className="flex items-center justify-between mt-auto pt-2">
+          {project.githubUrl ? (
             <a href={project.githubUrl} target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-slate-400 hover:text-slate-900 dark:hover:text-white text-sm transition-colors">
               <Github size={15} /> Code
             </a>
-          )}
-          {project.liveUrl && (
+          ) : <span />}
+          {project.liveUrl ? (
             <a href={project.liveUrl} target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 text-sm transition-colors ml-auto">
+              className="flex items-center gap-1.5 text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 text-sm transition-colors">
               Live Demo <ExternalLink size={13} />
             </a>
-          )}
+          ) : <span />}
         </div>
       </div>
     </motion.div>
@@ -139,19 +133,13 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 }
 
 export default function Projects() {
-  const [projects, setProjects] = useState<Project[]>(SEED_PROJECTS)
   const [filter, setFilter] = useState<'all' | 'featured'>('all')
-
-  useEffect(() => {
-    fetch('/api/projects').then((r) => r.json()).then((data) => { if (data?.length) setProjects(data) }).catch(() => {})
-  }, [])
-
-  const filtered = filter === 'featured' ? projects.filter((p) => p.featured) : projects
+  const filtered = filter === 'featured' ? PROJECTS.filter((p) => p.featured) : PROJECTS
 
   return (
     <section id="projects" className="section-padding max-w-7xl mx-auto">
       <SectionHeader
-        label="03 / Projects"
+        label="04 / Projects"
         title="Selected Work"
         subtitle="AI/ML projects I've built — from LLM applications to production-grade ML systems."
       />
@@ -159,7 +147,7 @@ export default function Projects() {
       <div className="flex justify-center gap-3 mb-12">
         {(['all', 'featured'] as const).map((f) => (
           <button key={f} onClick={() => setFilter(f)}
-            className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
+            className={`px-5 py-2 rounded-full text-sm font-medium transition-all hover:scale-105 ${
               filter === f
                 ? 'bg-gradient-to-r from-cyan-500 to-purple-600 text-white shadow-lg shadow-cyan-500/20'
                 : 'glass text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-black/5 dark:border-white/5'
@@ -170,7 +158,7 @@ export default function Projects() {
         ))}
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
         {filtered.map((project, i) => (
           <ProjectCard key={project._id} project={project} index={i} />
         ))}
