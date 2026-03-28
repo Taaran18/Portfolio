@@ -7,7 +7,7 @@ import SectionHeader from '@/components/ui/SectionHeader'
 const stats = [
   { value: '2+', label: 'Years in AI/ML' },
   { value: '5+', label: 'Projects Deployed' },
-  { value: '3+', label: 'Research Papers Read' },
+  { value: '2+', label: 'Papers Published' },
   { value: '10+', label: 'GitHub Repositories' },
 ]
 
@@ -54,20 +54,10 @@ export default function About() {
 
           <div className="flex flex-wrap gap-2 pt-2">
             {[
-              // Core ML
-              'Python', 'PyTorch', 'TensorFlow', 'Scikit-learn', 'Keras',
-              // Data
-              'Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'SQL',
-              // LLM / NLP
-              'LangChain', 'LangGraph', 'HuggingFace', 'OpenAI API', 'RAG',
-              'LoRA', 'QLoRA', 'RLHF', 'Prompt Engineering', 'spaCy',
-              // Vector / Search
-              'Pinecone', 'ChromaDB', 'FAISS',
-              // CV
-              'OpenCV', 'YOLO', 'TensorRT',
-              // MLOps & Infra
-              'MLflow', 'Weights & Biases', 'DVC', 'FastAPI', 'Docker',
-              'Kubernetes', 'AWS', 'GCP', 'Apache Spark',
+              'Python', 'PyTorch', 'TensorFlow', 'Scikit-learn',
+              'LangChain', 'HuggingFace', 'OpenAI API', 'RAG',
+              'Prompt Engineering', 'Pandas', 'OpenCV',
+              'FastAPI', 'Docker', 'GCP', 'MLflow',
             ].map((tech) => (
               <span key={tech} className="px-3 py-1 rounded-full text-xs font-mono text-cyan-600 dark:text-cyan-300 border border-cyan-500/20 bg-cyan-500/5">
                 {tech}

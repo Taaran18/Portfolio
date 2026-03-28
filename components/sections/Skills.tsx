@@ -73,7 +73,7 @@ const CATEGORY_COLORS: Record<string, { bar: string; text: string }> = {
   cloud:     { bar: 'from-green-500 to-teal-500',     text: 'text-green-600 dark:text-green-400' },
 }
 
-const CATEGORIES = ['all', 'languages', 'fullstack', 'ml', 'dl', 'llm', 'database', 'cloud'] as const
+const CATEGORIES = ['ml', 'dl', 'llm', 'languages', 'database', 'fullstack', 'cloud', 'all'] as const
 type Category = (typeof CATEGORIES)[number]
 
 function SkillBar({ skill, index }: { skill: Skill; index: number }) {
@@ -98,10 +98,10 @@ function SkillBar({ skill, index }: { skill: Skill; index: number }) {
 }
 
 export default function Skills() {
-  const [activeCategory, setActiveCategory] = useState<Category>('all')
+  const [activeCategory, setActiveCategory] = useState<Category>('ml')
   const filtered = activeCategory === 'all' ? SKILLS : SKILLS.filter((s) => s.category === activeCategory)
 
-  const byCategory = (['languages', 'fullstack', 'ml', 'dl', 'llm', 'database', 'cloud'] as const).reduce<Record<string, Skill[]>>((acc, cat) => {
+  const byCategory = (['ml', 'dl', 'llm', 'languages', 'database', 'fullstack', 'cloud'] as const).reduce<Record<string, Skill[]>>((acc, cat) => {
     acc[cat] = SKILLS.filter((s) => s.category === cat)
     return acc
   }, {})

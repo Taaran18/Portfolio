@@ -156,14 +156,14 @@ const ICON_MAP = {
 
 export default function Leadership() {
   return (
-    <section id="leadership" className="section-padding max-w-7xl mx-auto">
+    <section id="leadership" className="section-padding max-w-screen-2xl mx-auto">
       <SectionHeader
         label="03 / Leadership"
         title="College Leadership"
         subtitle="Roles where I led people, ran initiatives, and created impact beyond the classroom."
       />
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {ROLES.map((role, i) => {
           const Icon = ICON_MAP[role.icon]
           return (
