@@ -34,7 +34,7 @@ export interface Skill {
   _id?: string
   name: string
   level: number          // 0–100
-  category: 'frontend' | 'backend' | 'database' | 'devops' | 'other'
+  category: 'frontend' | 'backend' | 'database' | 'devops' | 'other' | 'languages' | 'fullstack' | 'ml' | 'dl' | 'llm' | 'cloud'
   icon?: string
   order: number
   createdAt?: string
