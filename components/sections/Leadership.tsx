@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Users, Trophy, Star } from 'lucide-react'
 import SectionHeader from '@/components/ui/SectionHeader'
@@ -155,6 +156,9 @@ const ICON_MAP = {
 }
 
 export default function Leadership() {
+  const [showAll, setShowAll] = useState(false)
+  const visible = showAll ? ROLES : ROLES.slice(0, 6)
+
   return (
     <section id="leadership" className="section-padding max-w-screen-2xl mx-auto">
       <SectionHeader
@@ -163,8 +167,8 @@ export default function Leadership() {
         subtitle="Roles where I led people, ran initiatives, and created impact beyond the classroom."
       />
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {ROLES.map((role, i) => {
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {visible.map((role, i) => {
           const Icon = ICON_MAP[role.icon]
           return (
             <motion.div
@@ -172,7 +176,7 @@ export default function Leadership() {
               initial={{ opacity: 0, scale: 0.88, y: 30 }}
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.55, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.55, delay: (i % 6) * 0.08, ease: [0.22, 1, 0.36, 1] }}
               className="group glass rounded-2xl p-6 border border-black/5 dark:border-white/5
                 hover:border-cyan-500/30 hover:shadow-xl hover:shadow-cyan-500/10
                 hover:scale-[1.03] transition-all duration-300"
@@ -209,6 +213,17 @@ export default function Leadership() {
           )
         })}
       </div>
+
+      {ROLES.length > 6 && (
+        <div className="flex justify-center mt-10">
+          <button
+            onClick={() => setShowAll((v) => !v)}
+            className="px-6 py-2.5 rounded-xl glass border border-black/5 dark:border-white/5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-cyan-500/30 text-sm font-medium transition-all hover:scale-105"
+          >
+            {showAll ? 'Show Less' : `Show More (${ROLES.length - 6} more)`}
+          </button>
+        </div>
+      )}
     </section>
   )
 }

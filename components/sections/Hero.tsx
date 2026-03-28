@@ -147,8 +147,8 @@ export default function Hero() {
             { icon: FileText, href: 'https://drive.google.com/file/d/1-ckubTF7jTKD8m9k3MNkf8JmydBHCjuy/view?usp=sharing', label: 'Resume' },
           ].map(({ icon: Icon, href, label }) => (
             <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
-              className="group flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors text-sm">
-              <Icon size={18} className="group-hover:scale-110 transition-transform" />
+              className="group flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors text-sm font-medium">
+              <Icon size={22} strokeWidth={1.75} className="group-hover:scale-110 transition-transform" />
               <span className="hidden sm:inline">{label}</span>
             </a>
           ))}
