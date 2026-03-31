@@ -9,6 +9,17 @@ import type { Project } from '@/types'
 
 const PROJECTS: Project[] = [
   {
+    _id: '0',
+    title: 'Nexus AI',
+    description: 'A multi-modal AI platform combining RAG, live web search, and six LLMs (Llama, Mixtral, Gemma, DeepSeek) in one interface — with real-time streaming, document upload, voice input, and LangGraph-powered node orchestration. Entire stack runs at zero cost.',
+    technologies: ['Next.js', 'FastAPI', 'LangGraph', 'LangChain', 'Supabase', 'Groq API'],
+    liveUrl: 'https://nexus-ai-drab.vercel.app/',
+    githubUrl: 'https://github.com/Taaran18/nexus-ai',
+    imageUrl: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&auto=format&fit=crop',
+    featured: true,
+    order: 0,
+  },
+  {
     _id: '1',
     title: 'WhatsApp Lead Automation',
     description: 'A full-stack platform for large-scale WhatsApp outreach — dual-mode connectivity (QR or Meta Business API), scheduled campaigns, lead management with tagging, and real-time delivery analytics, all from a single dashboard.',
