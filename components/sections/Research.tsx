@@ -61,7 +61,7 @@ function PaperCard({ paper, i }: { paper: Paper; i: number }) {
         {paper.title}
       </h3>
 
-      <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed flex-1 text-justify">
+      <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed flex-1 text-left">
         {paper.summary}
       </p>
 

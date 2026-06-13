@@ -36,18 +36,18 @@ export default function About() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="space-y-6"
         >
-          <p className="text-slate-700 dark:text-slate-300 text-lg leading-relaxed text-justify">
+          <p className="text-slate-700 dark:text-slate-300 text-lg leading-relaxed text-left">
             Hey! I&apos;m <span className="text-cyan-600 dark:text-cyan-400 font-semibold">Taaran</span>, an AI Engineer
             passionate about building systems at the intersection of{' '}
             <span className="text-purple-600 dark:text-purple-400 font-semibold">large language models</span>,
             deep learning, and real-world applications.
           </p>
-          <p className="text-slate-500 dark:text-slate-400 leading-relaxed text-justify">
+          <p className="text-slate-500 dark:text-slate-400 leading-relaxed text-left">
             I work across the full ML lifecycle — from exploratory data analysis and model research to
             serving models at scale in production. My current focus is on LLM-powered applications:
             retrieval-augmented generation (RAG), agentic AI, and multimodal systems.
           </p>
-          <p className="text-slate-500 dark:text-slate-400 leading-relaxed text-justify">
+          <p className="text-slate-500 dark:text-slate-400 leading-relaxed text-left">
             When I&apos;m not training models or writing code, I&apos;m reading the latest papers on arXiv,
             contributing to open-source AI tools, or experimenting with new architectures.
           </p>

@@ -111,7 +111,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         <h3 className="text-slate-900 dark:text-white font-bold text-lg mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
           {project.title}
         </h3>
-        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-4 text-justify">{project.description}</p>
+        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-4 text-left">{project.description}</p>
 
         <div className="flex flex-wrap gap-1.5 mb-5">
           {project.technologies.slice(0, 4).map((t) => (
