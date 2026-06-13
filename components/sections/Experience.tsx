@@ -70,7 +70,7 @@ function formatDate(d: string) {
 
 export default function Experience() {
   return (
-    <section id="experience" className="section-padding max-w-7xl mx-auto">
+    <section id="experience" className="section-padding container-wide">
       <SectionHeader
         label="02 / Experience"
         title="Work Experience"

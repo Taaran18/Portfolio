@@ -9,23 +9,33 @@ interface Props {
   count?: number
 }
 
+/** Fewer particles on phones/tablets to keep the scene smooth and battery-friendly. */
+function responsiveCount(): number {
+  if (typeof window === 'undefined') return 3000
+  const w = window.innerWidth
+  if (w < 640) return 1100   // phones
+  if (w < 1024) return 1900  // tablets
+  return 3000                // desktop
+}
+
 /**
  * A large field of tiny glowing particles that slowly rotate
  * and subtly respond to mouse movement.
  */
-export default function ParticleField({ mouseNorm, count = 3000 }: Props) {
+export default function ParticleField({ mouseNorm, count }: Props) {
   const pointsRef = useRef<THREE.Points>(null)
+  const resolvedCount = useMemo(() => count ?? responsiveCount(), [count])
 
   // Generate random positions once
   const { positions, colors } = useMemo(() => {
-    const positions = new Float32Array(count * 3)
-    const colors = new Float32Array(count * 3)
+    const positions = new Float32Array(resolvedCount * 3)
+    const colors = new Float32Array(resolvedCount * 3)
 
     const cyan = new THREE.Color('#22d3ee')
     const purple = new THREE.Color('#a855f7')
     const white = new THREE.Color('#ffffff')
 
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < resolvedCount; i++) {
       // Spread across a sphere
       const theta = Math.random() * Math.PI * 2
       const phi = Math.acos(Math.random() * 2 - 1)
@@ -44,7 +54,7 @@ export default function ParticleField({ mouseNorm, count = 3000 }: Props) {
     }
 
     return { positions, colors }
-  }, [count])
+  }, [resolvedCount])
 
   useFrame((state) => {
     if (!pointsRef.current) return

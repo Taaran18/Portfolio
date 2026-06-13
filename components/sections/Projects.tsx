@@ -148,7 +148,7 @@ export default function Projects() {
   const filtered = filter === 'featured' ? PROJECTS.filter((p) => p.featured) : PROJECTS
 
   return (
-    <section id="projects" className="section-padding max-w-screen-2xl mx-auto">
+    <section id="projects" className="section-padding container-wide">
       <SectionHeader
         label="04 / Projects"
         title="Selected Work"

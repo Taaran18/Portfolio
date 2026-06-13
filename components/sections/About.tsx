@@ -20,7 +20,7 @@ const traits = [
 
 export default function About() {
   return (
-    <section id="about" className="section-padding max-w-7xl mx-auto">
+    <section id="about" className="section-padding container-wide">
       <SectionHeader
         label="01 / About"
         title="About Me"

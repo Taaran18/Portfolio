@@ -1,26 +1,33 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import clsx from 'clsx'
 import ThemeToggle from './ThemeToggle'
 
 const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Leadership', href: '#leadership' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Research', href: '#research' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Certifications', href: '#certifications' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'About', href: '/about', id: 'about' },
+  { label: 'Experience', href: '/experience', id: 'experience' },
+  { label: 'Leadership', href: '/leadership', id: 'leadership' },
+  { label: 'Projects', href: '/projects', id: 'projects' },
+  { label: 'Research', href: '/research', id: 'research' },
+  { label: 'Skills', href: '/skills', id: 'skills' },
+  { label: 'Certifications', href: '/certifications', id: 'certifications' },
+  { label: 'Contact', href: '/contact', id: 'contact' },
 ]
 
 export default function Navbar() {
+  const pathname = usePathname()
+  const isHome = pathname === '/'
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
+
+  // Highlight: scroll-spy on the home page, current route elsewhere.
+  const isLinkActive = (link: { href: string; id: string }) =>
+    isHome ? activeSection === link.id : pathname === link.href
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30)
@@ -28,8 +35,10 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Scroll-spy only matters on the single-scroll home page.
   useEffect(() => {
-    const sections = navLinks.map((l) => l.href.slice(1))
+    if (!isHome) return
+    const sections = navLinks.map((l) => l.id)
     const observers: IntersectionObserver[] = []
     sections.forEach((id) => {
       const el = document.getElementById(id)
@@ -42,7 +51,7 @@ export default function Navbar() {
       observers.push(obs)
     })
     return () => observers.forEach((o) => o.disconnect())
-  }, [])
+  }, [isHome])
 
   return (
     <motion.header
@@ -56,21 +65,21 @@ export default function Navbar() {
           : 'py-5'
       )}
     >
-      <nav className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+      <nav className="container-wide px-6 md:px-12 flex items-center justify-between relative">
         {/* Logo */}
-        <a href="#" className="text-xl font-bold font-mono text-gradient hover:opacity-80 transition-opacity">
+        <a href="/" className="text-xl font-bold font-mono text-gradient hover:opacity-80 transition-opacity">
           &lt;TJ /&gt;
         </a>
 
-        {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-8">
+        {/* Desktop links — centered */}
+        <ul className="hidden md:flex items-center gap-6 lg:gap-8 absolute left-1/2 -translate-x-1/2">
           {navLinks.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
                 className={clsx(
-                  'text-sm font-medium transition-colors relative group',
-                  activeSection === link.href.slice(1)
+                  'text-sm font-medium transition-colors relative group whitespace-nowrap',
+                  isLinkActive(link)
                     ? 'text-cyan-500'
                     : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
                 )}
@@ -78,21 +87,23 @@ export default function Navbar() {
                 {link.label}
                 <span className={clsx(
                   'absolute -bottom-0.5 left-0 h-px bg-cyan-500 transition-all duration-300',
-                  activeSection === link.href.slice(1) ? 'w-full' : 'w-0 group-hover:w-full'
+                  isLinkActive(link) ? 'w-full' : 'w-0 group-hover:w-full'
                 )} />
               </a>
             </li>
           ))}
-          <li><ThemeToggle /></li>
-          <li>
-            <a
-              href="#contact"
-              className="px-4 py-2 rounded-lg border border-cyan-500/40 text-cyan-600 dark:text-cyan-400 text-sm font-medium hover:bg-cyan-500/10 transition-colors"
-            >
-              Hire Me
-            </a>
-          </li>
         </ul>
+
+        {/* Desktop right controls */}
+        <div className="hidden md:flex items-center gap-6">
+          <ThemeToggle />
+          <a
+            href="/contact"
+            className="px-4 py-2 rounded-lg border border-cyan-500/40 text-cyan-600 dark:text-cyan-400 text-sm font-medium hover:bg-cyan-500/10 transition-colors whitespace-nowrap"
+          >
+            Hire Me
+          </a>
+        </div>
 
         {/* Mobile row */}
         <div className="md:hidden flex items-center gap-2">
@@ -123,7 +134,7 @@ export default function Navbar() {
                     onClick={() => setMobileOpen(false)}
                     className={clsx(
                       'block text-base font-medium transition-colors',
-                      activeSection === link.href.slice(1)
+                      isLinkActive(link)
                         ? 'text-cyan-500'
                         : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
                     )}

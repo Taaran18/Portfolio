@@ -160,7 +160,7 @@ export default function Leadership() {
   const visible = showAll ? ROLES : ROLES.slice(0, 6)
 
   return (
-    <section id="leadership" className="section-padding max-w-screen-2xl mx-auto">
+    <section id="leadership" className="section-padding container-wide">
       <SectionHeader
         label="03 / Leadership"
         title="College Leadership"

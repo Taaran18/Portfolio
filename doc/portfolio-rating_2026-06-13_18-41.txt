@@ -1,0 +1,72 @@
+================================================================================
+ PORTFOLIO REVIEW & RATING — Taaran Jain (AI Engineer)
+ Generated: 2026-06-13 18:41 IST
+ Reviewed by: Claude (acting as portfolio expert) + 2025/26 hiring research
+ Site: https://www.taaranjain.com
+================================================================================
+
+--------------------------------------------------------------------------------
+ RATINGS (out of 10)
+--------------------------------------------------------------------------------
+ UI/UX & Design ................... 9.0 / 10
+ Content & Copy ................... 7.5 / 10
+ Technical depth / projects ....... 8.0 / 10
+ SEO & discoverability ............ 4.0 / 10  (fixed in this session -> ~9)
+ --------------------------------------------------
+ OVERALL (for an AI Engineer) ..... ~7.5 / 10
+
+--------------------------------------------------------------------------------
+ STRENGTHS
+--------------------------------------------------------------------------------
+ - 6 projects, EVERY one with a live demo AND a GitHub link
+   (Nexus AI, WhatsApp Lead Automation, OmniChat Pro, Self-Driven Car / NEAT,
+    MLInsights, AlgoVisualiser). This is exactly what recruiters want.
+ - Real, progressive experience: AI Engineer @ e-Marketing.io (current) ->
+   Data Science Specialist @ LogiScope -> DS Intern @ Celebal.
+ - 2 published papers (DRL in trading, AI medical diagnostics).
+ - 12 certifications, genuine leadership (GDSC AI/ML Lead, AICTE IDEA Lab).
+ - Top-tier visual execution: three.js particle hero, Framer Motion, dark/light,
+   typewriter, glassmorphism. Better looking than most personal portfolios.
+
+--------------------------------------------------------------------------------
+ WEAKNESSES (ranked by impact)
+--------------------------------------------------------------------------------
+ 1. NO QUANTIFIED METRICS / IMPACT anywhere. Biggest gap. Every project and job
+    bullet says WHAT was built, never the RESULT. Research: "no metrics ->
+    recruiters assume no testing"; "76% of hiring managers prefer portfolios
+    with detailed outcomes." Add latency, %, cost saved, users, accuracy.
+    Frame with STAR (Situation-Task-Action-Result), lead with the Result.
+ 2. STOCK UNSPLASH IMAGES on every project. Generic AI photos read as
+    "template" and hide your real work. Replace with real screenshots / GIFs.
+ 3. SELF-RATED SKILL % BARS (Python 95%, etc.) are a known cliche -> "95% of
+    what?". Use proficiency tiers (Expert / Proficient / Familiar) or drop them.
+ 4. PADDED "+" STATS ("2+ years, 2+ papers, 5+ projects"). State exact numbers.
+ 5. NO CASE-STUDY DEPTH. No architecture diagrams or problem->approach->result
+    write-ups. Make linked GitHub READMEs carry that weight.
+ 6. SEO was essentially absent (no metadataBase, canonical, OG image, structured
+    data, robots, sitemap). FIXED in this session.
+
+ Minor: text-justify creates uneven whitespace "rivers" (left-align reads
+ better); custom cursor (cursor:none) hurt usability (addressed this session);
+ 3000-particle 3D scene can dent mobile Lighthouse/LCP (optimized this session);
+ resume on Google Drive is fragile -> self-host /resume.pdf.
+
+--------------------------------------------------------------------------------
+ TOP 2 HIGHEST-LEVERAGE CHANGES (would push overall to ~9 / 10)
+--------------------------------------------------------------------------------
+ 1. Add quantified metrics to every project + experience bullet.
+ 2. Replace stock images with real app screenshots / GIFs.
+ Then: drop skill % bars, remove padded "+" stats, self-host resume PDF.
+
+--------------------------------------------------------------------------------
+ SOURCES
+--------------------------------------------------------------------------------
+ - InterviewNode — ML portfolio projects that get you hired (2025)
+   https://www.interviewnode.com/post/ml-engineer-portfolio-projects-that-will-get-you-hired-in-2025
+ - Learnist — 15 mistakes presenting AI projects (metrics/claims/links) (2026)
+   https://www.learnist.org/ai-projects-cv-mistakes-2026/
+ - DataExpert — Ultimate Guide to AI Engineering Portfolios
+   https://www.dataexpert.io/blog/ultimate-guide-ai-engineering-portfolios
+ - InterviewNode — Building your ML portfolio
+   https://www.interviewnode.com/post/building-your-ml-portfolio-showcasing-your-skills
+================================================================================

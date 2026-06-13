@@ -125,7 +125,7 @@ const COLOR_MAP = {
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="section-padding max-w-7xl mx-auto">
+    <section id="certifications" className="section-padding container-wide">
       <SectionHeader
         label="07 / Certifications"
         title="Certifications"

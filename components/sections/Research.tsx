@@ -80,7 +80,7 @@ function PaperCard({ paper, i }: { paper: Paper; i: number }) {
 
 export default function Research() {
   return (
-    <section id="research" className="section-padding max-w-7xl mx-auto">
+    <section id="research" className="section-padding container-wide">
       <SectionHeader
         label="05 / Research"
         title="Research"

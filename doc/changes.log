@@ -1,0 +1,184 @@
+================================================================================
+ CHANGES LOG — Portfolio (Taaran Jain)
+ All entries by Claude. Times in IST.
+================================================================================
+
+[2026-06-13]  DEPENDENCY RECOVERY & REACT 19 MIGRATION
+--------------------------------------------------------------------------------
+ Context: `npm audit fix --force` had upgraded Next.js 14 -> 16 while leaving
+ React 18 + react-three-fiber v8, crashing the app with
+ "Cannot read properties of undefined (reading 'ReactCurrentOwner')".
+
+ - Restored package.json / package-lock.json / tsconfig.json from git, then
+   performed a clean, intentional upgrade.
+ - Migrated the stack to React 19:
+     next            14.2.5 -> ^16.2.9
+     react           18     -> ^19
+     react-dom       18     -> ^19
+     @react-three/fiber  8  -> ^9.0.0   (fixes the ReactCurrentOwner crash)
+     @react-three/drei   9  -> ^10.0.0
+     next-themes     0.3    -> ^0.4.6
+     nodemailer      7      -> ^8.0.11  (fixes SMTP-injection advisory)
+     @types/react / @types/react-dom  18 -> ^19
+ - npm vulnerabilities: 91 -> 2 (the 2 remaining are postcss bundled inside
+   Next 16 itself; build-time only, not fixable without Next changing its dep).
+ - Verified: `tsc --noEmit` clean, `next build` clean, dev boots (HTTP 200),
+   and the 3D Hero scene renders in a real WebGL context with ZERO
+   ReactCurrentOwner errors (verified by driving headless Chrome via CDP).
+
+[2026-06-13]  THEME DEFAULT
+--------------------------------------------------------------------------------
+ - components/Providers.tsx: defaultTheme "dark" -> "light".
+   New visitors now see LIGHT mode first; their choice persists in
+   localStorage; enableSystem stays false so OS setting won't override.
+   (globals.css :root already defines the light palette as the base.)
+
+[2026-06-13]  GITIGNORE
+--------------------------------------------------------------------------------
+ - .gitignore: added ".claude/" so local Claude Code config is not committed
+   to the public repo.
+
+[2026-06-13]  SEO (robots, sitemap, social cards, structured data)
+--------------------------------------------------------------------------------
+ Canonical site URL: https://www.taaranjain.com
+ - lib/site.ts                NEW  — single source of truth for site URL/meta
+                                     (override via NEXT_PUBLIC_SITE_URL).
+ - app/robots.ts              NEW  — generates /robots.txt (allow /, disallow
+                                     /api/, points to sitemap + host).
+ - app/sitemap.ts             NEW  — generates /sitemap.xml (canonical home).
+ - app/opengraph-image.tsx    NEW  — dynamic 1200x630 social share image
+                                     (on-brand cyan/purple, no asset needed).
+ - app/twitter-image.tsx      NEW  — reuses the OG image (summary_large_image).
+ - app/layout.tsx             EDIT — metadataBase, canonical alternate,
+                                     full Open Graph + Twitter tags, keywords,
+                                     robots directives, and JSON-LD Person
+                                     structured data (name, jobTitle, location,
+                                     GitHub/LinkedIn, knowsAbout).
+ - Verified all routes return correctly in a production build:
+   /robots.txt, /sitemap.xml, /opengraph-image (200 PNG), JSON-LD in HTML.
+ TODO (post-deploy): submit https://www.taaranjain.com/sitemap.xml to Google
+ Search Console.
+
+[2026-06-13]  CUSTOM CURSOR — DESKTOP ONLY + SMOOTH
+--------------------------------------------------------------------------------
+ - components/ui/CursorGlow.tsx: rewritten.
+     * Renders ONLY on desktop (matchMedia "(hover:hover) and (pointer:fine)").
+       On mobile / tablet (touch) it no longer renders at all — fixes the
+       stray cyan dot that previously sat in the corner on touch devices.
+     * Smoothness: pointer tracked in a ref (no React re-render per move) and
+       eased toward the target every frame via requestAnimationFrame —
+       dot lerp 0.35 (fast), ring lerp 0.16 (trailing). Uses translate3d +
+       will-change-transform for GPU-accelerated, buttery motion.
+ - app/globals.css: removed global `cursor: none` from body; now applied only
+   inside `@media (hover:hover) and (pointer:fine)`. Touch devices keep normal
+   behavior. Added -webkit-tap-highlight-color: transparent.
+
+[2026-06-13]  WIDE DESKTOP LAYOUT + MOBILE/TABLET OPTIMIZATION
+--------------------------------------------------------------------------------
+ - app/globals.css:
+     * New `.container-wide` utility = w-full max-w-[1700px] mx-auto
+       (was max-w-7xl / 1280px) -> much wider desktop layout.
+     * `.section-padding` now responsive:
+       pt-8 pb-20 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 2xl:px-32.
+     * `.heading-xl` / `.heading-lg` scale down on small screens
+       (added text-4xl / text-2xl base steps).
+ - Replaced `max-w-7xl mx-auto` and `max-w-screen-2xl mx-auto` with
+   `container-wide` across all sections + Navbar + Footer (10 files).
+ - components/three/ParticleField.tsx: particle count is now responsive —
+   1100 (phones <640px) / 1900 (tablets <1024px) / 3000 (desktop) — to keep
+   the scene smooth and battery-friendly on mobile. dpr already capped [1,1.5].
+
+[2026-06-13]  DOCS
+--------------------------------------------------------------------------------
+ - doc/portfolio-rating_2026-06-13_18-41.txt  NEW — full review & rating.
+ - doc/changes.log                            NEW — this file.
+ - Folder moved from outside the repo to inside the project (per request):
+   ./doc/
+
+[2026-06-13]  NAVBAR & FOOTER LAYOUT
+--------------------------------------------------------------------------------
+ - components/ui/Navbar.tsx: nav links are now centered (absolute left-1/2
+   -translate-x-1/2); logo stays left, ThemeToggle + Hire Me grouped right.
+ - components/ui/Footer.tsx: 3-zone grid -> left = <TJ/> brand + tagline,
+   center = copyright, right = social icons.
+
+[2026-06-13]  LOCATION
+--------------------------------------------------------------------------------
+ - Changed location everywhere from "Bengaluru, Karnataka" to
+   "Jaipur, Rajasthan, India": Hero, Contact, lib/site.ts, layout.tsx
+   (SEO keyword + JSON-LD addressLocality/addressRegion).
+
+[2026-06-13]  HYBRID MULTI-PAGE ROUTING
+--------------------------------------------------------------------------------
+ Goal: keep the single-scroll home page AND give every nav item its own URL.
+ - app/(site)/  route group (URL-invisible) now holds the public portfolio:
+     app/(site)/layout.tsx  NEW — shared chrome (CursorGlow, Navbar, Footer,
+                                  ScrollToTop). Admin lives outside this group
+                                  so it gets none of the portfolio chrome.
+     app/(site)/page.tsx    NEW — home: full single-scroll with all sections.
+     app/(site)/{about,experience,leadership,projects,research,skills,
+                 certifications,contact}/page.tsx  NEW — standalone page per
+                 section, each with its own <title> for SEO.
+     app/page.tsx           DELETED (moved into the group).
+ - Navbar links now point to routes (/about, …); logo -> /. Active highlight
+   is scroll-spy on home, route-match on section pages.
+ - app/sitemap.ts: now lists home + all 8 section routes.
+ - app/robots.ts: disallow /admin and /admin/.
+
+[2026-06-13]  ADMIN PANEL (login + dashboard)
+--------------------------------------------------------------------------------
+ - lib/auth.ts  NEW — single-admin auth. Credentials read from env vars
+   (NEVER hardcoded). Constant-time (timingSafe) credential check. Session =
+   HMAC-SHA256(email, ADMIN_SESSION_SECRET) stored in an HttpOnly, SameSite=Lax,
+   Secure-in-prod cookie (8h).
+ - app/api/admin/login/route.ts   NEW — verifies creds, sets session cookie.
+ - app/api/admin/logout/route.ts  NEW — clears the cookie.
+ - app/admin/login/page.tsx       NEW — themed login form.
+ - app/admin/page.tsx             NEW — server component; redirects to
+                                        /admin/login unless the session is
+                                        valid. noindex.
+ - app/admin/AdminDashboard.tsx   NEW — dashboard UI (welcome, quick links,
+                                        logout).
+ - .env.local  (gitignored): appended ADMIN_EMAIL / ADMIN_PASSWORD /
+   ADMIN_SESSION_SECRET (real values, local only — existing EMAIL_* untouched).
+ - .env.example: rewritten to document the real vars (site URL, Gmail SMTP,
+   admin) and drop the stale NextAuth references.
+ - Verified: 20 routes build; all 8 section pages -> 200; /admin -> 307 to
+   /admin/login when unauthenticated; wrong creds -> 401; correct creds ->
+   200 + cookie; /admin with cookie -> 200 dashboard.
+
+[2026-06-13]  COMPLETE TECHNICAL SEO + FAVICON
+--------------------------------------------------------------------------------
+ Favicon = the <TJ /> brand mark (gradient + mono "TJ"):
+ - app/icon.tsx        NEW — generated 64x64 favicon (HTTP 200 PNG).
+ - app/apple-icon.tsx  NEW — generated 180x180 Apple touch icon.
+ - app/manifest.ts     NEW — PWA web manifest (name, theme color, icons).
+
+ On-page / structured data:
+ - lib/site.ts: added alternateNames ['taaranjain','Taaran','Taaran Jain
+   Portfolio'] and email.
+ - app/layout.tsx:
+     * metadata: added publisher, applicationName, category, twitter creator,
+       max-video-preview, and optional Google Search Console verification via
+       NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION.
+     * JSON-LD rebuilt as a connected @graph: Person (with alternateName,
+       given/familyName, image, email) + WebSite + ProfilePage, cross-linked by
+       @id so Google can build a knowledge panel for the name.
+ - app/(site)/<section>/page.tsx (all 8): added unique description, per-page
+   canonical (fixes earlier bug where every section inherited canonical "/"),
+   and per-page Open Graph.
+ - .env.example: documented NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION.
+ - Verified: /icon, /apple-icon, /manifest.webmanifest -> 200; icon + manifest
+   <link>s in HTML; JSON-LD graph (Person/WebSite/ProfilePage) present;
+   canonicals correct per page (home->/, /projects->/projects, /about->/about).
+
+ OFF-PAGE (manual, cannot be done in code) — required to rank #1 for
+ "taaranjain":
+   1. Verify the site in Google Search Console; submit
+      https://www.taaranjain.com/sitemap.xml.
+   2. Set the SAME url (https://www.taaranjain.com) as the website link on
+      GitHub, LinkedIn, X/Twitter, dev.to, Medium, etc. (backlinks).
+   3. Ensure non-www -> www (or vice-versa) redirects at the host so there is
+      one canonical host.
+   4. Keep name consistent everywhere ("Taaran Jain").
+================================================================================

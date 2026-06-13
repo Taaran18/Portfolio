@@ -114,7 +114,7 @@ export default function Hero() {
           className="flex items-center justify-center gap-1.5 text-slate-400 text-sm font-mono mb-10 -mt-4"
         >
           <MapPin size={13} className="text-cyan-500" />
-          <span>Bengaluru, Karnataka, India</span>
+          <span>Jaipur, Rajasthan, India</span>
         </motion.div>
 
         {/* CTAs */}

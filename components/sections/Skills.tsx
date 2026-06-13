@@ -107,7 +107,7 @@ export default function Skills() {
   }, {})
 
   return (
-    <section id="skills" className="section-padding max-w-7xl mx-auto">
+    <section id="skills" className="section-padding container-wide">
       <SectionHeader
         label="06 / Skills"
         title="Technical Skills"

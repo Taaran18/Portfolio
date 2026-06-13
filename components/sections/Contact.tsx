@@ -39,7 +39,7 @@ export default function Contact() {
   const inputCls = 'w-full px-4 py-3 rounded-lg bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:border-cyan-500/50 focus:bg-cyan-500/5 transition-all text-sm'
 
   return (
-    <section id="contact" className="section-padding max-w-7xl mx-auto">
+    <section id="contact" className="section-padding container-wide">
       <SectionHeader
         label="08 / Contact"
         title="Get In Touch"
@@ -66,7 +66,7 @@ export default function Contact() {
           <div className="space-y-4">
             {[
               { icon: Mail, color: 'text-cyan-500', label: 'Email', value: 'taaranjain16@gmail.com', href: 'mailto:taaranjain16@gmail.com' },
-              { icon: MapPin, color: 'text-purple-500', label: 'Location', value: 'Bengaluru, Karnataka, India', href: null },
+              { icon: MapPin, color: 'text-purple-500', label: 'Location', value: 'Jaipur, Rajasthan, India', href: null },
             ].map(({ icon: Icon, color, label, value, href }) => (
               <div key={label} className="flex items-center gap-4 text-slate-600 dark:text-slate-300">
                 <div className="w-10 h-10 rounded-xl glass flex items-center justify-center shrink-0">
