@@ -8,20 +8,16 @@ import Skills from '@/components/sections/Skills'
 import Certifications from '@/components/sections/Certifications'
 import Contact from '@/components/sections/Contact'
 
-/**
- * Home — the full single-scroll experience with every section.
- * Each section also has its own standalone page (e.g. /about, /projects).
- */
 export default function Home() {
   return (
-    <main>
+    <main id="main-content" tabIndex={-1} className="focus:outline-none">
       <Hero />
       <About />
-      <Experience />
-      <Leadership />
       <Projects />
+      <Experience />
       <Research />
       <Skills />
+      <Leadership />
       <Certifications />
       <Contact />
     </main>
