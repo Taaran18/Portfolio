@@ -35,3 +35,6 @@ Thumbs.db
 
 # claude code
 .claude/
+
+# analytics local store
+/.data

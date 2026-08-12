@@ -2,35 +2,41 @@
 
 import { useEffect, useState, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown, Github, Linkedin, FileText, MapPin } from 'lucide-react'
-import dynamic from 'next/dynamic'
+import { ArrowDown, MapPin } from 'lucide-react'
+import Button from '@/components/ui/Button'
+import { HERO_TITLE, HERO_CAPABILITIES, HERO_DESCRIPTION } from '@/content/hero'
+import { SOCIAL_LINKS } from '@/content/social'
+import { SITE } from '@/lib/site'
+import { EASE_OUT } from '@/lib/motion'
 
-const Scene = dynamic(() => import('@/components/three/Scene'), { ssr: false })
-
-const ROLES = [
-  'AI Engineer',
-  'Machine Learning Engineer',
-  'Data Scientist',
-  'LLM Developer',
-  'Deep Learning Researcher',
-]
+const PROFILE_LINKS = SOCIAL_LINKS.filter(
+  (s) => s.id === 'github' || s.id === 'linkedin' || s.id === 'email' || s.id === 'resume'
+)
 
 export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0)
   const [displayed, setDisplayed] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
+  const [reducedMotion, setReducedMotion] = useState(false)
 
   const sectionRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] })
 
-  // Hero content zooms out + fades as you scroll down
   const contentScale   = useTransform(scrollYProgress, [0, 0.6], [1, 0.82])
   const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
   const contentY       = useTransform(scrollYProgress, [0, 0.6], [0, -60])
 
-  // Typewriter — clean, no leaking timeouts
   useEffect(() => {
-    const current = ROLES[roleIndex]
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setReducedMotion(mq.matches)
+    const onChange = () => setReducedMotion(mq.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
+  useEffect(() => {
+    if (reducedMotion) return
+    const current = HERO_CAPABILITIES[roleIndex]
     let timeout: NodeJS.Timeout
 
     if (!isDeleting) {
@@ -44,110 +50,90 @@ export default function Hero() {
         timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length - 1)), 40)
       } else {
         setIsDeleting(false)
-        setRoleIndex((i) => (i + 1) % ROLES.length)
+        setRoleIndex((i) => (i + 1) % HERO_CAPABILITIES.length)
       }
     }
 
     return () => clearTimeout(timeout)
-  }, [displayed, isDeleting, roleIndex])
+  }, [displayed, isDeleting, roleIndex, reducedMotion])
 
   return (
     <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <Scene />
-      <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-[var(--bg-primary)] pointer-events-none opacity-80" />
+      <div className="ambient-glow" aria-hidden="true" />
 
-      {/* Content zooms out as you scroll */}
       <motion.div
         style={{ scale: contentScale, opacity: contentOpacity, y: contentY }}
         className="relative z-10 text-center px-6 max-w-5xl mx-auto"
       >
-        {/* Available badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-cyan-500/20 mb-8"
+          transition={{ delay: 0.05, duration: 0.6 }}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full surface border border-indigo-500/20 mb-8"
         >
           <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-          <span className="text-sm text-slate-600 dark:text-slate-300 font-mono">Open to opportunities</span>
+          <span className="text-sm text-slate-600 dark:text-slate-300 font-mono">{SITE.availability}</span>
         </motion.div>
 
-        {/* Heading */}
         <motion.h1
           initial={{ opacity: 0, scale: 0.9, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 0.15, duration: 0.8, ease: EASE_OUT }}
           className="heading-xl mb-4 text-slate-900 dark:text-white"
         >
           Hi, I&apos;m{' '}
           <span className="text-gradient">Taaran Jain</span>
         </motion.h1>
 
-        {/* Typewriter */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
+          transition={{ delay: 0.25 }}
           className="text-2xl md:text-3xl text-slate-600 dark:text-slate-300 font-light mb-6 h-10"
         >
-          <span>{displayed}</span>
-          <span className="inline-block w-0.5 h-7 bg-cyan-500 ml-1 animate-blink" />
+          <span className="font-medium text-slate-900 dark:text-white">{HERO_TITLE}</span>
+          <span className="mx-2 text-indigo-600 dark:text-indigo-400">·</span>
+          <span>{reducedMotion ? HERO_CAPABILITIES[0] : displayed}</span>
+          {!reducedMotion && <span className="inline-block w-0.5 h-7 bg-indigo-500 ml-1 animate-blink" />}
         </motion.div>
 
-        {/* Description */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.6 }}
-          className="text-slate-500 dark:text-slate-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-10"
-        >
-          I build intelligent systems — from fine-tuned LLMs and RAG pipelines to
-          computer vision models and end-to-end ML platforms. Turning data into
-          decisions, and research into real-world products.
-        </motion.p>
+        <p className="text-slate-600 dark:text-slate-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-10">
+          {HERO_DESCRIPTION}
+        </p>
 
-        {/* Location */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.0, duration: 0.5 }}
-          className="flex items-center justify-center gap-1.5 text-slate-400 text-sm font-mono mb-10 -mt-4"
+          transition={{ delay: 0.38, duration: 0.5 }}
+          className="flex items-center justify-center gap-1.5 text-slate-600 dark:text-slate-400 text-sm font-mono mb-10 -mt-4"
         >
-          <MapPin size={13} className="text-cyan-500" />
-          <span>Jaipur, Rajasthan, India</span>
+          <MapPin size={13} className="text-indigo-600" />
+          <span>{SITE.location}</span>
         </motion.div>
 
-        {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 0.44, duration: 0.6, ease: EASE_OUT }}
           className="flex flex-wrap items-center justify-center gap-4 mb-16"
         >
-          <a href="#projects"
-            className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold hover:opacity-90 hover:scale-105 transition-all shadow-lg shadow-cyan-500/25 glow-cyan">
+          <Button as="a" href="#projects" variant="primary" className="glow-accent">
             View My Work
-          </a>
-          <a href="#contact"
-            className="px-8 py-3.5 rounded-xl border border-slate-300 dark:border-white/10 glass text-slate-700 dark:text-slate-200 font-semibold hover:border-cyan-500/40 hover:scale-105 transition-all">
+          </Button>
+          <Button as="a" href="#contact" variant="secondary">
             Get in Touch
-          </a>
+          </Button>
         </motion.div>
 
-        {/* Social links */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.3 }}
+          transition={{ delay: 0.5 }}
           className="flex items-center justify-center gap-6 mb-20"
         >
-          {[
-            { icon: Github, href: 'https://github.com/Taaran18', label: 'GitHub' },
-            { icon: Linkedin, href: 'https://www.linkedin.com/in/taaran-jain/', label: 'LinkedIn' },
-            { icon: FileText, href: 'https://drive.google.com/file/d/1-ckubTF7jTKD8m9k3MNkf8JmydBHCjuy/view?usp=sharing', label: 'Resume' },
-          ].map(({ icon: Icon, href, label }) => (
+          {PROFILE_LINKS.map(({ icon: Icon, href, label }) => (
             <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
-              className="group flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors text-sm font-medium">
+              className="group flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60 focus-visible:ring-offset-2 rounded">
               <Icon size={22} strokeWidth={1.75} className="group-hover:scale-110 transition-transform" />
               <span className="hidden sm:inline">{label}</span>
             </a>
@@ -155,13 +141,12 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
       <motion.a
         href="#about"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-400 hover:text-cyan-500 transition-colors"
+        transition={{ delay: 0.7, duration: 0.6 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-indigo-500 transition-colors"
       >
         <span className="text-xs font-mono tracking-widest uppercase">Scroll</span>
         <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}>

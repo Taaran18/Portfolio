@@ -4,12 +4,10 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**',
+        hostname: 'images.unsplash.com',
       },
     ],
   },
-  // Required for Three.js
-  transpilePackages: ['three'],
 }
 
 export default nextConfig

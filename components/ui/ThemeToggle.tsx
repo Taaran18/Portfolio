@@ -2,37 +2,50 @@
 
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Sun, Moon } from 'lucide-react'
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
-  // Avoid hydration mismatch
   useEffect(() => setMounted(true), [])
   if (!mounted) return <div className="w-9 h-9" />
 
   const isDark = theme === 'dark'
+  const next = isDark ? 'light' : 'dark'
+
+  function toggle() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (!prefersReducedMotion && document.startViewTransition) {
+      document.startViewTransition(() => setTheme(next))
+    } else {
+      setTheme(next)
+    }
+  }
 
   return (
     <button
-      onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      aria-label="Toggle theme"
-      className="relative w-9 h-9 rounded-xl flex items-center justify-center transition-all
-        border border-transparent
-        hover:border-cyan-400/30 hover:bg-cyan-400/10
-        dark:hover:border-cyan-400/30 dark:hover:bg-cyan-400/10"
+      onClick={toggle}
+      aria-label={`Switch to ${next} theme`}
+      title={`Switch to ${next} theme`}
+      className="relative w-9 h-9 rounded-full flex items-center justify-center overflow-hidden
+        border border-[var(--surface-border)] text-[var(--text-muted)]
+        hover:text-[var(--text-primary)] hover:border-indigo-500/40
+        transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60"
     >
-      <Sun
-        size={17}
-        className={`absolute transition-all duration-300 text-amber-400
-          ${isDark ? 'opacity-0 rotate-90 scale-50' : 'opacity-100 rotate-0 scale-100'}`}
-      />
-      <Moon
-        size={17}
-        className={`absolute transition-all duration-300 text-cyan-400
-          ${isDark ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-50'}`}
-      />
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={isDark ? 'moon' : 'sun'}
+          initial={{ y: 12, opacity: 0, rotate: -30 }}
+          animate={{ y: 0, opacity: 1, rotate: 0 }}
+          exit={{ y: -12, opacity: 0, rotate: 30 }}
+          transition={{ duration: 0.18 }}
+          className="absolute inset-0 flex items-center justify-center"
+        >
+          {isDark ? <Moon size={16} /> : <Sun size={16} />}
+        </motion.span>
+      </AnimatePresence>
     </button>
   )
 }

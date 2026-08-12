@@ -1,26 +1,32 @@
 'use client'
 
+import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
+import { sectionEyebrow } from '@/content/sections'
+import { EASE_OUT } from '@/lib/motion'
 
 interface Props {
-  label: string
+  sectionId: string
   title: string
   subtitle?: string
 }
 
-export default function SectionHeader({ label, title, subtitle }: Props) {
+export default function SectionHeader({ sectionId, title, subtitle }: Props) {
+  const pathname = usePathname()
+  const label = sectionEyebrow(sectionId, pathname === '/')
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
+      transition={{ duration: 0.5, ease: EASE_OUT }}
       className="text-center mb-16"
     >
-      <p className="text-cyan-500 font-mono text-sm tracking-[0.3em] uppercase mb-4">{label}</p>
+      <p className="text-indigo-700 dark:text-indigo-400 font-mono text-sm tracking-[0.3em] uppercase mb-4">{label}</p>
       <h2 className="heading-lg text-gradient mb-4">{title}</h2>
       {subtitle && (
-        <p className="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
+        <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
           {subtitle}
         </p>
       )}

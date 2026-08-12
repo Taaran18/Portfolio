@@ -1,4 +1,4 @@
-// ─── Portfolio Data Types ──────────────────────────────────────────────────
+import type { LucideIcon } from 'lucide-react'
 
 export interface Project {
   _id?: string
@@ -22,36 +22,92 @@ export interface Experience {
   description: string
   responsibilities: string[]
   technologies: string[]
-  startDate: string      // ISO date string e.g. "2022-01"
-  endDate?: string       // Omit for current role
+  startDate: string
+  endDate?: string
   current: boolean
   order: number
   createdAt?: string
   updatedAt?: string
 }
 
+export type SkillTier = 'core' | 'production' | 'working'
+
 export interface Skill {
   _id?: string
   name: string
-  level: number          // 0–100
-  category: 'frontend' | 'backend' | 'database' | 'devops' | 'other' | 'languages' | 'fullstack' | 'ml' | 'dl' | 'llm' | 'cloud'
-  icon?: string
-  order: number
-  createdAt?: string
-  updatedAt?: string
+  tier: SkillTier
+  category: 'languages' | 'fullstack' | 'ml' | 'dl' | 'llm' | 'data' | 'cloud' | 'viz'
 }
 
-// ─── API Response Wrappers ─────────────────────────────────────────────────
-
-export interface ApiResponse<T> {
-  data?: T
-  error?: string
-  message?: string
+export interface LeadershipRole {
+  _id: string
+  title: string
+  organisation: string
+  period: string
+  description: string
+  impact: string[]
+  icon: 'users' | 'trophy' | 'star'
 }
 
-// ─── Mouse / Interaction ──────────────────────────────────────────────────
-
-export interface MousePosition {
-  x: number
-  y: number
+export interface Paper {
+  _id: string
+  title: string
+  authors?: string
+  venue?: string
+  year: string
+  summary: string
+  link: string
+  category: string
 }
+
+export interface Certification {
+  _id: string
+  name: string
+  issuer: string
+  date: string
+  description: string
+  credential: string
+  color: 'blue' | 'orange' | 'green' | 'purple'
+}
+
+export interface ArticleSection {
+  heading: string
+  body: string[]
+  bullets?: string[]
+}
+
+export interface CaseStudy {
+  slug: string
+  title: string
+  tagline: string
+  summary: string
+  role: string
+  timeline: string
+  stack: string[]
+  liveUrl?: string
+  githubUrl?: string
+  imageUrl?: string
+  publishedAt: string
+  metrics: { label: string; value: string }[]
+  sections: ArticleSection[]
+}
+
+export interface BlogPost {
+  slug: string
+  title: string
+  excerpt: string
+  publishedAt: string
+  readingMinutes: number
+  tags: string[]
+  sections: ArticleSection[]
+}
+
+export interface SocialLink {
+  id: 'github' | 'linkedin' | 'email' | 'resume' | 'whatsapp'
+  label: string
+  href: string
+  icon: LucideIcon
+
+  username?: string
+}
+
