@@ -70,6 +70,12 @@ export interface Certification {
   color: 'blue' | 'orange' | 'green' | 'purple'
 }
 
+export interface FaqEntry {
+  _id: string
+  question: string
+  answer: string
+}
+
 export interface ArticleSection {
   heading: string
   body: string[]

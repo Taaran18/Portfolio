@@ -7,10 +7,14 @@ import Research from '@/components/sections/Research'
 import Skills from '@/components/sections/Skills'
 import Certifications from '@/components/sections/Certifications'
 import Contact from '@/components/sections/Contact'
+import Faq from '@/components/sections/Faq'
+import JsonLd from '@/components/JsonLd'
+import { homeGraph } from '@/lib/seo'
 
 export default function Home() {
   return (
     <main id="main-content" tabIndex={-1} className="focus:outline-none">
+      <JsonLd schema={homeGraph()} />
       <Hero />
       <About />
       <Projects />
@@ -20,6 +24,7 @@ export default function Home() {
       <Leadership />
       <Certifications />
       <Contact />
+      <Faq />
     </main>
   )
 }

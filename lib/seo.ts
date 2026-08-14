@@ -6,11 +6,13 @@ import { PUBLISHED_PAPERS } from '@/content/research'
 import { CERTIFICATIONS } from '@/content/certifications'
 import { SKILLS } from '@/content/skills'
 import { CASE_STUDIES } from '@/content/case-studies'
+import { FAQS } from '@/content/faqs'
 import { BLOG_POSTS } from '@/content/blog'
 import type { BlogPost, CaseStudy } from '@/types'
 
 const PERSON_ID = `${SITE_URL}/#person`
 const WEBSITE_ID = `${SITE_URL}/#website`
+const ORGANIZATION_ID = `${SITE_URL}/#organization`
 
 const currentRole = EXPERIENCES.find((e) => e.current) ?? EXPERIENCES[0]
 
@@ -74,6 +76,94 @@ export function personSchema() {
       credentialCategory: 'certificate',
       recognizedBy: organisation(cert.issuer),
       url: cert.credential,
+    })),
+  }
+}
+
+export function organizationSchema() {
+  return {
+    '@type': 'Organization',
+    '@id': ORGANIZATION_ID,
+    name: SITE.name,
+    alternateName: `${SITE.name} — ${SITE.primaryRole}`,
+    url: SITE_URL,
+    logo: {
+      '@type': 'ImageObject',
+      '@id': `${SITE_URL}/#logo`,
+      url: `${SITE_URL}/apple-icon`,
+      contentUrl: `${SITE_URL}/apple-icon`,
+      width: 180,
+      height: 180,
+      caption: SITE.name,
+    },
+    image: { '@id': `${SITE_URL}/#logo` },
+    email: `mailto:${SITE.email}`,
+    founder: { '@id': PERSON_ID },
+    sameAs: [SITE.socials.github, SITE.socials.linkedin],
+  }
+}
+
+export function aboutPageSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'AboutPage',
+        '@id': `${SITE_URL}/about#page`,
+        url: `${SITE_URL}/about`,
+        name: `About ${SITE.name}`,
+        description: SITE.description,
+        isPartOf: { '@id': WEBSITE_ID },
+        about: { '@id': PERSON_ID },
+        mainEntity: { '@id': PERSON_ID },
+        inLanguage: 'en',
+      },
+      breadcrumbGraph([
+        { name: 'Home', item: SITE_URL },
+        { name: 'About', item: `${SITE_URL}/about` },
+      ]),
+    ],
+  }
+}
+
+export function contactPageSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'ContactPage',
+        '@id': `${SITE_URL}/contact#page`,
+        url: `${SITE_URL}/contact`,
+        name: `Contact ${SITE.name}`,
+        description: `Get in touch with ${SITE.name} about ${SITE.openToRoles.join(', ')} roles, freelance projects, or research collaboration.`,
+        isPartOf: { '@id': WEBSITE_ID },
+        about: { '@id': PERSON_ID },
+        inLanguage: 'en',
+        mainEntity: {
+          '@type': 'ContactPoint',
+          contactType: 'Professional enquiries',
+          email: SITE.email,
+          areaServed: 'Worldwide',
+          availableLanguage: ['English', 'Hindi'],
+        },
+      },
+      faqPageSchema(),
+      breadcrumbGraph([
+        { name: 'Home', item: SITE_URL },
+        { name: 'Contact', item: `${SITE_URL}/contact` },
+      ]),
+    ],
+  }
+}
+
+export function faqPageSchema(pageUrl: string = `${SITE_URL}/contact`) {
+  return {
+    '@type': 'FAQPage',
+    '@id': `${pageUrl}#faq`,
+    mainEntity: FAQS.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
     })),
   }
 }
@@ -163,7 +253,7 @@ export function caseStudySchema(study: CaseStudy) {
         dateModified: study.publishedAt,
         inLanguage: 'en',
         author: { '@id': PERSON_ID },
-        publisher: { '@id': PERSON_ID },
+        publisher: { '@id': ORGANIZATION_ID },
         keywords: study.stack.join(', '),
         articleSection: study.sections.map((s) => s.heading),
         mainEntityOfPage: {
@@ -209,6 +299,19 @@ export function caseStudyListSchema() {
           author: { '@id': PERSON_ID },
         })),
       },
+      {
+        '@type': 'ItemList',
+        '@id': `${SITE_URL}/case-studies#carousel`,
+        name: `Case studies by ${SITE.name}`,
+        itemListOrder: 'https://schema.org/ItemListOrderDescending',
+        numberOfItems: CASE_STUDIES.length,
+        itemListElement: CASE_STUDIES.map((study, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: study.title,
+          url: `${SITE_URL}/case-studies/${study.slug}`,
+        })),
+      },
       breadcrumbGraph([
         { name: 'Home', item: SITE_URL },
         { name: 'Case Studies', item: `${SITE_URL}/case-studies` },
@@ -231,7 +334,7 @@ export function blogPostSchema(post: BlogPost) {
         dateModified: post.publishedAt,
         inLanguage: 'en',
         author: { '@id': PERSON_ID },
-        publisher: { '@id': PERSON_ID },
+        publisher: { '@id': ORGANIZATION_ID },
         keywords: post.tags.join(', '),
         articleSection: post.sections.map((s) => s.heading),
         wordCount: post.sections.reduce(
@@ -272,6 +375,19 @@ export function blogListSchema() {
           author: { '@id': PERSON_ID },
         })),
       },
+      {
+        '@type': 'ItemList',
+        '@id': `${SITE_URL}/blog#carousel`,
+        name: `Writing by ${SITE.name}`,
+        itemListOrder: 'https://schema.org/ItemListOrderDescending',
+        numberOfItems: BLOG_POSTS.length,
+        itemListElement: BLOG_POSTS.map((post, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: post.title,
+          url: `${SITE_URL}/blog/${post.slug}`,
+        })),
+      },
       breadcrumbGraph([
         { name: 'Home', item: SITE_URL },
         { name: 'Blog', item: `${SITE_URL}/blog` },
@@ -309,11 +425,19 @@ export function breadcrumbSchema(path: string) {
   }
 }
 
+export function homeGraph() {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [faqPageSchema(SITE_URL)],
+  }
+}
+
 export function rootGraph() {
   return {
     '@context': 'https://schema.org',
     '@graph': [
       personSchema(),
+      organizationSchema(),
       websiteSchema(),
       profilePageSchema(),
       projectsSchema(),
