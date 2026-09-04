@@ -6,7 +6,16 @@ export interface KnowledgeEntry {
   question: string
 
   answer: string
-  topic: 'identity' | 'contact' | 'experience' | 'projects' | 'skills' | 'certifications' | 'leadership' | 'research' | 'availability'
+  topic:
+    | 'identity'
+    | 'contact'
+    | 'experience'
+    | 'projects'
+    | 'skills'
+    | 'certifications'
+    | 'leadership'
+    | 'research'
+    | 'availability'
 
   featured?: boolean
 }

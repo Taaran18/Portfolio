@@ -30,9 +30,7 @@ function SkillPill({ skill }: { skill: Skill }) {
 }
 
 function byTier(skills: Skill[]) {
-  return [...skills].sort(
-    (a, b) => SKILL_TIER_ORDER.indexOf(a.tier) - SKILL_TIER_ORDER.indexOf(b.tier)
-  )
+  return [...skills].sort((a, b) => SKILL_TIER_ORDER.indexOf(a.tier) - SKILL_TIER_ORDER.indexOf(b.tier))
 }
 
 export default function Skills() {
@@ -73,12 +71,8 @@ export default function Skills() {
           <Card key={cat} padding="sm" hover="subtle" {...fadeInScale({ delay: (gi % 6) * 0.05, y: 20 })}>
             <div className="flex items-center gap-2 mb-4">
               <span className={`w-2 h-2 rounded-full shrink-0 ${SKILL_CATEGORY_COLORS[cat]?.dot ?? 'bg-slate-400'}`} />
-              <h3 className="font-semibold text-sm text-slate-900 dark:text-white">
-                {SKILL_CATEGORY_LABELS[cat]}
-              </h3>
-              <span className="ml-auto text-xs font-mono text-slate-400 dark:text-slate-600">
-                {skills.length}
-              </span>
+              <h3 className="font-semibold text-sm text-slate-900 dark:text-white">{SKILL_CATEGORY_LABELS[cat]}</h3>
+              <span className="ml-auto text-xs font-mono text-slate-400 dark:text-slate-600">{skills.length}</span>
             </div>
             <div className="flex flex-wrap gap-2">
               {byTier(skills).map((skill) => (

@@ -15,7 +15,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
   { id: 'resume', label: 'Resume', href: SITE.resumeUrl, icon: FileText },
 ]
 
-export function findSocialLink(id: SocialLink['id']): SocialLink | undefined {
+function findSocialLink(id: SocialLink['id']): SocialLink | undefined {
   return SOCIAL_LINKS.find((s) => s.id === id)
 }
 

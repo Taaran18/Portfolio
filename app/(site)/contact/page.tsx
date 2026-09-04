@@ -4,7 +4,8 @@ import JsonLd from '@/components/JsonLd'
 import Faq from '@/components/sections/Faq'
 import { contactPageSchema } from '@/lib/seo'
 
-const description = 'Get in touch with Taaran Jain — open to AI/ML engineering roles, freelance projects, and research collaborations.'
+const description =
+  'Get in touch with Taaran Jain — open to AI/ML engineering roles, freelance projects, and research collaborations.'
 
 export const metadata: Metadata = {
   title: 'Contact',

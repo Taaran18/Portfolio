@@ -27,9 +27,7 @@ function PaperCard({ paper, i }: { paper: Paper; i: number }) {
         {paper.title}
       </h3>
 
-      <p className="card-body text-slate-600 dark:text-slate-400 flex-1 text-left">
-        {paper.summary}
-      </p>
+      <p className="card-body text-slate-600 dark:text-slate-400 flex-1 text-left">{paper.summary}</p>
 
       <div className="flex items-center justify-between pt-2 mt-auto">
         <Badge tone="purple">{paper.category}</Badge>

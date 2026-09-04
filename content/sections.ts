@@ -1,4 +1,4 @@
-export interface SectionMeta {
+interface SectionMeta {
   id: string
   path: string
   navLabel: string
@@ -15,7 +15,7 @@ export const SECTIONS: SectionMeta[] = [
   { id: 'contact', path: '/contact', navLabel: 'Contact' },
 ]
 
-export const STANDALONE_PAGES: SectionMeta[] = [
+const STANDALONE_PAGES: SectionMeta[] = [
   { id: 'case-studies', path: '/case-studies', navLabel: 'Case Studies' },
   { id: 'blog', path: '/blog', navLabel: 'Blog' },
 ]
@@ -24,9 +24,7 @@ export const ALL_PAGES: SectionMeta[] = [...SECTIONS, ...STANDALONE_PAGES]
 
 const NAV_IDS = ['about', 'projects', 'case-studies', 'experience', 'research', 'skills', 'blog', 'contact']
 
-export const NAV_LINKS: SectionMeta[] = NAV_IDS.map(
-  (id) => ALL_PAGES.find((p) => p.id === id)!
-)
+export const NAV_LINKS: SectionMeta[] = NAV_IDS.map((id) => ALL_PAGES.find((p) => p.id === id)!)
 
 export const SCROLL_SECTION_IDS = new Set(SECTIONS.map((s) => s.id))
 

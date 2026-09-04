@@ -3,7 +3,8 @@ import Projects from '@/components/sections/Projects'
 import JsonLd from '@/components/JsonLd'
 import { breadcrumbSchema } from '@/lib/seo'
 
-const description = 'Selected AI/ML projects by Taaran Jain — LLM applications, RAG pipelines, and end-to-end ML platforms with live demos.'
+const description =
+  'Selected AI/ML projects by Taaran Jain — LLM applications, RAG pipelines, and end-to-end ML platforms with live demos.'
 
 export const metadata: Metadata = {
   title: 'Projects',

@@ -116,4 +116,3 @@ export interface SocialLink {
 
   username?: string
 }
-

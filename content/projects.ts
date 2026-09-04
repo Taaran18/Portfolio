@@ -4,7 +4,8 @@ export const PROJECTS: Project[] = [
   {
     _id: '0',
     title: 'Nexus AI',
-    description: 'A multi-modal AI platform combining RAG, live web search, and six LLMs (Llama, Mixtral, Gemma, DeepSeek) in one interface — with real-time streaming, document upload, voice input, and LangGraph-powered node orchestration. Entire stack runs at zero cost.',
+    description:
+      'A multi-modal AI platform combining RAG, live web search, and six LLMs (Llama, Mixtral, Gemma, DeepSeek) in one interface — with real-time streaming, document upload, voice input, and LangGraph-powered node orchestration. Entire stack runs at zero cost.',
     technologies: ['Next.js', 'FastAPI', 'LangGraph', 'LangChain', 'Supabase', 'Groq API'],
     liveUrl: 'https://nexus-ai-drab.vercel.app/',
     githubUrl: 'https://github.com/Taaran18/nexus-ai',
@@ -15,7 +16,8 @@ export const PROJECTS: Project[] = [
   {
     _id: '1',
     title: 'WhatsApp Lead Automation',
-    description: 'A full-stack platform for large-scale WhatsApp outreach — dual-mode connectivity (QR or Meta Business API), scheduled campaigns, lead management with tagging, and real-time delivery analytics, all from a single dashboard.',
+    description:
+      'A full-stack platform for large-scale WhatsApp outreach — dual-mode connectivity (QR or Meta Business API), scheduled campaigns, lead management with tagging, and real-time delivery analytics, all from a single dashboard.',
     technologies: ['Next.js', 'FastAPI', 'PostgreSQL', 'Node.js', 'WhatsApp API', 'Supabase'],
     liveUrl: 'https://one-to-many-automation.vercel.app',
     githubUrl: 'https://github.com/Taaran18/one-to-many-automation',
@@ -26,7 +28,8 @@ export const PROJECTS: Project[] = [
   {
     _id: '2',
     title: 'OmniChat Pro',
-    description: 'A high-performance conversational AI platform with RAG-lite document processing, real-time response streaming, live token cost tracking, and a premium adaptive UI — all in a strictly modular Streamlit architecture.',
+    description:
+      'A high-performance conversational AI platform with RAG-lite document processing, real-time response streaming, live token cost tracking, and a premium adaptive UI — all in a strictly modular Streamlit architecture.',
     technologies: ['Python', 'Streamlit', 'OpenAI API', 'PyPDF', 'CSS'],
     liveUrl: 'https://omnichat-pro.streamlit.app/',
     githubUrl: 'https://github.com/Taaran18/OmniChat-Pro',
@@ -37,7 +40,8 @@ export const PROJECTS: Project[] = [
   {
     _id: '3',
     title: 'Self-Driven Car',
-    description: 'A neuroevolution simulator where AI learns to drive using NEAT — evolving neural networks across generations through mutation, crossover, and speciation. A 9-input network (8 ray-cast sensors + velocity) learns steering and acceleration with zero explicit rules.',
+    description:
+      'A neuroevolution simulator where AI learns to drive using NEAT — evolving neural networks across generations through mutation, crossover, and speciation. A 9-input network (8 ray-cast sensors + velocity) learns steering and acceleration with zero explicit rules.',
     technologies: ['Python', 'NEAT', 'Pygame', 'Streamlit', 'Neuroevolution'],
     liveUrl: 'https://self-driven-car-neat.streamlit.app/',
     githubUrl: 'https://github.com/Taaran18/Self-Driven-Car',
@@ -48,7 +52,8 @@ export const PROJECTS: Project[] = [
   {
     _id: '4',
     title: 'MLInsights',
-    description: 'Upload a dataset, get a trained ML model — no code needed. Auto-trains 30+ classification, regression, and clustering models, compares performance side-by-side, and exports cleaned data, model files, and PDF reports.',
+    description:
+      'Upload a dataset, get a trained ML model — no code needed. Auto-trains 30+ classification, regression, and clustering models, compares performance side-by-side, and exports cleaned data, model files, and PDF reports.',
     technologies: ['Next.js', 'FastAPI', 'Scikit-learn', 'XGBoost', 'LightGBM', 'CatBoost'],
     liveUrl: 'https://ml-insights-flax.vercel.app',
     githubUrl: 'https://github.com/Taaran18/MLInsights',
@@ -59,7 +64,8 @@ export const PROJECTS: Project[] = [
   {
     _id: '5',
     title: 'AlgoVisualiser',
-    description: 'An interactive DSA learning platform that animates 70+ algorithms step-by-step — with playback controls, adjustable speed, and dark/light mode. Covers everything from sorting and graphs to dynamic programming and backtracking.',
+    description:
+      'An interactive DSA learning platform that animates 70+ algorithms step-by-step — with playback controls, adjustable speed, and dark/light mode. Covers everything from sorting and graphs to dynamic programming and backtracking.',
     technologies: ['Next.js', 'TypeScript', 'FastAPI', 'Tailwind CSS', 'Framer Motion'],
     liveUrl: 'https://algo-visualiser-mu.vercel.app',
     githubUrl: 'https://github.com/Taaran18/AlgoVisualiser',

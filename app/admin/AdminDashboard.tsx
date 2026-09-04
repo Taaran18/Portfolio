@@ -2,16 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import {
-  AlertTriangle,
-  Eye,
-  ExternalLink,
-  Globe,
-  LogOut,
-  MousePointerClick,
-  RefreshCw,
-  Users,
-} from 'lucide-react'
+import { AlertTriangle, Eye, ExternalLink, Globe, LogOut, MousePointerClick, RefreshCw, Users } from 'lucide-react'
 import type { AnalyticsSummary, CountRow } from '@/lib/analytics/types'
 
 const RANGES = [7, 30, 90] as const
@@ -103,7 +94,9 @@ export default function AdminDashboard({ email }: { email: string }) {
     }
   }, [])
 
-  useEffect(() => { load(days) }, [days, load])
+  useEffect(() => {
+    load(days)
+  }, [days, load])
 
   async function logout() {
     setLoggingOut(true)
@@ -166,17 +159,25 @@ export default function AdminDashboard({ email }: { email: string }) {
 
         {!data && !loading && (
           <div className={card}>
-            <p className="text-sm text-slate-600 dark:text-slate-400">
-              Could not load analytics. Try refreshing.
-            </p>
+            <p className="text-sm text-slate-600 dark:text-slate-400">Could not load analytics. Try refreshing.</p>
           </div>
         )}
 
         {data && (
           <>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-              <StatTile icon={Eye} label="Page views" value={data.totals.views} sub={`${data.totals.viewsToday} today`} />
-              <StatTile icon={Users} label="Unique visitors" value={data.totals.visitors} sub={`${data.totals.visitorsToday} today`} />
+              <StatTile
+                icon={Eye}
+                label="Page views"
+                value={data.totals.views}
+                sub={`${data.totals.viewsToday} today`}
+              />
+              <StatTile
+                icon={Users}
+                label="Unique visitors"
+                value={data.totals.visitors}
+                sub={`${data.totals.visitorsToday} today`}
+              />
               <StatTile icon={MousePointerClick} label="Link clicks" value={data.totals.clicks} />
               <StatTile icon={Globe} label="Referrer sources" value={data.referrers.length} />
             </div>
@@ -213,7 +214,12 @@ export default function AdminDashboard({ email }: { email: string }) {
                         {event.type === 'page_view' ? event.path : `${event.label} — from ${event.path}`}
                       </span>
                       <span className="ml-auto text-xs font-mono text-slate-500 shrink-0">
-                        {new Date(event.at).toLocaleString('en-IN', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}
+                        {new Date(event.at).toLocaleString('en-IN', {
+                          day: '2-digit',
+                          month: 'short',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        })}
                       </span>
                     </li>
                   ))}

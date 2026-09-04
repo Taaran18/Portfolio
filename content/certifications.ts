@@ -6,7 +6,8 @@ export const CERTIFICATIONS: Certification[] = [
     name: 'WorldQuant Challenge — Silver Certificate',
     issuer: 'WorldQuant',
     date: 'Jun 2025',
-    description: 'Awarded for strong performance in WorldQuant\'s quantitative research challenge — applying data-driven and algorithmic thinking to real financial markets.',
+    description:
+      "Awarded for strong performance in WorldQuant's quantitative research challenge — applying data-driven and algorithmic thinking to real financial markets.",
     credential: 'https://drive.google.com/file/d/1cUXfSkDlyhoAIUGm0plalbrZT1RBkTsH/view?usp=sharing',
     color: 'purple',
   },
@@ -15,7 +16,8 @@ export const CERTIFICATIONS: Certification[] = [
     name: 'Financial Analyst Career Track',
     issuer: '365 Financial Analyst',
     date: 'Nov 2024',
-    description: 'Financial modelling, valuation, and data-driven investment analysis — adding a quantitative finance lens to complement my ML engineering background.',
+    description:
+      'Financial modelling, valuation, and data-driven investment analysis — adding a quantitative finance lens to complement my ML engineering background.',
     credential: 'https://learn.365financialanalyst.com/certificates/DD-FB6D812B4E/',
     color: 'purple',
   },
@@ -24,7 +26,8 @@ export const CERTIFICATIONS: Certification[] = [
     name: 'MLOps Specialization',
     issuer: 'DeepLearning.AI · Coursera',
     date: 'Mar 2024',
-    description: 'Bridges the gap between model training and production — CI/CD for ML, data pipelines, model monitoring, and scalable deployment practices.',
+    description:
+      'Bridges the gap between model training and production — CI/CD for ML, data pipelines, model monitoring, and scalable deployment practices.',
     credential: 'https://www.coursera.org/account/accomplishments/specialization/U3YF7Z5E72Q2',
     color: 'orange',
   },
@@ -33,7 +36,8 @@ export const CERTIFICATIONS: Certification[] = [
     name: 'TensorFlow: Advanced Techniques Specialization',
     issuer: 'DeepLearning.AI · Coursera',
     date: 'Feb 2024',
-    description: 'Goes beyond standard TensorFlow — custom model architectures, advanced CV pipelines, and performance optimisation for production deployment.',
+    description:
+      'Goes beyond standard TensorFlow — custom model architectures, advanced CV pipelines, and performance optimisation for production deployment.',
     credential: 'https://www.coursera.org/account/accomplishments/specialization/AXDXB9D9XPDM',
     color: 'orange',
   },
@@ -42,7 +46,8 @@ export const CERTIFICATIONS: Certification[] = [
     name: 'TensorFlow Developer Specialization',
     issuer: 'DeepLearning.AI · Coursera',
     date: 'Feb 2024',
-    description: 'End-to-end deep learning with TensorFlow — building and training neural networks for computer vision, NLP, and time series tasks.',
+    description:
+      'End-to-end deep learning with TensorFlow — building and training neural networks for computer vision, NLP, and time series tasks.',
     credential: 'https://www.coursera.org/account/accomplishments/specialization/VAPLJXCE9G6S',
     color: 'orange',
   },
@@ -51,7 +56,8 @@ export const CERTIFICATIONS: Certification[] = [
     name: 'Advanced Analytics Professional Certificate',
     issuer: 'Google · Coursera',
     date: 'Aug 2023',
-    description: 'Advanced-level data analytics with Python and statistical modelling — translating complex analysis into decisions that drive measurable outcomes.',
+    description:
+      'Advanced-level data analytics with Python and statistical modelling — translating complex analysis into decisions that drive measurable outcomes.',
     credential: 'https://www.coursera.org/account/accomplishments/professional-cert/BZGJQBE4JRE2',
     color: 'green',
   },
@@ -60,7 +66,8 @@ export const CERTIFICATIONS: Certification[] = [
     name: 'Google Data Analytics Professional Certificate',
     issuer: 'Google · Coursera',
     date: 'Aug 2023',
-    description: 'Google\'s professional data analytics track — data cleaning, SQL, R, and Tableau to turn raw data into clear, actionable insights.',
+    description:
+      "Google's professional data analytics track — data cleaning, SQL, R, and Tableau to turn raw data into clear, actionable insights.",
     credential: 'https://coursera.org/share/b7640004570568bb820df9b25115339d',
     color: 'green',
   },
@@ -69,7 +76,8 @@ export const CERTIFICATIONS: Certification[] = [
     name: 'Business Analytics & Digital Media',
     issuer: 'Indian School of Business · Coursera',
     date: 'Jun 2023',
-    description: 'Covers data-driven decision making, digital marketing analytics, and business strategy — bridging the gap between ML outputs and real business impact.',
+    description:
+      'Covers data-driven decision making, digital marketing analytics, and business strategy — bridging the gap between ML outputs and real business impact.',
     credential: 'https://coursera.org/share/efdaf8b4eee4b6da9ca235cac7b50dc0',
     color: 'purple',
   },
@@ -78,7 +86,8 @@ export const CERTIFICATIONS: Certification[] = [
     name: 'Machine Learning Specialization',
     issuer: 'DeepLearning.AI · Coursera',
     date: 'Jun 2023',
-    description: 'Andrew Ng\'s gold-standard ML curriculum — supervised, unsupervised, and reinforcement learning with a strong focus on real-world application.',
+    description:
+      "Andrew Ng's gold-standard ML curriculum — supervised, unsupervised, and reinforcement learning with a strong focus on real-world application.",
     credential: 'https://www.coursera.org/account/accomplishments/specialization/BXVTML3Y2G5V',
     color: 'orange',
   },
@@ -87,7 +96,8 @@ export const CERTIFICATIONS: Certification[] = [
     name: 'Azure AI Fundamentals',
     issuer: 'Microsoft',
     date: 'May 2023',
-    description: 'Validates core AI and ML concepts on Microsoft Azure — the foundation for deploying AI services in cloud-native production environments.',
+    description:
+      'Validates core AI and ML concepts on Microsoft Azure — the foundation for deploying AI services in cloud-native production environments.',
     credential: 'https://www.credly.com/badges/ea0d49b6-8fd8-49be-9c4b-0c828d4307e1/linked_in_profile',
     color: 'blue',
   },
@@ -96,7 +106,8 @@ export const CERTIFICATIONS: Certification[] = [
     name: 'Azure Data Fundamentals',
     issuer: 'Microsoft',
     date: 'Apr 2023',
-    description: 'Validates core data concepts on Azure — relational and non-relational databases, analytics workloads, and cloud data storage fundamentals.',
+    description:
+      'Validates core data concepts on Azure — relational and non-relational databases, analytics workloads, and cloud data storage fundamentals.',
     credential: 'https://www.credly.com/badges/cabc0e27-e5a9-44f4-b931-d97c635d50ab/linked_in_profile',
     color: 'blue',
   },

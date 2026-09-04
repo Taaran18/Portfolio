@@ -49,10 +49,19 @@ const CURATED: KnowledgeEntry[] = [
   {
     id: 'availability',
     topic: 'availability',
-    keywords: ['available', 'hire', 'hiring', 'freelance', 'open to work', 'looking for a job', 'full-time', 'collaborate'],
+    keywords: [
+      'available',
+      'hire',
+      'hiring',
+      'freelance',
+      'open to work',
+      'looking for a job',
+      'full-time',
+      'collaborate',
+    ],
     question: 'Is Taaran available for hire?',
     answer:
-      "Yes — Taaran is open to full-time AI/ML engineering roles, freelance projects, and research collaborations. If you have an interesting problem involving data or intelligence, reach out via the contact form or email.",
+      'Yes — Taaran is open to full-time AI/ML engineering roles, freelance projects, and research collaborations. If you have an interesting problem involving data or intelligence, reach out via the contact form or email.',
     featured: true,
   },
   {
@@ -118,7 +127,9 @@ const PROJECTS_OVERVIEW: KnowledgeEntry = {
   question: 'What projects has Taaran built?',
   answer: `Taaran has shipped ${PROJECTS.length} AI/ML projects, including ${PROJECTS.filter((p) => p.featured)
     .map((p) => p.title)
-    .join(', ')}. Ask about any of them by name, or check the Projects section for the full list with live demos and source code.`,
+    .join(
+      ', '
+    )}. Ask about any of them by name, or check the Projects section for the full list with live demos and source code.`,
   featured: true,
 }
 
@@ -165,7 +176,10 @@ const LEADERSHIP_ENTRY: KnowledgeEntry = {
   topic: 'leadership',
   keywords: ['leadership', 'college', 'clubs', 'volunteer', 'extracurricular', 'hackathon'],
   question: "What's Taaran's leadership experience?",
-  answer: `Taaran has held ${LEADERSHIP_ROLES.length} leadership roles in college — including ${LEADERSHIP_ROLES.slice(0, 3)
+  answer: `Taaran has held ${LEADERSHIP_ROLES.length} leadership roles in college — including ${LEADERSHIP_ROLES.slice(
+    0,
+    3
+  )
     .map((r) => `${r.title} at ${r.organisation}`)
     .join(', ')} — spanning AI/ML mentorship, hackathon organisation, and technical event leadership.`,
 }

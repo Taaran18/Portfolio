@@ -47,15 +47,10 @@ export default function AdminLoginForm() {
             <Lock size={24} className="text-white" />
           </div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Admin Login</h1>
-          <p className="text-slate-600 dark:text-slate-400 text-sm mt-1">
-            Sign in to access the dashboard.
-          </p>
+          <p className="text-slate-600 dark:text-slate-400 text-sm mt-1">Sign in to access the dashboard.</p>
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="surface rounded-3xl p-8 space-y-5"
-        >
+        <form onSubmit={handleSubmit} className="surface rounded-3xl p-8 space-y-5">
           {error && (
             <div className="rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-sm px-4 py-3">
               {error}
@@ -63,7 +58,9 @@ export default function AdminLoginForm() {
           )}
 
           <div className="relative">
-            <label htmlFor="admin-email" className="sr-only">Email</label>
+            <label htmlFor="admin-email" className="sr-only">
+              Email
+            </label>
             <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
             <input
               id="admin-email"
@@ -78,7 +75,9 @@ export default function AdminLoginForm() {
           </div>
 
           <div className="relative">
-            <label htmlFor="admin-password" className="sr-only">Password</label>
+            <label htmlFor="admin-password" className="sr-only">
+              Password
+            </label>
             <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
             <input
               id="admin-password"

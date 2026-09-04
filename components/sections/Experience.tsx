@@ -48,7 +48,10 @@ export default function Experience() {
 
                     <div className="flex items-center gap-1 text-slate-600 dark:text-slate-400 text-xs font-mono mb-4">
                       <Calendar size={12} />
-                      <span>{formatMonthYear(exp.startDate)} — {exp.current ? 'Present' : exp.endDate ? formatMonthYear(exp.endDate) : ''}</span>
+                      <span>
+                        {formatMonthYear(exp.startDate)} —{' '}
+                        {exp.current ? 'Present' : exp.endDate ? formatMonthYear(exp.endDate) : ''}
+                      </span>
                     </div>
 
                     <p className="card-body text-slate-600 dark:text-slate-300 mb-4">{exp.description}</p>
@@ -64,7 +67,9 @@ export default function Experience() {
 
                     <div className="flex flex-wrap gap-1.5">
                       {exp.technologies.map((t) => (
-                        <Badge key={t} tone="purple" className="font-mono">{t}</Badge>
+                        <Badge key={t} tone="purple" className="font-mono">
+                          {t}
+                        </Badge>
                       ))}
                     </div>
                   </Card>

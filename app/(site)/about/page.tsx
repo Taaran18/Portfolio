@@ -3,7 +3,8 @@ import About from '@/components/sections/About'
 import JsonLd from '@/components/JsonLd'
 import { aboutPageSchema } from '@/lib/seo'
 
-const description = 'Learn about Taaran Jain — an AI Engineer specialising in LLMs, RAG, and production ML systems, based in Jaipur, India.'
+const description =
+  'Learn about Taaran Jain — an AI Engineer specialising in LLMs, RAG, and production ML systems, based in Jaipur, India.'
 
 export const metadata: Metadata = {
   title: 'About',

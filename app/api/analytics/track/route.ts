@@ -22,10 +22,7 @@ export async function POST(req: NextRequest) {
   if (!path) return NextResponse.json({ error: 'Missing path' }, { status: 400 })
 
   const userAgent = req.headers.get('user-agent') ?? ''
-  const ip =
-    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
-    req.headers.get('x-real-ip') ??
-    'unknown'
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? req.headers.get('x-real-ip') ?? 'unknown'
 
   let referrer = clean(body?.referrer, 200)
   if (referrer) {

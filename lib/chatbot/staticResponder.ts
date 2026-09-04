@@ -4,7 +4,7 @@ import { SITE, whatsappUrl } from '@/lib/site'
 import type { ChatResponder, ChatReply, ChatMessage, ChatAction, KnowledgeEntry } from './types'
 
 const FALLBACK_TEXT =
-  "That one is outside what I know. Taaran can answer it properly himself — reach him directly below, or ask me something about his work, projects, or experience."
+  'That one is outside what I know. Taaran can answer it properly himself — reach him directly below, or ask me something about his work, projects, or experience.'
 
 const MIN_MATCH_SCORE = 3
 
@@ -18,12 +18,45 @@ function contactActions(): ChatAction[] {
 }
 
 const STOPWORDS = new Set([
-  'what', 'whats', 'who', 'where', 'when', 'why', 'which', 'is', 'are', 'your', 'you', 'the', 'a', 'an',
-  'do', 'does', 'did', 'can', 'could', 'tell', 'me', 'about', 'how', 'i', 'to', 'of', 'for', 'in', 'on', 'with', 'my',
+  'what',
+  'whats',
+  'who',
+  'where',
+  'when',
+  'why',
+  'which',
+  'is',
+  'are',
+  'your',
+  'you',
+  'the',
+  'a',
+  'an',
+  'do',
+  'does',
+  'did',
+  'can',
+  'could',
+  'tell',
+  'me',
+  'about',
+  'how',
+  'i',
+  'to',
+  'of',
+  'for',
+  'in',
+  'on',
+  'with',
+  'my',
 ])
 
 function normalize(text: string): string {
-  return text.toLowerCase().replace(/[^\w\s]/g, ' ').replace(/\s+/g, ' ').trim()
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
 }
 
 function significantWords(text: string): string[] {
@@ -48,7 +81,9 @@ function bestSubstringMatch(message: string): KnowledgeEntry | null {
       if (entry.keywords.some((k) => k.toLowerCase().includes(word))) score += 1
     }
 
-    const isBetter = score > bestScore || (score > 0 && score === bestScore && (!bestEntry || entry.keywords.length < bestEntry.keywords.length))
+    const isBetter =
+      score > bestScore ||
+      (score > 0 && score === bestScore && (!bestEntry || entry.keywords.length < bestEntry.keywords.length))
     if (isBetter) {
       bestScore = score
       bestEntry = entry

@@ -1,11 +1,6 @@
 import { NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
-import {
-  verifyCredentials,
-  createSessionToken,
-  SESSION_COOKIE,
-  SESSION_MAX_AGE,
-} from '@/lib/auth'
+import { verifyCredentials, createSessionToken, SESSION_COOKIE, SESSION_MAX_AGE } from '@/lib/auth'
 
 export async function POST(req: Request) {
   let email = ''

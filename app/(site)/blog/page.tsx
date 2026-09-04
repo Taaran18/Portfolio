@@ -50,7 +50,9 @@ export default function BlogPage() {
               <div className="flex flex-wrap items-center justify-between gap-4 mt-auto">
                 <div className="flex flex-wrap gap-2">
                   {post.tags.map((tag) => (
-                    <Badge key={tag} tone="purple" className="font-mono">{tag}</Badge>
+                    <Badge key={tag} tone="purple" className="font-mono">
+                      {tag}
+                    </Badge>
                   ))}
                 </div>
                 <Link

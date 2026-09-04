@@ -56,42 +56,45 @@ export default async function BlogPostPage({ params }: Params) {
           </aside>
 
           <div className="lg:col-span-7 min-w-0">
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors mb-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60 rounded"
-          >
-            <ArrowLeft size={15} /> All writing
-          </Link>
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors mb-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60 rounded"
+            >
+              <ArrowLeft size={15} /> All writing
+            </Link>
 
-          <header className="mb-12">
-            <div className="flex flex-wrap items-center gap-3 mb-4 text-xs text-slate-500 dark:text-slate-500 font-mono">
-              <time dateTime={post.publishedAt}>{formatLongDate(post.publishedAt)}</time>
-              <span className="inline-flex items-center gap-1.5">
-                <Clock size={12} /> {post.readingMinutes} min read
-              </span>
-            </div>
+            <header className="mb-12">
+              <div className="flex flex-wrap items-center gap-3 mb-4 text-xs text-slate-500 dark:text-slate-500 font-mono">
+                <time dateTime={post.publishedAt}>{formatLongDate(post.publishedAt)}</time>
+                <span className="inline-flex items-center gap-1.5">
+                  <Clock size={12} /> {post.readingMinutes} min read
+                </span>
+              </div>
 
-            <h1 className="heading-lg text-slate-900 dark:text-white mb-5">{post.title}</h1>
-            <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-6">{post.excerpt}</p>
+              <h1 className="heading-lg text-slate-900 dark:text-white mb-5">{post.title}</h1>
+              <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-6">{post.excerpt}</p>
 
-            <div className="flex flex-wrap gap-2 pb-8 border-b border-[var(--surface-border)]">
-              {post.tags.map((tag) => (
-                <Badge key={tag} tone="purple" className="font-mono">{tag}</Badge>
-              ))}
-            </div>
-          </header>
+              <div className="flex flex-wrap gap-2 pb-8 border-b border-[var(--surface-border)]">
+                {post.tags.map((tag) => (
+                  <Badge key={tag} tone="purple" className="font-mono">
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+            </header>
 
-          <ArticleBody sections={post.sections} />
+            <ArticleBody sections={post.sections} />
 
-          <footer className="mt-16 pt-8 border-t border-[var(--surface-border)]">
-            <p className="text-sm text-slate-600 dark:text-slate-400">
-              Written by <span className="font-medium text-slate-900 dark:text-white">{SITE.name}</span> — AI Engineer.{' '}
-              <Link href="/contact" className="text-indigo-600 dark:text-indigo-400 hover:underline">
-                Get in touch
-              </Link>
-              .
-            </p>
-          </footer>
+            <footer className="mt-16 pt-8 border-t border-[var(--surface-border)]">
+              <p className="text-sm text-slate-600 dark:text-slate-400">
+                Written by <span className="font-medium text-slate-900 dark:text-white">{SITE.name}</span> — AI
+                Engineer.{' '}
+                <Link href="/contact" className="text-indigo-600 dark:text-indigo-400 hover:underline">
+                  Get in touch
+                </Link>
+                .
+              </p>
+            </footer>
           </div>
 
           <aside className="hidden lg:block lg:col-span-3">

@@ -10,6 +10,8 @@ export const SKILLS: Skill[] = [
   { _id: 's6', name: 'LLMs', category: 'llm', tier: 'core' },
   { _id: 's7', name: 'HuggingFace', category: 'llm', tier: 'production' },
   { _id: 's8', name: 'NLP', category: 'llm', tier: 'production' },
+  { _id: 's29', name: 'LangGraph', category: 'llm', tier: 'production' },
+  { _id: 's30', name: 'Agentic Workflows', category: 'llm', tier: 'production' },
 
   { _id: 's9', name: 'Pandas', category: 'ml', tier: 'core' },
   { _id: 's10', name: 'NumPy', category: 'ml', tier: 'core' },
@@ -28,6 +30,8 @@ export const SKILLS: Skill[] = [
 
   { _id: 's21', name: 'PostgreSQL', category: 'data', tier: 'production' },
   { _id: 's22', name: 'MongoDB', category: 'data', tier: 'working' },
+  { _id: 's31', name: 'pgvector / Vector DBs', category: 'data', tier: 'production' },
+  { _id: 's32', name: 'Supabase', category: 'data', tier: 'production' },
 
   { _id: 's23', name: 'Docker', category: 'cloud', tier: 'production' },
   { _id: 's24', name: 'GCP', category: 'cloud', tier: 'production' },

@@ -2,9 +2,7 @@ import type { MetadataRoute } from 'next'
 import { ALL_PAGES } from '@/content/sections'
 import { SITE_URL } from '@/lib/site'
 
-const LAST_MODIFIED = new Date(
-  process.env.VERCEL_GIT_COMMIT_SHA ? Date.now() : Date.UTC(2026, 7, 12)
-)
+const LAST_MODIFIED = new Date(process.env.VERCEL_GIT_COMMIT_SHA ? Date.now() : Date.UTC(2026, 7, 12))
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const home = {

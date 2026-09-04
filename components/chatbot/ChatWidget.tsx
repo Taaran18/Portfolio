@@ -16,8 +16,13 @@ const WELCOME: ChatMessage = {
 function linkify(text: string) {
   return text.split(/(https?:\/\/[^\s]+)/g).map((part, i) =>
     /^https?:\/\//.test(part) ? (
-      <a key={i} href={part} target="_blank" rel="noopener noreferrer"
-        className="underline decoration-indigo-500/50 hover:decoration-indigo-500 break-all">
+      <a
+        key={i}
+        href={part}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline decoration-indigo-500/50 hover:decoration-indigo-500 break-all"
+      >
         {part}
       </a>
     ) : (
@@ -111,12 +116,18 @@ export default function ChatWidget() {
       })
       const data = await res.json()
       const botId = nextId()
-      setMessages((prev) => [...prev, { id: botId, role: 'bot', text: data.text ?? 'Something went wrong — try again?' }])
+      setMessages((prev) => [
+        ...prev,
+        { id: botId, role: 'bot', text: data.text ?? 'Something went wrong — try again?' },
+      ])
       setStreamingId(botId)
       setActions(data.actions ?? [])
     } catch {
       const botId = nextId()
-      setMessages((prev) => [...prev, { id: botId, role: 'bot', text: "I'm having trouble connecting right now — please try again in a moment." }])
+      setMessages((prev) => [
+        ...prev,
+        { id: botId, role: 'bot', text: "I'm having trouble connecting right now — please try again in a moment." },
+      ])
       setStreamingId(botId)
     } finally {
       setPending(false)
@@ -165,17 +176,28 @@ export default function ChatWidget() {
                 <Sparkles size={16} className="text-white" />
               </div>
               <div>
-                <p id={dialogTitleId} className="text-sm font-semibold text-slate-900 dark:text-white">{ASSISTANT.name}</p>
+                <p id={dialogTitleId} className="text-sm font-semibold text-slate-900 dark:text-white">
+                  {ASSISTANT.name}
+                </p>
                 <p className="text-xs text-slate-600 dark:text-slate-400">{ASSISTANT.tagline}</p>
               </div>
             </div>
 
-            <div ref={listRef} role="log" aria-live="polite" aria-label="Chat messages" className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
+            <div
+              ref={listRef}
+              role="log"
+              aria-live="polite"
+              aria-label="Chat messages"
+              className="flex-1 overflow-y-auto px-4 py-4 space-y-3"
+            >
               {messages.map((m) =>
                 m.role === 'bot' ? (
                   <BotBubble key={m.id} text={m.text} animate={m.id === streamingId} />
                 ) : (
-                  <div key={m.id} className="ml-auto max-w-[85%] rounded-3xl rounded-br-sm bg-violet-600 bg-gradient-to-r from-indigo-700 to-violet-600 text-white px-4 py-2.5 text-sm">
+                  <div
+                    key={m.id}
+                    className="ml-auto max-w-[85%] rounded-3xl rounded-br-sm bg-violet-600 bg-gradient-to-r from-indigo-700 to-violet-600 text-white px-4 py-2.5 text-sm"
+                  >
                     {m.text}
                   </div>
                 )
@@ -225,7 +247,10 @@ export default function ChatWidget() {
             )}
 
             <form
-              onSubmit={(e) => { e.preventDefault(); send(input) }}
+              onSubmit={(e) => {
+                e.preventDefault()
+                send(input)
+              }}
               className="flex items-center gap-2 p-3 border-t border-[var(--surface-border)] shrink-0"
             >
               <input

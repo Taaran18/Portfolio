@@ -37,7 +37,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-transparent to-transparent opacity-40" />
           {project.featured && (
-            <Badge tone="yellow" icon={Star} className="absolute top-3 right-3">Featured</Badge>
+            <Badge tone="yellow" icon={Star} className="absolute top-3 right-3">
+              Featured
+            </Badge>
           )}
         </div>
       )}
@@ -50,26 +52,42 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
         <div className="flex flex-wrap gap-1.5 mb-5">
           {project.technologies.slice(0, 4).map((t) => (
-            <Badge key={t} tone="cyan" className="font-mono">{t}</Badge>
+            <Badge key={t} tone="cyan" className="font-mono">
+              {t}
+            </Badge>
           ))}
           {project.technologies.length > 4 && (
-            <span className="px-2 py-0.5 rounded text-xs font-mono text-slate-600 dark:text-slate-400">+{project.technologies.length - 4}</span>
+            <span className="px-2 py-0.5 rounded text-xs font-mono text-slate-600 dark:text-slate-400">
+              +{project.technologies.length - 4}
+            </span>
           )}
         </div>
 
         <div className="flex items-center justify-between mt-auto pt-2">
           {project.githubUrl ? (
-            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60 focus-visible:ring-offset-2 rounded">
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60 focus-visible:ring-offset-2 rounded"
+            >
               <Github size={15} /> Code
             </a>
-          ) : <span />}
+          ) : (
+            <span />
+          )}
           {project.liveUrl ? (
-            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-indigo-700 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60 focus-visible:ring-offset-2 rounded">
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-indigo-700 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60 focus-visible:ring-offset-2 rounded"
+            >
               Live Demo <ExternalLink size={13} />
             </a>
-          ) : <span />}
+          ) : (
+            <span />
+          )}
         </div>
       </div>
     </Card>

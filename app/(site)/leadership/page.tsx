@@ -3,7 +3,8 @@ import Leadership from '@/components/sections/Leadership'
 import JsonLd from '@/components/JsonLd'
 import { breadcrumbSchema } from '@/lib/seo'
 
-const description = 'Leadership and community roles of Taaran Jain across AI/ML mentoring and student innovation initiatives.'
+const description =
+  'Leadership and community roles of Taaran Jain across AI/ML mentoring and student innovation initiatives.'
 
 export const metadata: Metadata = {
   title: 'Leadership',

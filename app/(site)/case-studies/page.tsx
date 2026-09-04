@@ -35,7 +35,9 @@ export default function CaseStudiesPage() {
             <Card key={study.slug} padding="md" hover="lift" className="flex flex-col">
               <div className="flex flex-wrap gap-2 mb-4">
                 {study.stack.slice(0, 3).map((tech) => (
-                  <Badge key={tech} tone="cyan" className="font-mono">{tech}</Badge>
+                  <Badge key={tech} tone="cyan" className="font-mono">
+                    {tech}
+                  </Badge>
                 ))}
               </div>
 
@@ -44,9 +46,7 @@ export default function CaseStudiesPage() {
               </h2>
               <p className="text-sm text-indigo-600 dark:text-indigo-400 mb-3">{study.tagline}</p>
 
-              <p className="card-body text-slate-600 dark:text-slate-400 mb-6 flex-1 text-left">
-                {study.summary}
-              </p>
+              <p className="card-body text-slate-600 dark:text-slate-400 mb-6 flex-1 text-left">{study.summary}</p>
 
               <div className="flex flex-wrap gap-x-6 gap-y-2 mb-6">
                 {study.metrics.map((metric) => (

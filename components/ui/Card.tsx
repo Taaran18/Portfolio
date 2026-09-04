@@ -29,8 +29,7 @@ interface CardOwnProps {
   children: React.ReactNode
 }
 
-type CardProps = CardOwnProps &
-  Omit<HTMLMotionProps<'div'> & HTMLMotionProps<'a'>, keyof CardOwnProps>
+type CardProps = CardOwnProps & Omit<HTMLMotionProps<'div'> & HTMLMotionProps<'a'>, keyof CardOwnProps>
 
 export default function Card({
   as = 'div',

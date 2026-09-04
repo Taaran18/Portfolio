@@ -22,9 +22,9 @@ export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] })
 
-  const contentScale   = useTransform(scrollYProgress, [0, 0.6], [1, 0.82])
+  const contentScale = useTransform(scrollYProgress, [0, 0.6], [1, 0.82])
   const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
-  const contentY       = useTransform(scrollYProgress, [0, 0.6], [0, -60])
+  const contentY = useTransform(scrollYProgress, [0, 0.6], [0, -60])
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -81,8 +81,7 @@ export default function Hero() {
           transition={{ delay: 0.15, duration: 0.8, ease: EASE_OUT }}
           className="heading-xl mb-4 text-slate-900 dark:text-white"
         >
-          Hi, I&apos;m{' '}
-          <span className="text-gradient">Taaran Jain</span>
+          Hi, I&apos;m <span className="text-gradient">Taaran Jain</span>
         </motion.h1>
 
         <motion.div
@@ -132,8 +131,14 @@ export default function Hero() {
           className="flex items-center justify-center gap-6 mb-20"
         >
           {PROFILE_LINKS.map(({ icon: Icon, href, label }) => (
-            <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
-              className="group flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60 focus-visible:ring-offset-2 rounded">
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              className="group flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60 focus-visible:ring-offset-2 rounded"
+            >
               <Icon size={22} strokeWidth={1.75} className="group-hover:scale-110 transition-transform" />
               <span className="hidden sm:inline">{label}</span>
             </a>

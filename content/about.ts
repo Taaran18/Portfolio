@@ -13,22 +13,51 @@ export const ABOUT_STATS = [
   { value: String(PUBLISHED_PAPERS.length), label: 'Papers Published' },
 ]
 
-export interface AboutTrait {
+interface AboutTrait {
   icon: LucideIcon
   title: string
   desc: string
 }
 
 export const ABOUT_TRAITS: AboutTrait[] = [
-  { icon: BrainCircuit, title: 'LLM Engineering', desc: 'Building RAG pipelines, fine-tuning transformers, and deploying production-grade LLM applications.' },
-  { icon: Database, title: 'Data Science', desc: 'End-to-end ML pipelines — from raw data ingestion and feature engineering to model evaluation.' },
-  { icon: Rocket, title: 'MLOps & Deployment', desc: 'Taking models from notebook to production with robust CI/CD, monitoring, and scalability.' },
-  { icon: BookOpen, title: 'Research-Driven', desc: 'Staying close to SOTA research and translating cutting-edge ideas into practical systems.' },
+  {
+    icon: BrainCircuit,
+    title: 'LLM Engineering',
+    desc: 'Building RAG pipelines over vector databases, orchestrating agentic workflows with LangGraph, and deploying production-grade LLM applications.',
+  },
+  {
+    icon: Database,
+    title: 'Data Science',
+    desc: 'End-to-end ML pipelines — from raw data ingestion and feature engineering to model evaluation.',
+  },
+  {
+    icon: Rocket,
+    title: 'MLOps & Deployment',
+    desc: 'Taking models from notebook to production with robust CI/CD, monitoring, and scalability.',
+  },
+  {
+    icon: BookOpen,
+    title: 'Research-Driven',
+    desc: 'Staying close to SOTA research and translating cutting-edge ideas into practical systems.',
+  },
 ]
 
 export const ABOUT_TECH_STACK = [
-  'Python', 'PyTorch', 'TensorFlow', 'Scikit-learn',
-  'LangChain', 'HuggingFace', 'OpenAI API', 'RAG',
-  'Prompt Engineering', 'Pandas', 'OpenCV',
-  'FastAPI', 'Docker', 'GCP', 'MLflow',
+  'Python',
+  'PyTorch',
+  'TensorFlow',
+  'Scikit-learn',
+  'LangChain',
+  'HuggingFace',
+  'OpenAI API',
+  'RAG',
+  'LangGraph',
+  'pgvector',
+  'Prompt Engineering',
+  'Pandas',
+  'OpenCV',
+  'FastAPI',
+  'Docker',
+  'GCP',
+  'MLflow',
 ]

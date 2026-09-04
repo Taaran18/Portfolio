@@ -39,7 +39,9 @@ export default function Navbar() {
       const el = document.getElementById(id)
       if (!el) return
       const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveSection(id) },
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(id)
+        },
         { rootMargin: '-40% 0px -55% 0px' }
       )
       obs.observe(el)
@@ -50,7 +52,9 @@ export default function Navbar() {
 
   useEffect(() => {
     if (!mobileOpen) return
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setMobileOpen(false) }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileOpen(false)
+    }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [mobileOpen])
@@ -70,7 +74,10 @@ export default function Navbar() {
           scrolled ? 'py-2' : 'py-2.5'
         )}
       >
-        <Link href="/" className="text-xl font-bold font-mono text-gradient hover:opacity-80 transition-opacity shrink-0 mr-auto">
+        <Link
+          href="/"
+          className="text-xl font-bold font-mono text-gradient hover:opacity-80 transition-opacity shrink-0 mr-auto"
+        >
           &lt;TJ /&gt;
         </Link>
 
@@ -88,10 +95,12 @@ export default function Navbar() {
                 )}
               >
                 {link.label}
-                <span className={clsx(
-                  'absolute -bottom-0.5 left-0 h-px bg-indigo-500 transition-all duration-300',
-                  isLinkActive(link) ? 'w-full' : 'w-0 group-hover:w-full'
-                )} />
+                <span
+                  className={clsx(
+                    'absolute -bottom-0.5 left-0 h-px bg-indigo-500 transition-all duration-300',
+                    isLinkActive(link) ? 'w-full' : 'w-0 group-hover:w-full'
+                  )}
+                />
               </Link>
             </li>
           ))}

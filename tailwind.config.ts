@@ -16,7 +16,7 @@ const config: Config = {
         mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
       },
       animation: {
-        'blink': 'blink 0.75s step-end infinite',
+        blink: 'blink 0.75s step-end infinite',
       },
       keyframes: {
         blink: {

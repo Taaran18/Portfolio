@@ -3,7 +3,8 @@ import Experience from '@/components/sections/Experience'
 import JsonLd from '@/components/JsonLd'
 import { breadcrumbSchema } from '@/lib/seo'
 
-const description = 'Professional experience of Taaran Jain as an AI Engineer and Data Scientist building production ML and LLM systems.'
+const description =
+  'Professional experience of Taaran Jain as an AI Engineer and Data Scientist building production ML and LLM systems.'
 
 export const metadata: Metadata = {
   title: 'Experience',

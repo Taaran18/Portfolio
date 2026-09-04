@@ -3,7 +3,8 @@ import Research from '@/components/sections/Research'
 import JsonLd from '@/components/JsonLd'
 import { breadcrumbSchema } from '@/lib/seo'
 
-const description = 'Research papers published by Taaran Jain at the intersection of AI, financial markets, and healthcare.'
+const description =
+  'Research papers published by Taaran Jain at the intersection of AI, financial markets, and healthcare.'
 
 export const metadata: Metadata = {
   title: 'Research',

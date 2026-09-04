@@ -15,7 +15,9 @@ export default function ArticleToc({ sections }: { sections: ArticleSection[] })
       const el = document.getElementById(id)
       if (!el) return
       const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveId(id) },
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveId(id)
+        },
         { rootMargin: '-25% 0px -65% 0px' }
       )
       obs.observe(el)
@@ -27,9 +29,7 @@ export default function ArticleToc({ sections }: { sections: ArticleSection[] })
 
   return (
     <nav aria-label="On this page" className="sticky top-28">
-      <p className="text-[11px] font-mono uppercase tracking-widest text-slate-500 mb-4">
-        On this page
-      </p>
+      <p className="text-[11px] font-mono uppercase tracking-widest text-slate-500 mb-4">On this page</p>
       <ul className="space-y-1 border-l border-[var(--surface-border)]">
         {sections.map((section) => {
           const id = slugify(section.heading)

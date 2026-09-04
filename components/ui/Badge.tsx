@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import type { LucideIcon } from 'lucide-react'
 
-export type BadgeTone = 'cyan' | 'purple' | 'green' | 'yellow' | 'blue' | 'orange'
+type BadgeTone = 'cyan' | 'purple' | 'green' | 'yellow' | 'blue' | 'orange'
 
 const TONE_CLASSES: Record<BadgeTone, string> = {
   cyan: 'bg-indigo-500/10 border-indigo-500/20 text-indigo-800 dark:text-indigo-400',

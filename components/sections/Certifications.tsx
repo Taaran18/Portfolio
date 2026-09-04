@@ -46,11 +46,11 @@ export default function Certifications() {
                 {cert.name}
               </h3>
 
-              <Badge tone={cert.color} className="mb-3 self-start">{cert.issuer}</Badge>
+              <Badge tone={cert.color} className="mb-3 self-start">
+                {cert.issuer}
+              </Badge>
 
-              <p className="card-body text-slate-600 dark:text-slate-400 mb-4 flex-1 text-left">
-                {cert.description}
-              </p>
+              <p className="card-body text-slate-600 dark:text-slate-400 mb-4 flex-1 text-left">{cert.description}</p>
 
               <div className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-400 group-hover:text-indigo-500 transition-colors">
                 <ExternalLink size={12} />

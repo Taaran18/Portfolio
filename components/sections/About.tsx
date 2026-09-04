@@ -19,44 +19,47 @@ export default function About() {
       />
 
       <div className="grid lg:grid-cols-2 gap-16 items-start">
-        <motion.div
-          {...slideIn('left', { duration: 0.7, margin: '-80px' })}
-          className="space-y-6"
-        >
+        <motion.div {...slideIn('left', { duration: 0.7, margin: '-80px' })} className="space-y-6">
           <p className="text-slate-700 dark:text-slate-300 text-lg leading-relaxed text-left">
-            Hey! I&apos;m <span className="text-indigo-700 dark:text-indigo-400 font-semibold">Taaran</span>, an AI Engineer
-            passionate about building systems at the intersection of{' '}
-            <span className="text-violet-600 dark:text-violet-400 font-semibold">large language models</span>,
-            deep learning, and real-world applications.
+            Hey! I&apos;m <span className="text-indigo-700 dark:text-indigo-400 font-semibold">Taaran</span>, an AI
+            Engineer passionate about building systems at the intersection of{' '}
+            <span className="text-violet-600 dark:text-violet-400 font-semibold">large language models</span>, deep
+            learning, and real-world applications.
           </p>
           <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-left">
-            I work across the full ML lifecycle — from exploratory data analysis and model research to
-            serving models at scale in production. My current focus is on LLM-powered applications:
-            retrieval-augmented generation (RAG), agentic AI, and multimodal systems.
+            I work across the full ML lifecycle — from exploratory data analysis and model research to serving models at
+            scale in production. My current focus is on LLM-powered applications: retrieval-augmented generation (RAG),
+            agentic AI, and multimodal systems.
           </p>
           <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-left">
-            When I&apos;m not training models or writing code, I&apos;m reading the latest papers on arXiv,
-            contributing to open-source AI tools, or experimenting with new architectures.
+            When I&apos;m not training models or writing code, I&apos;m reading the latest papers on arXiv, contributing
+            to open-source AI tools, or experimenting with new architectures.
           </p>
 
           <div className="flex flex-wrap gap-2 pt-2">
             {ABOUT_TECH_STACK.map((tech) => (
-              <Badge key={tech} tone="cyan" className="font-mono">{tech}</Badge>
+              <Badge key={tech} tone="cyan" className="font-mono">
+                {tech}
+              </Badge>
             ))}
           </div>
 
           <div className="pt-4">
-            <Button as="a" href={getSocialLink('resume').href} target="_blank" rel="noopener noreferrer" variant="secondary" className="text-sm">
+            <Button
+              as="a"
+              href={getSocialLink('resume').href}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="secondary"
+              className="text-sm"
+            >
               View Resume
             </Button>
           </div>
         </motion.div>
 
         <div className="space-y-8">
-          <motion.div
-            {...slideIn('right', { duration: 0.7, margin: '-80px' })}
-            className="grid grid-cols-2 gap-4"
-          >
+          <motion.div {...slideIn('right', { duration: 0.7, margin: '-80px' })} className="grid grid-cols-2 gap-4">
             {ABOUT_STATS.map((stat, i) => (
               <Card
                 key={stat.label}
