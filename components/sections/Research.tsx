@@ -15,6 +15,7 @@ function PaperCard({ paper, i }: { paper: Paper; i: number }) {
       href={paper.link}
       target="_blank"
       rel="noopener noreferrer"
+      aria-label={`Read the paper: ${paper.title}`}
       className="flex flex-col gap-3"
       {...fadeInScale({ delay: i * 0.1, duration: 0.45, y: 24 })}
     >

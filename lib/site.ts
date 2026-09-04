@@ -13,9 +13,9 @@ export const SITE = {
   name: 'Taaran Jain',
 
   alternateNames: ['taaranjain', 'Taaran', 'Taaran Jain Portfolio'],
-  title: 'Taaran Jain — AI Engineer',
+  title: 'Taaran Jain — AI & Machine Learning Engineer',
   description:
-    'AI Engineer and Machine Learning Engineer building LLM applications — RAG pipelines with LangGraph and pgvector, fine-tuned transformers, and production ML systems.',
+    'AI and Machine Learning Engineer building LLM applications — RAG pipelines with LangGraph and pgvector, fine-tuned transformers, and production ML systems.',
   url: SITE_URL,
   email: 'taaranjain16@gmail.com',
   location: 'Jaipur, Rajasthan, India',

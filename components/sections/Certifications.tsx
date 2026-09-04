@@ -33,6 +33,7 @@ export default function Certifications() {
               href={cert.credential}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`View the ${cert.name} credential from ${cert.issuer}`}
               padding="sm"
               className={`flex flex-col ${c.hover}`}
               {...fadeInScale({ delay: (i % PREVIEW_COUNT) * 0.07, y: 30 })}
