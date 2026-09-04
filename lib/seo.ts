@@ -6,6 +6,7 @@ import { PUBLISHED_PAPERS } from '@/content/research'
 import { CERTIFICATIONS } from '@/content/certifications'
 import { SKILLS } from '@/content/skills'
 import { CASE_STUDIES } from '@/content/case-studies'
+import { LEADERSHIP_ROLES } from '@/content/leadership'
 import { FAQS } from '@/content/faqs'
 import { BLOG_POSTS } from '@/content/blog'
 import type { BlogPost, CaseStudy } from '@/types'
@@ -408,40 +409,157 @@ function breadcrumbGraph(entries: { name: string; item: string }[]) {
   }
 }
 
-export function breadcrumbSchema(path: string) {
-  const section = SECTIONS.find((s) => s.path === path)
-  const items = [{ name: 'Home', item: SITE_URL }]
-  if (section) items.push({ name: section.navLabel, item: `${SITE_URL}${section.path}` })
-
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: items.map((entry, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: entry.name,
-      item: entry.item,
-    })),
-  }
-}
-
 export function homeGraph() {
   return {
     '@context': 'https://schema.org',
-    '@graph': [faqPageSchema(SITE_URL)],
+    '@graph': [profilePageSchema(), projectsSchema(), ...researchSchema(), faqPageSchema(SITE_URL)],
   }
+}
+
+function collectionGraph(path: string, name: string, description: string, extras: object[]) {
+  const url = `${SITE_URL}${path}`
+  const section = SECTIONS.find((s) => s.path === path)
+  const crumbs = [{ name: 'Home', item: SITE_URL }]
+  if (section) crumbs.push({ name: section.navLabel, item: url })
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'CollectionPage',
+        '@id': `${url}#page`,
+        url,
+        name,
+        description,
+        isPartOf: { '@id': WEBSITE_ID },
+        about: { '@id': PERSON_ID },
+        primaryImageOfPage: { '@id': `${SITE_URL}/#logo` },
+      },
+      ...extras,
+      breadcrumbGraph(crumbs),
+    ],
+  }
+}
+
+export function projectsPageSchema() {
+  return collectionGraph(
+    '/projects',
+    `Projects by ${SITE.name}`,
+    `AI and machine learning projects built by ${SITE.name}, each with a live demo and public source.`,
+    [projectsSchema()]
+  )
+}
+
+export function researchPageSchema() {
+  return collectionGraph(
+    '/research',
+    `Research by ${SITE.name}`,
+    `Peer-reviewed papers published by ${SITE.name}.`,
+    researchSchema()
+  )
+}
+
+export function experiencePageSchema() {
+  return collectionGraph(
+    '/experience',
+    `Experience of ${SITE.name}`,
+    `Professional roles held by ${SITE.name} as an AI and machine learning engineer.`,
+    [
+      {
+        '@type': 'ItemList',
+        '@id': `${SITE_URL}/experience#list`,
+        name: `Roles held by ${SITE.name}`,
+        numberOfItems: EXPERIENCES.length,
+        itemListElement: experienceSchema().map((role, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          item: role,
+        })),
+      },
+    ]
+  )
+}
+
+export function skillsPageSchema() {
+  return collectionGraph(
+    '/skills',
+    `Technical skills of ${SITE.name}`,
+    `The languages, frameworks and platforms ${SITE.name} works with, grouped by depth of use.`,
+    [
+      {
+        '@type': 'ItemList',
+        '@id': `${SITE_URL}/skills#list`,
+        name: `Skills of ${SITE.name}`,
+        numberOfItems: SKILLS.length,
+        itemListElement: SKILLS.map((skill, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          item: { '@type': 'DefinedTerm', name: skill.name, inDefinedTermSet: `${SITE_URL}/skills` },
+        })),
+      },
+    ]
+  )
+}
+
+export function certificationsPageSchema() {
+  return collectionGraph(
+    '/certifications',
+    `Certifications of ${SITE.name}`,
+    `Professional certifications earned by ${SITE.name} in AI, machine learning, cloud and analytics.`,
+    [
+      {
+        '@type': 'ItemList',
+        '@id': `${SITE_URL}/certifications#list`,
+        name: `Certifications held by ${SITE.name}`,
+        numberOfItems: CERTIFICATIONS.length,
+        itemListElement: CERTIFICATIONS.map((cert, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          item: {
+            '@type': 'EducationalOccupationalCredential',
+            name: cert.name,
+            description: cert.description,
+            credentialCategory: 'certificate',
+            recognizedBy: organisation(cert.issuer),
+            url: cert.credential,
+            about: { '@id': PERSON_ID },
+          },
+        })),
+      },
+    ]
+  )
+}
+
+export function leadershipPageSchema() {
+  return collectionGraph(
+    '/leadership',
+    `Leadership roles of ${SITE.name}`,
+    `Community, mentoring and event leadership roles held by ${SITE.name}.`,
+    [
+      {
+        '@type': 'ItemList',
+        '@id': `${SITE_URL}/leadership#list`,
+        name: `Leadership roles held by ${SITE.name}`,
+        numberOfItems: LEADERSHIP_ROLES.length,
+        itemListElement: LEADERSHIP_ROLES.map((role, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          item: {
+            '@type': 'OrganizationRole',
+            roleName: role.title,
+            description: role.description,
+            memberOf: organisation(role.organisation),
+            member: { '@id': PERSON_ID },
+          },
+        })),
+      },
+    ]
+  )
 }
 
 export function rootGraph() {
   return {
     '@context': 'https://schema.org',
-    '@graph': [
-      personSchema(),
-      organizationSchema(),
-      websiteSchema(),
-      profilePageSchema(),
-      projectsSchema(),
-      ...researchSchema(),
-    ],
+    '@graph': [personSchema(), organizationSchema(), websiteSchema()],
   }
 }
