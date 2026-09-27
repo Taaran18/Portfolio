@@ -23,7 +23,7 @@ export default function SectionHeader({ sectionId, title, subtitle }: Props) {
       transition={{ duration: 0.5, ease: EASE_OUT }}
       className="text-center mb-16"
     >
-      <p className="text-indigo-700 dark:text-indigo-400 font-mono text-sm tracking-[0.3em] uppercase mb-4">{label}</p>
+      <p className="text-brand-700 dark:text-brand-400 font-mono text-sm tracking-[0.3em] uppercase mb-4">{label}</p>
       <h2 className="heading-lg text-gradient mb-4">{title}</h2>
       {subtitle && (
         <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">

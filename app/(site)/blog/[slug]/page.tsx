@@ -1,12 +1,14 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/metadata'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, Clock } from 'lucide-react'
+import { Clock } from 'lucide-react'
 import Badge from '@/components/ui/Badge'
 import ArticleBody from '@/components/ui/ArticleBody'
 import ArticleToc from '@/components/ui/ArticleToc'
 import ShareRail from '@/components/ui/ShareRail'
 import JsonLd from '@/components/JsonLd'
+import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import { BLOG_POSTS, getBlogPost } from '@/content/blog'
 import { blogPostSchema } from '@/lib/seo'
 import { formatLongDate } from '@/lib/format'
@@ -23,21 +25,14 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const post = getBlogPost(slug)
   if (!post) return {}
 
-  return {
+  return pageMetadata({
     title: post.title,
-    description: post.excerpt,
-    alternates: { canonical: `/blog/${post.slug}` },
+    shareTitle: post.title,
+    description: post.metaDescription ?? post.excerpt,
+    path: `/blog/${post.slug}`,
     keywords: post.tags,
-    openGraph: {
-      type: 'article',
-      title: post.title,
-      description: post.excerpt,
-      url: `/blog/${post.slug}`,
-      publishedTime: post.publishedAt,
-      authors: [SITE.name],
-      tags: post.tags,
-    },
-  }
+    article: { publishedTime: post.publishedAt, tags: post.tags },
+  })
 }
 
 export default async function BlogPostPage({ params }: Params) {
@@ -56,12 +51,11 @@ export default async function BlogPostPage({ params }: Params) {
           </aside>
 
           <div className="lg:col-span-7 min-w-0">
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors mb-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60 rounded"
-            >
-              <ArrowLeft size={15} /> All writing
-            </Link>
+            <Breadcrumbs
+              trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]}
+              align="start"
+              className="mb-10"
+            />
 
             <header className="mb-12">
               <div className="flex flex-wrap items-center gap-3 mb-4 text-xs text-slate-500 dark:text-slate-500 font-mono">
@@ -76,7 +70,7 @@ export default async function BlogPostPage({ params }: Params) {
 
               <div className="flex flex-wrap gap-2 pb-8 border-b border-[var(--surface-border)]">
                 {post.tags.map((tag) => (
-                  <Badge key={tag} tone="purple" className="font-mono">
+                  <Badge key={tag} tone="brand" className="font-mono">
                     {tag}
                   </Badge>
                 ))}
@@ -89,7 +83,7 @@ export default async function BlogPostPage({ params }: Params) {
               <p className="text-sm text-slate-600 dark:text-slate-400">
                 Written by <span className="font-medium text-slate-900 dark:text-white">{SITE.name}</span> — AI
                 Engineer.{' '}
-                <Link href="/contact" className="text-indigo-600 dark:text-indigo-400 hover:underline">
+                <Link href="/contact" className="text-brand-700 dark:text-brand-400 hover:underline">
                   Get in touch
                 </Link>
                 .

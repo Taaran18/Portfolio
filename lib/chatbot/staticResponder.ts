@@ -1,6 +1,7 @@
 import Fuse from 'fuse.js'
 import { KNOWLEDGE_BASE, FEATURED_QUESTIONS } from '@/content/chatbot'
 import { SITE, whatsappUrl } from '@/lib/site'
+import { answerProjectQuestion } from './projectRouter'
 import type { ChatResponder, ChatReply, ChatMessage, ChatAction, KnowledgeEntry } from './types'
 
 const FALLBACK_TEXT =
@@ -131,9 +132,12 @@ function pickSuggestions(excludeId?: string, count = 3): string[] {
 }
 
 export class StaticKnowledgeResponder implements ChatResponder {
-  async respond(message: string, _history: ChatMessage[] = []): Promise<ChatReply> {
+  async respond(message: string, history: ChatMessage[] = []): Promise<ChatReply> {
     const trimmed = message.trim()
     if (!trimmed) return { text: FALLBACK_TEXT, suggestions: pickSuggestions(), actions: contactActions() }
+
+    const projectReply = answerProjectQuestion(trimmed, history)
+    if (projectReply) return projectReply
 
     const match = bestSubstringMatch(trimmed) ?? fuzzyKeywordMatch(trimmed)
     if (!match) return { text: FALLBACK_TEXT, suggestions: pickSuggestions(), actions: contactActions() }

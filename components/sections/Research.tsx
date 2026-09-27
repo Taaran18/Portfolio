@@ -24,15 +24,15 @@ function PaperCard({ paper, i }: { paper: Paper; i: number }) {
         <span className="text-xs text-slate-600 dark:text-slate-400 font-mono">{paper.year}</span>
       </div>
 
-      <h3 className="card-title text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors flex-1">
+      <h3 className="card-title text-slate-900 dark:text-white group-hover:text-brand-700 dark:group-hover:text-brand-400 transition-colors flex-1">
         {paper.title}
       </h3>
 
       <p className="card-body text-slate-600 dark:text-slate-400 flex-1 text-left">{paper.summary}</p>
 
       <div className="flex items-center justify-between pt-2 mt-auto">
-        <Badge tone="purple">{paper.category}</Badge>
-        <div className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-400 group-hover:text-indigo-500 transition-colors">
+        <Badge tone="brand">{paper.category}</Badge>
+        <div className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-400 group-hover:text-brand-600 transition-colors">
           <span>View Paper</span>
           <ExternalLink size={12} />
         </div>

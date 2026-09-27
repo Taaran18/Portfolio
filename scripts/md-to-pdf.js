@@ -19,7 +19,7 @@ const CSS = `
 * { box-sizing: border-box; }
 body { font: 11px/1.6 -apple-system, "Helvetica Neue", Arial, sans-serif; color: #18181b; margin: 0; }
 h1 { font-size: 26px; letter-spacing: -.02em; margin: 0 0 14px; }
-h2 { font-size: 15px; letter-spacing: -.01em; margin: 24px 0 8px; padding-bottom: 5px; border-bottom: 2px solid #4f46e5; page-break-after: avoid; }
+h2 { font-size: 15px; letter-spacing: -.01em; margin: 24px 0 8px; padding-bottom: 5px; border-bottom: 2px solid #0f766e; page-break-after: avoid; }
 h3 { font-size: 12px; margin: 16px 0 6px; page-break-after: avoid; }
 p, li { max-width: 78ch; }
 p { margin: 0 0 9px; }
@@ -30,7 +30,7 @@ th { text-align: left; font-size: 9px; text-transform: uppercase; letter-spacing
 td { padding: 6px 8px; border-bottom: 1px solid #ededf0; vertical-align: top; }
 tr { page-break-inside: avoid; }
 code { font: 10px ui-monospace, Menlo, monospace; background: #f4f4f5; padding: 1px 4px; border-radius: 3px; }
-a { color: #4f46e5; text-decoration: none; word-break: break-word; }
+a { color: #0f766e; text-decoration: none; word-break: break-word; }
 hr { border: 0; border-top: 1px solid #d4d4d8; margin: 20px 0; }
 blockquote { margin: 0 0 10px; padding-left: 12px; border-left: 3px solid #d4d4d8; color: #52525b; }
 `

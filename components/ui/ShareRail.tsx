@@ -9,10 +9,10 @@ import { SITE, SITE_URL } from '@/lib/site'
 const PROFILE_LINKS = SOCIAL_LINKS.filter((s) => s.id !== 'email')
 
 const railLink =
-  'inline-flex items-center gap-2.5 text-[13px] text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60'
+  'inline-flex items-center gap-2.5 text-[13px] text-slate-600 dark:text-slate-400 hover:text-brand-700 dark:hover:text-brand-400 transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60'
 
 const iconButton =
-  'w-9 h-9 rounded-full border border-[var(--surface-border)] flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-500/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60'
+  'w-9 h-9 rounded-full border border-[var(--surface-border)] flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-brand-700 dark:hover:text-brand-400 hover:border-brand-500/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60'
 
 const heading = 'text-[11px] font-mono uppercase tracking-widest text-slate-500 mb-3'
 

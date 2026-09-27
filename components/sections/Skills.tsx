@@ -66,7 +66,7 @@ export default function Skills() {
         ))}
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-start max-w-6xl mx-auto">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
         {groups.map(({ cat, skills }, gi) => (
           <Card key={cat} padding="sm" hover="subtle" {...fadeInScale({ delay: (gi % 6) * 0.05, y: 20 })}>
             <div className="flex items-center gap-2 mb-4">

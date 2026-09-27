@@ -43,7 +43,7 @@ export default function Certifications() {
                 <span className="text-slate-600 dark:text-slate-400 text-xs font-mono">{cert.date}</span>
               </div>
 
-              <h3 className="card-title text-slate-900 dark:text-white leading-snug mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+              <h3 className="card-title text-slate-900 dark:text-white leading-snug mb-2 group-hover:text-brand-700 dark:group-hover:text-brand-400 transition-colors">
                 {cert.name}
               </h3>
 
@@ -53,7 +53,7 @@ export default function Certifications() {
 
               <p className="card-body text-slate-600 dark:text-slate-400 mb-4 flex-1 text-left">{cert.description}</p>
 
-              <div className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-400 group-hover:text-indigo-500 transition-colors">
+              <div className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-400 group-hover:text-brand-600 transition-colors">
                 <ExternalLink size={12} />
                 <span>View Credential</span>
               </div>

@@ -24,11 +24,11 @@ export default function ScrollToTop() {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           aria-label="Scroll to top"
           className="fixed bottom-24 right-6 z-50 w-14 h-14 rounded-full
-            bg-violet-600 bg-gradient-to-br from-indigo-700 to-violet-600
+            bg-accent-700 bg-gradient-to-br from-brand-700 to-accent-700
             flex items-center justify-center
-            shadow-lg shadow-indigo-500/30
+            shadow-lg shadow-brand-500/30
             hover:opacity-90 hover:scale-105
-            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2
+            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2
             transition-transform"
         >
           <ArrowUp size={22} className="text-white" />

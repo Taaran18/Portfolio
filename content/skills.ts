@@ -51,8 +51,8 @@ export const SKILL_TIER_LABELS: Record<SkillTier, string> = {
 export const SKILL_TIER_ORDER: SkillTier[] = ['core', 'production', 'working']
 
 export const SKILL_TIER_STYLES: Record<SkillTier, string> = {
-  core: 'bg-indigo-600 border-indigo-600 text-white',
-  production: 'bg-indigo-500/10 border-indigo-500/35 text-indigo-700 dark:text-indigo-300',
+  core: 'bg-brand-700 border-brand-600 text-white',
+  production: 'bg-brand-500/10 border-brand-500/35 text-brand-700 dark:text-brand-300',
   working: 'bg-transparent border-[var(--surface-border)] text-[var(--text-muted)]',
 }
 
@@ -68,10 +68,10 @@ export const SKILL_CATEGORY_LABELS: Record<string, string> = {
 }
 
 export const SKILL_CATEGORY_COLORS: Record<string, { dot: string }> = {
-  llm: { dot: 'bg-violet-500' },
+  llm: { dot: 'bg-accent-500' },
   ml: { dot: 'bg-orange-500' },
   dl: { dot: 'bg-pink-500' },
-  languages: { dot: 'bg-indigo-500' },
+  languages: { dot: 'bg-brand-500' },
   fullstack: { dot: 'bg-sky-500' },
   data: { dot: 'bg-amber-500' },
   cloud: { dot: 'bg-emerald-500' },

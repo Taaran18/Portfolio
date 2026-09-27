@@ -9,7 +9,7 @@ export const CERTIFICATIONS: Certification[] = [
     description:
       "Awarded for strong performance in WorldQuant's quantitative research challenge — applying data-driven and algorithmic thinking to real financial markets.",
     credential: 'https://drive.google.com/file/d/1cUXfSkDlyhoAIUGm0plalbrZT1RBkTsH/view?usp=sharing',
-    color: 'purple',
+    color: 'brand',
   },
   {
     _id: '1',
@@ -19,7 +19,7 @@ export const CERTIFICATIONS: Certification[] = [
     description:
       'Financial modelling, valuation, and data-driven investment analysis — adding a quantitative finance lens to complement my ML engineering background.',
     credential: 'https://learn.365financialanalyst.com/certificates/DD-FB6D812B4E/',
-    color: 'purple',
+    color: 'brand',
   },
   {
     _id: '2',
@@ -79,7 +79,7 @@ export const CERTIFICATIONS: Certification[] = [
     description:
       'Covers data-driven decision making, digital marketing analytics, and business strategy — bridging the gap between ML outputs and real business impact.',
     credential: 'https://coursera.org/share/efdaf8b4eee4b6da9ca235cac7b50dc0',
-    color: 'purple',
+    color: 'brand',
   },
   {
     _id: '8',
@@ -117,5 +117,5 @@ export const CERT_COLOR_MAP = {
   blue: { dot: 'bg-blue-500', hover: 'hover:border-blue-500/30 hover:shadow-blue-500/10' },
   orange: { dot: 'bg-orange-400', hover: 'hover:border-orange-400/30 hover:shadow-orange-400/10' },
   green: { dot: 'bg-green-500', hover: 'hover:border-green-500/30 hover:shadow-green-500/10' },
-  purple: { dot: 'bg-violet-500', hover: 'hover:border-violet-500/30 hover:shadow-violet-500/10' },
+  brand: { dot: 'bg-brand-500', hover: 'hover:border-brand-500/30 hover:shadow-brand-500/10' },
 }

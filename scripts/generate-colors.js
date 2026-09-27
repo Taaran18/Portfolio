@@ -31,8 +31,8 @@ const TOKENS = {
     '--surface-border': '#d4d4d8',
     '--nav-bg': '#ffffff',
     '--nav-border': '#d4d4d8',
-    '--accent': '#4f46e5',
-    '--accent-alt': '#7c3aed',
+    '--accent': '#0d9488',
+    '--accent-alt': '#0891b2',
   },
   dark: {
     '--bg-primary': '#000000',
@@ -43,18 +43,23 @@ const TOKENS = {
     '--surface-border': '#2e2e32',
     '--nav-bg': '#0e0e0e',
     '--nav-border': '#2e2e32',
-    '--accent': '#4f46e5',
-    '--accent-alt': '#7c3aed',
+    '--accent': '#0d9488',
+    '--accent-alt': '#0891b2',
   },
 }
 
 const CORE = [
-  ['indigo-600', tw.indigo[600], 'Primary accent. CTAs, links, active nav, focus rings.', 72 + 36],
-  ['indigo-500', tw.indigo[500], 'Hover and ring tints, gradient start, chart bars.', 72],
-  ['indigo-400', tw.indigo[400], 'Dark-mode accent text (indigo-600 is too dark on black).', 48],
-  ['indigo-700', tw.indigo[700], 'Pressed state, gradient end on the login CTA.', 19],
-  ['violet-600', tw.violet[600], 'Gradient partner to indigo. Logo mark, primary button.', 21],
-  ['violet-500', tw.violet[500], 'Secondary badge tone, link-click icons.', 10],
+  [
+    'brand-700 (teal-700)',
+    tw.teal[700],
+    'Primary accent. Links, CTA gradient start, active nav, gradient headings (light).',
+    60,
+  ],
+  ['brand-500 (teal-500)', tw.teal[500], 'Focus rings, borders, dots, chart bars (decorative only).', 55],
+  ['brand-400 (teal-400)', tw.teal[400], 'Dark-mode accent text and gradient headings (dark).', 45],
+  ['brand-800 (teal-800)', tw.teal[800], 'Hover state on solid brand buttons.', 3],
+  ['accent-700 (cyan-700)', tw.cyan[700], 'Gradient partner. CTA gradient end, logo mark.', 20],
+  ['accent-400 (cyan-400)', tw.cyan[400], 'Dark-mode gradient partner, tech tag text.', 6],
 ]
 const NEUTRAL = [
   ['slate-900', tw.slate[900], 'Headings and primary body text in light mode.', 36],
@@ -74,22 +79,22 @@ const SEMANTIC = [
 ]
 const FIXED = [
   ['WhatsApp green', '#25D366', 'Brand-locked. The WhatsApp FAB must use the official colour.'],
-  ['Email indigo', '#4f46e5', 'Hard-coded in the contact email template — mail clients cannot read CSS variables.'],
-  ['OG gradient', '#818cf8 -> #7c3aed', 'Open Graph card headline gradient (indigo-400 to violet-600).'],
+  ['Email teal', '#0f766e', 'Hard-coded in the contact email template — mail clients cannot read CSS variables.'],
+  ['OG gradient', '#2dd4bf -> #22d3ee', 'Open Graph card headline gradient (teal-400 to cyan-400).'],
 ]
 
 const CONTRAST = [
   ['Body text on page', '#000000', '#ffffff', 'light', false],
   ['Muted text on page', '#52525b', '#ffffff', 'light', false],
-  ['Accent link on page', '#4f46e5', '#ffffff', 'light', false],
-  ['White on accent button', '#ffffff', '#4f46e5', 'light', false],
+  ['Accent link on page', tw.teal[700], '#ffffff', 'light', false],
+  ['White on accent button', '#ffffff', tw.teal[700], 'light', false],
+  ['White on gradient end', '#ffffff', tw.cyan[700], 'light', false],
   ['Body text on page', '#ffffff', '#000000', 'dark', false],
   ['Muted text on page', '#a1a1aa', '#000000', 'dark', false],
-  ['Accent link on surface', tw.indigo[400], '#0e0e0e', 'dark', false],
+  ['Accent link on surface', tw.teal[400], '#0e0e0e', 'dark', false],
   ['Muted text on surface', tw.slate[400], '#0e0e0e', 'dark', false],
 ]
 
-// ---------- Markdown ----------
 let md = `# Colour reference
 
 Every colour used in this portfolio, pulled directly from the source. Regenerate
@@ -130,7 +135,7 @@ const section = (title, note, rows) => {
 }
 md += section(
   'Brand palette',
-  'Indigo and violet carry the brand. Indigo is the action colour; violet only ever appears alongside it in gradients.',
+  'Teal (`brand`) and cyan (`accent`) carry the brand. Teal is the action colour; cyan only ever appears alongside it in gradients and on tech tags. Both are aliased in tailwind.config.ts, so the palette changes in one place.',
   CORE
 )
 md += section(
@@ -152,11 +157,10 @@ for (const [label, fg, bg, theme] of CONTRAST) {
   const r = ratio(fg, bg)
   md += `| ${label} | ${theme} | ${fmt(r)}:1 | ${grade(r)} |\n`
 }
-md += `\n### Known limits\n\n- \`indigo-600\` on white is ${fmt(ratio(tw.indigo[600], '#ffffff'))}:1 — fine for links and bold text, but not for small muted copy.\n- \`indigo-500\` on white is only ${fmt(ratio(tw.indigo[500], '#ffffff'))}:1. Use it for fills and borders, never for text on a light background.\n- Dark mode swaps to \`indigo-400\` (${fmt(ratio(tw.indigo[400], '#0e0e0e'))}:1 on surface) because \`indigo-600\` drops to ${fmt(ratio(tw.indigo[600], '#0e0e0e'))}:1 on black.\n`
+md += `\n### Known limits\n\n- \`brand-600\` on white is only ${fmt(ratio(tw.teal[600], '#ffffff'))}:1, so light-mode text and white-on-colour buttons use \`brand-700\` (${fmt(ratio(tw.teal[700], '#ffffff'))}:1).\n- \`brand-500\` on white is ${fmt(ratio(tw.teal[500], '#ffffff'))}:1. Use it for fills, borders and dots, never for text on a light background.\n- Dark mode swaps to \`brand-400\` (${fmt(ratio(tw.teal[400], '#0e0e0e'))}:1 on surface).\n`
 
 fs.writeFileSync('docs/colors.md', md)
 
-// ---------- HTML for PDF ----------
 const swatchRows = (rows) =>
   rows
     .map(
@@ -170,7 +174,7 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><title>Colour ref
 * { box-sizing: border-box; }
 body { font: 11px/1.55 -apple-system, "Helvetica Neue", Arial, sans-serif; color: #18181b; margin: 0; }
 h1 { font-size: 26px; letter-spacing: -.02em; margin: 0 0 4px; }
-h2 { font-size: 15px; letter-spacing: -.01em; margin: 26px 0 6px; padding-bottom: 5px; border-bottom: 2px solid #4f46e5; page-break-after: avoid; }
+h2 { font-size: 15px; letter-spacing: -.01em; margin: 26px 0 6px; padding-bottom: 5px; border-bottom: 2px solid #0f766e; page-break-after: avoid; }
 p.lede { color: #52525b; margin: 0 0 18px; max-width: 62ch; }
 p.note { color: #52525b; margin: 0 0 9px; max-width: 74ch; }
 table { width: 100%; border-collapse: collapse; margin-bottom: 6px; page-break-inside: auto; }

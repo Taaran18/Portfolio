@@ -19,7 +19,7 @@ export default function Experience() {
       />
 
       <div className="relative">
-        <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-indigo-500/50 via-violet-500/30 to-transparent -translate-x-1/2" />
+        <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-brand-500/50 via-accent-500/30 to-transparent -translate-x-1/2" />
 
         <div className="space-y-12">
           {EXPERIENCES.map((exp, i) => {
@@ -32,16 +32,16 @@ export default function Experience() {
                   isLeft ? 'md:justify-start' : 'md:justify-end'
                 }`}
               >
-                <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-gradient-to-br from-indigo-400 to-violet-500 border-2 border-[var(--bg-primary)] shadow-lg shadow-indigo-500/30 z-10 mt-6" />
+                <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-gradient-to-br from-brand-400 to-accent-500 border-2 border-[var(--bg-primary)] shadow-lg shadow-brand-500/30 z-10 mt-6" />
 
                 <div className={`md:w-[46%] ${isLeft ? 'md:mr-auto md:pr-12' : 'md:ml-auto md:pl-12'}`}>
                   <Card padding="md" hover="lift" borderGradient>
                     <div className="flex items-start justify-between mb-3">
                       <div>
-                        <h3 className="card-title text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                        <h3 className="card-title text-slate-900 dark:text-white group-hover:text-brand-700 dark:group-hover:text-brand-400 transition-colors">
                           {exp.role}
                         </h3>
-                        <p className="text-indigo-700 dark:text-indigo-400 font-semibold">{exp.company}</p>
+                        <p className="text-brand-700 dark:text-brand-400 font-semibold">{exp.company}</p>
                       </div>
                       {exp.current && <Badge tone="green">Current</Badge>}
                     </div>
@@ -59,7 +59,7 @@ export default function Experience() {
                     <ul className="space-y-1.5 mb-5">
                       {exp.responsibilities.map((r, j) => (
                         <li key={j} className="flex gap-2 text-slate-600 dark:text-slate-400 text-sm">
-                          <span className="text-indigo-500 mt-0.5 shrink-0">▸</span>
+                          <span className="text-brand-600 mt-0.5 shrink-0">▸</span>
                           {r}
                         </li>
                       ))}
@@ -67,7 +67,7 @@ export default function Experience() {
 
                     <div className="flex flex-wrap gap-1.5">
                       {exp.technologies.map((t) => (
-                        <Badge key={t} tone="purple" className="font-mono">
+                        <Badge key={t} tone="brand" className="font-mono">
                           {t}
                         </Badge>
                       ))}

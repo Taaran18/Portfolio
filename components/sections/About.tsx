@@ -18,12 +18,12 @@ export default function About() {
         subtitle="I'm obsessed with making machines learn — and making sure what they learn is actually useful."
       />
 
-      <div className="grid lg:grid-cols-2 gap-16 items-start">
-        <motion.div {...slideIn('left', { duration: 0.7, margin: '-80px' })} className="space-y-6">
+      <div className="grid lg:grid-cols-2 gap-16">
+        <motion.div {...slideIn('left', { duration: 0.7, margin: '-80px' })} className="flex flex-col gap-6">
           <p className="text-slate-700 dark:text-slate-300 text-lg leading-relaxed text-left">
-            Hey! I&apos;m <span className="text-indigo-700 dark:text-indigo-400 font-semibold">Taaran</span>, an AI
+            Hey! I&apos;m <span className="text-brand-700 dark:text-brand-400 font-semibold">Taaran</span>, an AI
             Engineer passionate about building systems at the intersection of{' '}
-            <span className="text-violet-600 dark:text-violet-400 font-semibold">large language models</span>, deep
+            <span className="text-accent-700 dark:text-accent-400 font-semibold">large language models</span>, deep
             learning, and real-world applications.
           </p>
           <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-left">
@@ -36,68 +36,74 @@ export default function About() {
             to open-source AI tools, or experimenting with new architectures.
           </p>
 
-          <div className="flex flex-wrap gap-2 pt-2">
-            {ABOUT_TECH_STACK.map((tech) => (
-              <Badge key={tech} tone="cyan" className="font-mono">
-                {tech}
-              </Badge>
-            ))}
-          </div>
+          <div className="flex flex-col gap-6 pt-2 lg:mt-auto">
+            <div className="flex flex-wrap gap-2">
+              {ABOUT_TECH_STACK.map((tech) => (
+                <Badge key={tech} tone="cyan" className="font-mono">
+                  {tech}
+                </Badge>
+              ))}
+            </div>
 
-          <div className="pt-4">
-            <Button
-              as="a"
-              href={getSocialLink('resume').href}
-              target="_blank"
-              rel="noopener noreferrer"
-              variant="secondary"
-              className="text-sm"
-            >
-              View Resume
-            </Button>
+            <div>
+              <Button
+                as="a"
+                href={getSocialLink('resume').href}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="secondary"
+                className="text-sm"
+              >
+                View Resume
+              </Button>
+            </div>
           </div>
         </motion.div>
 
-        <div className="space-y-8">
-          <motion.div {...slideIn('right', { duration: 0.7, margin: '-80px' })} className="grid grid-cols-2 gap-4">
-            {ABOUT_STATS.map((stat, i) => (
-              <Card
-                key={stat.label}
-                padding="md"
-                hover="none"
-                borderGradient
-                group={false}
-                initial={{ opacity: 0, scale: 0.7 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1, ease: EASE_OUT }}
-                className="text-center"
-              >
-                <p className="text-3xl font-bold text-gradient mb-1">{stat.value}</p>
-                <p className="text-slate-600 dark:text-slate-400 text-xs whitespace-nowrap">{stat.label}</p>
-              </Card>
-            ))}
-          </motion.div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {ABOUT_TRAITS.map((trait, i) => (
-              <Card
-                key={trait.title}
-                padding="sm"
-                hover="subtle"
-                initial={{ opacity: 0, scale: 0.82, y: 20 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.55, delay: i * 0.1, ease: EASE_OUT }}
-              >
-                <trait.icon size={22} className="text-indigo-600 mb-3 group-hover:scale-110 transition-transform" />
-                <h3 className="card-title text-slate-900 dark:text-white mb-1">{trait.title}</h3>
-                <p className="card-body text-slate-600 dark:text-slate-400">{trait.desc}</p>
-              </Card>
-            ))}
-          </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:auto-rows-fr gap-4">
+          {ABOUT_TRAITS.map((trait, i) => (
+            <Card
+              key={trait.title}
+              padding="md"
+              hover="subtle"
+              initial={{ opacity: 0, scale: 0.82, y: 20 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: i * 0.1, ease: EASE_OUT }}
+            >
+              <trait.icon
+                size={22}
+                className="text-brand-700 dark:text-brand-400 mb-3 group-hover:scale-110 transition-transform"
+              />
+              <h3 className="card-title text-slate-900 dark:text-white mb-1">{trait.title}</h3>
+              <p className="card-body text-slate-600 dark:text-slate-400">{trait.desc}</p>
+            </Card>
+          ))}
         </div>
       </div>
+
+      <motion.div
+        {...slideIn('right', { duration: 0.7, margin: '-80px' })}
+        className="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-4"
+      >
+        {ABOUT_STATS.map((stat, i) => (
+          <Card
+            key={stat.label}
+            padding="md"
+            hover="none"
+            borderGradient
+            group={false}
+            initial={{ opacity: 0, scale: 0.7 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: i * 0.1, ease: EASE_OUT }}
+            className="text-center"
+          >
+            <p className="text-3xl md:text-4xl font-bold text-gradient mb-1">{stat.value}</p>
+            <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">{stat.label}</p>
+          </Card>
+        ))}
+      </motion.div>
     </section>
   )
 }

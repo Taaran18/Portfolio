@@ -14,8 +14,8 @@ const PADDING: Record<CardPadding, string> = {
 
 const HOVER: Record<CardHover, string> = {
   none: '',
-  subtle: 'hover:border-indigo-500/40 transition-all',
-  lift: 'surface-raise hover:border-indigo-500/40 hover:-translate-y-1 transition-all duration-300',
+  subtle: 'hover:border-brand-500/40 transition-all',
+  lift: 'surface-raise hover:border-brand-500/40 hover:-translate-y-1 transition-all duration-300',
 }
 
 interface CardOwnProps {

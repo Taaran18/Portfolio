@@ -1,4 +1,4 @@
-import { SITE, SITE_URL } from '@/lib/site'
+import { SITE, SITE_UPDATED, SITE_URL } from '@/lib/site'
 import { SECTIONS } from '@/content/sections'
 import { PROJECTS } from '@/content/projects'
 import { EXPERIENCES } from '@/content/experience'
@@ -9,13 +9,31 @@ import { CASE_STUDIES } from '@/content/case-studies'
 import { LEADERSHIP_ROLES } from '@/content/leadership'
 import { FAQS } from '@/content/faqs'
 import { BLOG_POSTS } from '@/content/blog'
-import type { BlogPost, CaseStudy } from '@/types'
+import type { BlogPost, CaseStudy, Project } from '@/types'
+import type { LegalDoc } from '@/content/legal'
 
 const PERSON_ID = `${SITE_URL}/#person`
 const WEBSITE_ID = `${SITE_URL}/#website`
 const ORGANIZATION_ID = `${SITE_URL}/#organization`
 
 const currentRole = EXPERIENCES.find((e) => e.current) ?? EXPERIENCES[0]
+
+const LANGUAGES = new Set(['Python', 'TypeScript', 'JavaScript', 'SQL'])
+
+function languagesOf(technologies: string[]) {
+  const found = technologies.filter((t) => LANGUAGES.has(t))
+  return found.length ? { programmingLanguage: found } : {}
+}
+
+function projectForStudy(study: CaseStudy): Project | undefined {
+  return PROJECTS.find((project) => project.caseStudySlug === study.slug)
+}
+
+function studyImages(study: CaseStudy) {
+  const project = projectForStudy(study)
+  if (project?.images.length) return project.images.map((image) => `${SITE_URL}${image.src}`)
+  return study.imageUrl ? [`${SITE_URL}${study.imageUrl}`] : []
+}
 
 function organisation(name: string) {
   return { '@type': 'Organization', name }
@@ -34,11 +52,6 @@ export function personSchema() {
     email: `mailto:${SITE.email}`,
     jobTitle: [...SITE.openToRoles],
     description: SITE.description,
-    seeks: SITE.openToRoles.map((role) => ({
-      '@type': 'Demand',
-      name: role,
-      itemOffered: { '@type': 'JobPosting', title: role },
-    })),
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Jaipur',
@@ -190,6 +203,7 @@ export function profilePageSchema() {
     name: SITE.title,
     isPartOf: { '@id': WEBSITE_ID },
     mainEntity: { '@id': PERSON_ID },
+    dateModified: SITE_UPDATED,
   }
 }
 
@@ -203,15 +217,24 @@ export function projectsSchema() {
       '@type': 'ListItem',
       position: i + 1,
       item: {
-        '@type': 'SoftwareApplication',
+        '@type': 'SoftwareSourceCode',
         name: project.title,
         description: project.description,
-        url: project.liveUrl ?? project.githubUrl,
-        applicationCategory: 'DeveloperApplication',
-        operatingSystem: 'Web',
+        url: project.liveUrl ?? project.githubUrl ?? `${SITE_URL}/projects`,
         author: { '@id': PERSON_ID },
         keywords: project.technologies.join(', '),
+        ...languagesOf(project.technologies),
         ...(project.githubUrl ? { codeRepository: project.githubUrl } : {}),
+        ...(project.images.length ? { image: project.images.map((image) => `${SITE_URL}${image.src}`) } : {}),
+        ...(project.caseStudySlug
+          ? {
+              subjectOf: {
+                '@type': 'TechArticle',
+                headline: `${project.title} case study`,
+                url: `${SITE_URL}/case-studies/${project.caseStudySlug}`,
+              },
+            }
+          : {}),
       },
     })),
   }
@@ -240,6 +263,8 @@ export function experienceSchema() {
 }
 
 export function caseStudySchema(study: CaseStudy) {
+  const project = projectForStudy(study)
+  const images = studyImages(study)
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -261,13 +286,15 @@ export function caseStudySchema(study: CaseStudy) {
           '@type': 'WebPage',
           '@id': `${SITE_URL}/case-studies/${study.slug}`,
         },
-        ...(study.imageUrl ? { image: `${SITE_URL}${study.imageUrl}` } : {}),
+        ...(images.length ? { image: images } : {}),
         about: {
-          '@type': 'SoftwareApplication',
+          '@type': 'SoftwareSourceCode',
           name: study.title,
-          applicationCategory: 'DeveloperApplication',
-          operatingSystem: 'Web',
-          url: study.liveUrl,
+          ...(project ? { description: project.description } : {}),
+          keywords: (project?.technologies ?? study.stack).join(', '),
+          ...languagesOf(project?.technologies ?? study.stack),
+          ...(study.liveUrl ? { url: study.liveUrl } : {}),
+          author: { '@id': PERSON_ID },
           ...(study.githubUrl ? { codeRepository: study.githubUrl } : {}),
         },
       },
@@ -298,13 +325,14 @@ export function caseStudyListSchema() {
           url: `${SITE_URL}/case-studies/${study.slug}`,
           datePublished: study.publishedAt,
           author: { '@id': PERSON_ID },
+          ...(study.imageUrl ? { image: `${SITE_URL}${study.imageUrl}` } : {}),
         })),
       },
       {
         '@type': 'ItemList',
         '@id': `${SITE_URL}/case-studies#carousel`,
         name: `Case studies by ${SITE.name}`,
-        itemListOrder: 'https://schema.org/ItemListOrderDescending',
+        itemListOrder: 'https://schema.org/ItemListUnordered',
         numberOfItems: CASE_STUDIES.length,
         itemListElement: CASE_STUDIES.map((study, i) => ({
           '@type': 'ListItem',
@@ -343,6 +371,7 @@ export function blogPostSchema(post: BlogPost) {
           0
         ),
         timeRequired: `PT${post.readingMinutes}M`,
+        image: `${SITE_URL}/opengraph-image`,
         mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/blog/${post.slug}` },
       },
       breadcrumbGraph([
@@ -445,7 +474,7 @@ export function projectsPageSchema() {
   return collectionGraph(
     '/projects',
     `Projects by ${SITE.name}`,
-    `AI and machine learning projects built by ${SITE.name}, each with a live demo and public source.`,
+    `AI and machine learning products built by ${SITE.name}, each with the problem it solves, measured impact, screenshots, a live demo and a case study.`,
     [projectsSchema()]
   )
 }
@@ -561,5 +590,29 @@ export function rootGraph() {
   return {
     '@context': 'https://schema.org',
     '@graph': [personSchema(), organizationSchema(), websiteSchema()],
+  }
+}
+
+export function legalPageSchema(doc: LegalDoc) {
+  const url = `${SITE_URL}${doc.path}`
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebPage',
+        '@id': `${url}#page`,
+        url,
+        name: doc.title,
+        description: doc.description,
+        dateModified: doc.updated,
+        inLanguage: 'en',
+        isPartOf: { '@id': WEBSITE_ID },
+        publisher: { '@id': ORGANIZATION_ID },
+      },
+      breadcrumbGraph([
+        { name: 'Home', item: SITE_URL },
+        { name: doc.title, item: url },
+      ]),
+    ],
   }
 }

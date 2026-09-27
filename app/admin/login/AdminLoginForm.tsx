@@ -37,13 +37,13 @@ export default function AdminLoginForm() {
   }
 
   const inputCls =
-    'w-full pl-11 pr-4 py-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500/50 focus:bg-indigo-500/5 focus-visible:ring-2 focus-visible:ring-indigo-400 transition-all text-sm'
+    'w-full pl-11 pr-4 py-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-brand-500/50 focus:bg-brand-500/5 focus-visible:ring-2 focus-visible:ring-brand-400 transition-all text-sm'
 
   return (
     <main className="min-h-screen flex items-center justify-center px-6 py-20">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-violet-600 bg-gradient-to-br from-indigo-700 to-violet-600 mb-4">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-accent-700 bg-gradient-to-br from-brand-700 to-accent-700 mb-4">
             <Lock size={24} className="text-white" />
           </div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Admin Login</h1>
@@ -94,7 +94,7 @@ export default function AdminLoginForm() {
               onClick={() => setShowPassword((v) => !v)}
               aria-label={showPassword ? 'Hide password' : 'Show password'}
               aria-pressed={showPassword}
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60"
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-brand-700 dark:hover:text-brand-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60"
             >
               {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
             </button>
@@ -103,7 +103,7 @@ export default function AdminLoginForm() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-violet-600 bg-gradient-to-r from-indigo-700 to-violet-600 text-white font-semibold hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-indigo-500/20"
+            className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-accent-700 bg-gradient-to-r from-brand-700 to-accent-700 text-white font-semibold hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-brand-500/20"
           >
             {loading ? (
               <>

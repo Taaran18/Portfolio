@@ -9,11 +9,13 @@ export function whatsappUrl(message = WHATSAPP_GREETING): string | null {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
 }
 
+export const SITE_UPDATED = '2026-09-27'
+
 export const SITE = {
   name: 'Taaran Jain',
 
   alternateNames: ['taaranjain', 'Taaran', 'Taaran Jain Portfolio'],
-  title: 'Taaran Jain — AI & Machine Learning Engineer',
+  title: 'Taaran Jain | AI/ML Engineer Building LLM & RAG Systems',
   description:
     'AI and Machine Learning Engineer building LLM applications — RAG pipelines with LangGraph and pgvector, fine-tuned transformers, and production ML systems.',
   url: SITE_URL,

@@ -3,8 +3,9 @@
 import { useEffect, useRef, useState, useId } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { MessageCircle, X, Send, Sparkles } from 'lucide-react'
+import Link from 'next/link'
 import { useStreamedText } from './useStreamedText'
-import { ASSISTANT, FEATURED_QUESTIONS } from '@/content/chatbot'
+import { ASSISTANT, STARTER_QUESTIONS } from '@/content/chatbot-ui'
 import type { ChatAction, ChatMessage } from '@/lib/chatbot/types'
 
 const WELCOME: ChatMessage = {
@@ -13,22 +14,28 @@ const WELCOME: ChatMessage = {
   text: ASSISTANT.welcome,
 }
 
+const LINK_PATTERN =
+  /(https?:\/\/[^\s]+[^\s.,;:!?)]|\/(?:projects|case-studies|blog|contact|about|experience|research|skills)(?:\/[\w-]+)*)/g
+const linkClass = 'underline decoration-brand-500/50 hover:decoration-brand-500 break-all'
+
 function linkify(text: string) {
-  return text.split(/(https?:\/\/[^\s]+)/g).map((part, i) =>
-    /^https?:\/\//.test(part) ? (
-      <a
-        key={i}
-        href={part}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="underline decoration-indigo-500/50 hover:decoration-indigo-500 break-all"
-      >
-        {part}
-      </a>
-    ) : (
-      <span key={i}>{part}</span>
-    )
-  )
+  return text.split(LINK_PATTERN).map((part, i) => {
+    if (/^https?:\/\//.test(part)) {
+      return (
+        <a key={i} href={part} target="_blank" rel="noopener noreferrer" className={linkClass}>
+          {part}
+        </a>
+      )
+    }
+    if (i % 2 === 1 && part.startsWith('/')) {
+      return (
+        <Link key={i} href={part} className={linkClass}>
+          {part}
+        </Link>
+      )
+    }
+    return <span key={i}>{part}</span>
+  })
 }
 
 function BotBubble({ text, animate }: { text: string; animate: boolean }) {
@@ -43,7 +50,7 @@ function BotBubble({ text, animate }: { text: string; animate: boolean }) {
 export default function ChatWidget() {
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState<ChatMessage[]>([WELCOME])
-  const [suggestions, setSuggestions] = useState<string[]>(FEATURED_QUESTIONS.slice(0, 4))
+  const [suggestions, setSuggestions] = useState<string[]>(STARTER_QUESTIONS)
   const [input, setInput] = useState('')
   const [pending, setPending] = useState(false)
   const [streamingId, setStreamingId] = useState<string | null>(null)
@@ -143,7 +150,7 @@ export default function ChatWidget() {
         aria-haspopup="dialog"
         aria-label={open ? `Close ${ASSISTANT.name}` : `Chat with ${ASSISTANT.name}`}
         whileTap={{ scale: 0.92 }}
-        className="fixed bottom-6 left-6 z-50 w-14 h-14 rounded-full bg-violet-600 bg-gradient-to-br from-indigo-700 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/30 hover:opacity-90 hover:scale-105 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2"
+        className="fixed bottom-6 left-6 z-50 w-14 h-14 rounded-full bg-accent-700 bg-gradient-to-br from-brand-700 to-accent-700 flex items-center justify-center shadow-lg shadow-brand-500/30 hover:opacity-90 hover:scale-105 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2"
       >
         <AnimatePresence mode="wait" initial={false}>
           <motion.span
@@ -172,7 +179,7 @@ export default function ChatWidget() {
             className="fixed bottom-24 left-6 z-50 w-[380px] max-w-[calc(100vw-3rem)] h-[560px] max-h-[70vh] rounded-3xl surface shadow-2xl flex flex-col overflow-hidden"
           >
             <div className="flex items-center gap-3 px-5 py-4 border-b border-[var(--surface-border)] shrink-0">
-              <div className="w-9 h-9 rounded-full bg-violet-600 bg-gradient-to-br from-indigo-700 to-violet-600 flex items-center justify-center shrink-0">
+              <div className="w-9 h-9 rounded-full bg-accent-700 bg-gradient-to-br from-brand-700 to-accent-700 flex items-center justify-center shrink-0">
                 <Sparkles size={16} className="text-white" />
               </div>
               <div>
@@ -196,7 +203,7 @@ export default function ChatWidget() {
                 ) : (
                   <div
                     key={m.id}
-                    className="ml-auto max-w-[85%] rounded-3xl rounded-br-sm bg-violet-600 bg-gradient-to-r from-indigo-700 to-violet-600 text-white px-4 py-2.5 text-sm"
+                    className="ml-auto max-w-[85%] rounded-3xl rounded-br-sm bg-accent-700 bg-gradient-to-r from-brand-700 to-accent-700 text-white px-4 py-2.5 text-sm"
                   >
                     {m.text}
                   </div>
@@ -223,7 +230,7 @@ export default function ChatWidget() {
                     key={action.kind}
                     href={action.href}
                     {...(action.kind === 'contact' ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
-                    className="text-xs px-3 py-1.5 rounded-full bg-indigo-600 text-white font-medium hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2"
+                    className="text-xs px-3 py-1.5 rounded-full bg-brand-700 text-white font-medium hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2"
                   >
                     {action.label}
                   </a>
@@ -238,7 +245,7 @@ export default function ChatWidget() {
                     key={q}
                     onClick={() => send(q)}
                     disabled={pending}
-                    className="text-xs px-3 py-1.5 rounded-full surface text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-500/30 transition-colors disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60"
+                    className="text-xs px-3 py-1.5 rounded-full surface text-slate-600 dark:text-slate-400 hover:text-brand-700 dark:hover:text-brand-400 hover:border-brand-500/30 transition-colors disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60"
                   >
                     {q}
                   </button>
@@ -259,13 +266,13 @@ export default function ChatWidget() {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask a question..."
                 aria-label="Message"
-                className="flex-1 px-3.5 py-2.5 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:border-indigo-500/50 focus-visible:ring-2 focus-visible:ring-indigo-400 transition-all"
+                className="flex-1 px-3.5 py-2.5 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:border-brand-500/50 focus-visible:ring-2 focus-visible:ring-brand-400 transition-all"
               />
               <button
                 type="submit"
                 disabled={pending || !input.trim()}
                 aria-label="Send message"
-                className="w-10 h-10 rounded-full bg-violet-600 bg-gradient-to-br from-indigo-700 to-violet-600 flex items-center justify-center shrink-0 hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2"
+                className="w-10 h-10 rounded-full bg-accent-700 bg-gradient-to-br from-brand-700 to-accent-700 flex items-center justify-center shrink-0 hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2"
               >
                 <Send size={15} className="text-white" />
               </button>

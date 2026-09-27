@@ -3,6 +3,7 @@ import { MapPin } from 'lucide-react'
 import { SOCIAL_LINKS } from '@/content/social'
 import { ALL_PAGES } from '@/content/sections'
 import { SITE } from '@/lib/site'
+import { LEGAL_DOCS } from '@/content/legal'
 
 const CONNECT_LINKS = SOCIAL_LINKS.filter((s) => s.id !== 'resume')
 const RESUME = SOCIAL_LINKS.find((s) => s.id === 'resume')
@@ -12,7 +13,9 @@ const EXPLORE = ALL_PAGES.slice(0, HALF)
 const MORE = ALL_PAGES.slice(HALF)
 
 const linkCls =
-  'text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60'
+  'text-sm text-slate-600 dark:text-slate-400 hover:text-brand-700 dark:hover:text-brand-400 transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60'
+
+const legalLinkCls = linkCls.replace('text-sm', 'text-xs')
 
 const headingCls = 'text-xs font-mono uppercase tracking-widest text-slate-500 dark:text-slate-500 mb-4'
 
@@ -46,7 +49,7 @@ export default function Footer() {
               AI Engineer building LLM applications, RAG pipelines, and production ML systems.
             </p>
             <p className="inline-flex items-center gap-1.5 text-sm text-slate-600 dark:text-slate-400">
-              <MapPin size={14} className="text-indigo-600 dark:text-indigo-400 shrink-0" />
+              <MapPin size={14} className="text-brand-700 dark:text-brand-400 shrink-0" />
               {SITE.location}
             </p>
             <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-green-500/30 bg-green-500/10 text-xs font-medium text-green-700 dark:text-green-400">
@@ -72,7 +75,7 @@ export default function Footer() {
                     rel="noopener noreferrer"
                     className={`inline-flex items-center gap-2.5 group ${linkCls}`}
                   >
-                    <Icon size={15} className="shrink-0 group-hover:text-indigo-500 transition-colors" />
+                    <Icon size={15} className="shrink-0 group-hover:text-brand-600 transition-colors" />
                     {label}
                   </a>
                 </li>
@@ -86,7 +89,7 @@ export default function Footer() {
                     rel="noopener noreferrer"
                     className={`inline-flex items-center gap-2.5 group ${linkCls}`}
                   >
-                    <RESUME.icon size={15} className="shrink-0 group-hover:text-indigo-500 transition-colors" />
+                    <RESUME.icon size={15} className="shrink-0 group-hover:text-brand-600 transition-colors" />
                     {RESUME.label}
                   </a>
                 </li>
@@ -95,10 +98,21 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 pt-6 border-t border-[var(--surface-border)]">
-          <p className="text-xs text-slate-500 dark:text-slate-500 text-center">
+        <div className="mt-14 pt-6 border-t border-[var(--surface-border)] flex flex-col-reverse items-center gap-4 sm:flex-row sm:justify-between">
+          <p className="text-xs text-slate-500 dark:text-slate-500 text-center sm:text-left">
             {`© ${new Date().getFullYear()} ${SITE.name} · ${SITE.primaryRole} · All Rights Reserved.`}
           </p>
+          <nav aria-label="Legal">
+            <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+              {LEGAL_DOCS.map((doc) => (
+                <li key={doc.id}>
+                  <Link href={doc.path} className={legalLinkCls}>
+                    {doc.navLabel}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
       </div>
     </footer>

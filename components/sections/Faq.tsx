@@ -29,7 +29,7 @@ export default function Faq() {
                     onClick={() => setOpenId(open ? null : faq._id)}
                     aria-expanded={open}
                     aria-controls={`faq-${faq._id}`}
-                    className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60 rounded-3xl"
+                    className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60 rounded-3xl"
                   >
                     <span className="font-medium text-slate-900 dark:text-white">{faq.question}</span>
                     <ChevronDown

@@ -1,18 +1,27 @@
 import type { LucideIcon } from 'lucide-react'
 
+export interface ProjectImage {
+  src: string
+  alt: string
+  caption: string
+}
+
 export interface Project {
-  _id?: string
+  slug: string
   title: string
+  tagline: string
   description: string
-  longDescription?: string
+  problem: string
+  solution: string
+  impact: string[]
+  metrics: { value: string; label: string }[]
   technologies: string[]
   liveUrl?: string
   githubUrl?: string
-  imageUrl?: string
+  caseStudySlug?: string
+  images: ProjectImage[]
   featured: boolean
   order: number
-  createdAt?: string
-  updatedAt?: string
 }
 
 export interface Experience {
@@ -67,7 +76,7 @@ export interface Certification {
   date: string
   description: string
   credential: string
-  color: 'blue' | 'orange' | 'green' | 'purple'
+  color: 'blue' | 'orange' | 'green' | 'brand'
 }
 
 export interface FaqEntry {
@@ -87,8 +96,8 @@ export interface CaseStudy {
   title: string
   tagline: string
   summary: string
-  role: string
-  timeline: string
+  metaDescription?: string
+  timeline?: string
   stack: string[]
   liveUrl?: string
   githubUrl?: string
@@ -102,6 +111,7 @@ export interface BlogPost {
   slug: string
   title: string
   excerpt: string
+  metaDescription?: string
   publishedAt: string
   readingMinutes: number
   tags: string[]

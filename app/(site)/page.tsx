@@ -13,7 +13,7 @@ import { homeGraph } from '@/lib/seo'
 
 export default function Home() {
   return (
-    <main id="main-content" tabIndex={-1} className="focus:outline-none">
+    <main id="main-content" tabIndex={-1} className="home-bands focus:outline-none">
       <JsonLd schema={homeGraph()} />
       <Hero />
       <About />

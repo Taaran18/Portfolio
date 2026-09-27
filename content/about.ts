@@ -1,16 +1,15 @@
 import { BrainCircuit, Rocket, Database, BookOpen } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import { PROJECTS } from '@/content/projects'
 import { EXPERIENCES } from '@/content/experience'
 import { PUBLISHED_PAPERS } from '@/content/research'
-
-const liveWithSource = PROJECTS.filter((p) => p.liveUrl && p.githubUrl).length
+import { CERTIFICATIONS } from '@/content/certifications'
+import { LEADERSHIP_ROLES } from '@/content/leadership'
 
 export const ABOUT_STATS = [
-  { value: String(PROJECTS.length), label: 'Products Shipped Live' },
-  { value: `${Math.round((liveWithSource / PROJECTS.length) * 100)}%`, label: 'With Demo & Source' },
   { value: String(EXPERIENCES.length), label: 'Companies Shipped For' },
   { value: String(PUBLISHED_PAPERS.length), label: 'Papers Published' },
+  { value: String(CERTIFICATIONS.length), label: 'Certifications Earned' },
+  { value: String(LEADERSHIP_ROLES.length), label: 'Leadership Roles' },
 ]
 
 interface AboutTrait {

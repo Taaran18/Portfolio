@@ -1,0 +1,519 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Colour reference</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 16mm;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font:
+          11px/1.55 -apple-system,
+          'Helvetica Neue',
+          Arial,
+          sans-serif;
+        color: #18181b;
+        margin: 0;
+      }
+      h1 {
+        font-size: 26px;
+        letter-spacing: -0.02em;
+        margin: 0 0 4px;
+      }
+      h2 {
+        font-size: 15px;
+        letter-spacing: -0.01em;
+        margin: 26px 0 6px;
+        padding-bottom: 5px;
+        border-bottom: 2px solid #0f766e;
+        page-break-after: avoid;
+      }
+      p.lede {
+        color: #52525b;
+        margin: 0 0 18px;
+        max-width: 62ch;
+      }
+      p.note {
+        color: #52525b;
+        margin: 0 0 9px;
+        max-width: 74ch;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 6px;
+        page-break-inside: auto;
+      }
+      th {
+        text-align: left;
+        font-size: 9px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #71717a;
+        border-bottom: 1px solid #d4d4d8;
+        padding: 5px 7px;
+      }
+      td {
+        padding: 5px 7px;
+        border-bottom: 1px solid #ededf0;
+        vertical-align: middle;
+      }
+      tr {
+        page-break-inside: avoid;
+      }
+      code {
+        font:
+          10px ui-monospace,
+          Menlo,
+          monospace;
+        background: #f4f4f5;
+        padding: 1px 4px;
+        border-radius: 3px;
+      }
+      td.sw {
+        width: 30px;
+      }
+      td.sw span {
+        display: block;
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+        border: 1px solid rgba(0, 0, 0, 0.16);
+      }
+      .pair {
+        display: flex;
+        gap: 5px;
+      }
+      .pair span {
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+        border: 1px solid rgba(0, 0, 0, 0.16);
+      }
+      .grade {
+        font-weight: 700;
+      }
+      .aaa {
+        color: #15803d;
+      }
+      .aa {
+        color: #15803d;
+      }
+      .large {
+        color: #b45309;
+      }
+      .fail {
+        color: #b91c1c;
+      }
+      footer {
+        margin-top: 22px;
+        padding-top: 8px;
+        border-top: 1px solid #d4d4d8;
+        color: #71717a;
+        font-size: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Colour reference</h1>
+    <p class="lede">
+      Every colour used in the Taaran Jain portfolio, generated from source. Design tokens flip with the theme and
+      should be preferred; palette colours are Tailwind utilities used directly in components.
+    </p>
+
+    <h2>Design tokens</h2>
+    <p class="note">
+      Defined on <code>:root</code> in <code>app/globals.css</code>, overridden under <code>[data-theme='dark']</code>.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Token</th>
+          <th>Light</th>
+          <th>Dark</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="sw">
+            <div class="pair"><span style="background: #ffffff"></span><span style="background: #000000"></span></div>
+          </td>
+          <td><code>--bg-primary</code></td>
+          <td><code>#ffffff</code></td>
+          <td><code>#000000</code></td>
+          <td>Page background</td>
+        </tr>
+        <tr>
+          <td class="sw">
+            <div class="pair"><span style="background: #f4f4f5"></span><span style="background: #0a0a0a"></span></div>
+          </td>
+          <td><code>--bg-secondary</code></td>
+          <td><code>#f4f4f5</code></td>
+          <td><code>#0a0a0a</code></td>
+          <td>Recessed sections</td>
+        </tr>
+        <tr>
+          <td class="sw">
+            <div class="pair"><span style="background: #000000"></span><span style="background: #ffffff"></span></div>
+          </td>
+          <td><code>--text-primary</code></td>
+          <td><code>#000000</code></td>
+          <td><code>#ffffff</code></td>
+          <td>Headings and body text</td>
+        </tr>
+        <tr>
+          <td class="sw">
+            <div class="pair"><span style="background: #52525b"></span><span style="background: #a1a1aa"></span></div>
+          </td>
+          <td><code>--text-muted</code></td>
+          <td><code>#52525b</code></td>
+          <td><code>#a1a1aa</code></td>
+          <td>Secondary text</td>
+        </tr>
+        <tr>
+          <td class="sw">
+            <div class="pair"><span style="background: #ffffff"></span><span style="background: #0e0e0e"></span></div>
+          </td>
+          <td><code>--surface-bg</code></td>
+          <td><code>#ffffff</code></td>
+          <td><code>#0e0e0e</code></td>
+          <td>Card and panel fill</td>
+        </tr>
+        <tr>
+          <td class="sw">
+            <div class="pair"><span style="background: #d4d4d8"></span><span style="background: #2e2e32"></span></div>
+          </td>
+          <td><code>--surface-border</code></td>
+          <td><code>#d4d4d8</code></td>
+          <td><code>#2e2e32</code></td>
+          <td>Card and divider borders</td>
+        </tr>
+        <tr>
+          <td class="sw">
+            <div class="pair"><span style="background: #ffffff"></span><span style="background: #0e0e0e"></span></div>
+          </td>
+          <td><code>--nav-bg</code></td>
+          <td><code>#ffffff</code></td>
+          <td><code>#0e0e0e</code></td>
+          <td>Navigation bar fill</td>
+        </tr>
+        <tr>
+          <td class="sw">
+            <div class="pair"><span style="background: #d4d4d8"></span><span style="background: #2e2e32"></span></div>
+          </td>
+          <td><code>--nav-border</code></td>
+          <td><code>#d4d4d8</code></td>
+          <td><code>#2e2e32</code></td>
+          <td>Navigation bar border</td>
+        </tr>
+        <tr>
+          <td class="sw">
+            <div class="pair"><span style="background: #0d9488"></span><span style="background: #0d9488"></span></div>
+          </td>
+          <td><code>--accent</code></td>
+          <td><code>#0d9488</code></td>
+          <td><code>#0d9488</code></td>
+          <td>Primary accent</td>
+        </tr>
+        <tr>
+          <td class="sw">
+            <div class="pair"><span style="background: #0891b2"></span><span style="background: #0891b2"></span></div>
+          </td>
+          <td><code>--accent-alt</code></td>
+          <td><code>#0891b2</code></td>
+          <td><code>#0891b2</code></td>
+          <td>Gradient partner</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Brand palette</h2>
+    <p class="note">Indigo is the action colour. Violet only ever appears alongside it in gradients.</p>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Colour</th>
+          <th>Hex</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="sw"><span style="background: #0f766e"></span></td>
+          <td><code>brand-700 (teal-700)</code></td>
+          <td><code>#0f766e</code></td>
+          <td>Primary accent. Links, CTA gradient start, active nav, gradient headings (light).</td>
+        </tr>
+        <tr>
+          <td class="sw"><span style="background: #14b8a6"></span></td>
+          <td><code>brand-500 (teal-500)</code></td>
+          <td><code>#14b8a6</code></td>
+          <td>Focus rings, borders, dots, chart bars (decorative only).</td>
+        </tr>
+        <tr>
+          <td class="sw"><span style="background: #2dd4bf"></span></td>
+          <td><code>brand-400 (teal-400)</code></td>
+          <td><code>#2dd4bf</code></td>
+          <td>Dark-mode accent text and gradient headings (dark).</td>
+        </tr>
+        <tr>
+          <td class="sw"><span style="background: #115e59"></span></td>
+          <td><code>brand-800 (teal-800)</code></td>
+          <td><code>#115e59</code></td>
+          <td>Hover state on solid brand buttons.</td>
+        </tr>
+        <tr>
+          <td class="sw"><span style="background: #0e7490"></span></td>
+          <td><code>accent-700 (cyan-700)</code></td>
+          <td><code>#0e7490</code></td>
+          <td>Gradient partner. CTA gradient end, logo mark.</td>
+        </tr>
+        <tr>
+          <td class="sw"><span style="background: #22d3ee"></span></td>
+          <td><code>accent-400 (cyan-400)</code></td>
+          <td><code>#22d3ee</code></td>
+          <td>Dark-mode gradient partner, tech tag text.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Neutrals</h2>
+    <p class="note">Slate carries all text and structure. Light and dark use different steps to hold contrast.</p>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Colour</th>
+          <th>Hex</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="sw"><span style="background: #0f172a"></span></td>
+          <td><code>slate-900</code></td>
+          <td><code>#0f172a</code></td>
+          <td>Headings and primary body text in light mode.</td>
+        </tr>
+        <tr>
+          <td class="sw"><span style="background: #334155"></span></td>
+          <td><code>slate-700</code></td>
+          <td><code>#334155</code></td>
+          <td>Article body copy, definition values.</td>
+        </tr>
+        <tr>
+          <td class="sw"><span style="background: #475569"></span></td>
+          <td><code>slate-600</code></td>
+          <td><code>#475569</code></td>
+          <td>Muted body text in light mode. Pairs with slate-400 in dark.</td>
+        </tr>
+        <tr>
+          <td class="sw"><span style="background: #64748b"></span></td>
+          <td><code>slate-500</code></td>
+          <td><code>#64748b</code></td>
+          <td>Micro-labels, timestamps, eyebrow text.</td>
+        </tr>
+        <tr>
+          <td class="sw"><span style="background: #94a3b8"></span></td>
+          <td><code>slate-400</code></td>
+          <td><code>#94a3b8</code></td>
+          <td>Muted body text in dark mode.</td>
+        </tr>
+        <tr>
+          <td class="sw"><span style="background: #cbd5e1"></span></td>
+          <td><code>slate-300</code></td>
+          <td><code>#cbd5e1</code></td>
+          <td>Article body copy in dark mode.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Semantic and category colours</h2>
+    <p class="note">Used to classify rather than decorate — certification issuers, status, and alerts.</p>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Colour</th>
+          <th>Hex</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="sw"><span style="background: #22c55e"></span></td>
+          <td><code>green-500</code></td>
+          <td><code>#22c55e</code></td>
+          <td>Success, "available" status dot, certification tone.</td>
+        </tr>
+        <tr>
+          <td class="sw"><span style="background: #3b82f6"></span></td>
+          <td><code>blue-500</code></td>
+          <td><code>#3b82f6</code></td>
+          <td>Certification tone (Microsoft/Azure).</td>
+        </tr>
+        <tr>
+          <td class="sw"><span style="background: #fb923c"></span></td>
+          <td><code>orange-400</code></td>
+          <td><code>#fb923c</code></td>
+          <td>Certification tone (DeepLearning.AI).</td>
+        </tr>
+        <tr>
+          <td class="sw"><span style="background: #f59e0b"></span></td>
+          <td><code>amber-500</code></td>
+          <td><code>#f59e0b</code></td>
+          <td>Warning banner in the analytics dashboard.</td>
+        </tr>
+        <tr>
+          <td class="sw"><span style="background: #ef4444"></span></td>
+          <td><code>red-500</code></td>
+          <td><code>#ef4444</code></td>
+          <td>Destructive actions, form errors, sign-out hover.</td>
+        </tr>
+        <tr>
+          <td class="sw"><span style="background: #eab308"></span></td>
+          <td><code>yellow-500</code></td>
+          <td><code>#eab308</code></td>
+          <td>Featured badge tone.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Fixed colours</h2>
+    <p class="note">These do not follow the theme and must not be tokenised.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Colour</th>
+          <th>Value</th>
+          <th>Why</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>WhatsApp green</td>
+          <td><code>#25D366</code></td>
+          <td>Brand-locked. The WhatsApp FAB must use the official colour.</td>
+        </tr>
+        <tr>
+          <td>Email teal</td>
+          <td><code>#0f766e</code></td>
+          <td>Hard-coded in the contact email template — mail clients cannot read CSS variables.</td>
+        </tr>
+        <tr>
+          <td>OG gradient</td>
+          <td><code>#2dd4bf -> #22d3ee</code></td>
+          <td>Open Graph card headline gradient (teal-400 to cyan-400).</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Measured contrast</h2>
+    <p class="note">
+      WCAG 2.1 ratios computed from the values above. Normal text needs 4.5:1; large or bold text needs 3:1.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Pair</th>
+          <th>Theme</th>
+          <th>Ratio</th>
+          <th>Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="sw">
+            <div class="pair"><span style="background: #ffffff"></span><span style="background: #000000"></span></div>
+          </td>
+          <td>Body text on page</td>
+          <td>light</td>
+          <td><code>21.00:1</code></td>
+          <td class="grade aaa">AAA</td>
+        </tr>
+        <tr>
+          <td class="sw">
+            <div class="pair"><span style="background: #ffffff"></span><span style="background: #52525b"></span></div>
+          </td>
+          <td>Muted text on page</td>
+          <td>light</td>
+          <td><code>7.73:1</code></td>
+          <td class="grade aaa">AAA</td>
+        </tr>
+        <tr>
+          <td class="sw">
+            <div class="pair"><span style="background: #ffffff"></span><span style="background: #0f766e"></span></div>
+          </td>
+          <td>Accent link on page</td>
+          <td>light</td>
+          <td><code>5.47:1</code></td>
+          <td class="grade aa">AA</td>
+        </tr>
+        <tr>
+          <td class="sw">
+            <div class="pair"><span style="background: #0f766e"></span><span style="background: #ffffff"></span></div>
+          </td>
+          <td>White on accent button</td>
+          <td>light</td>
+          <td><code>5.47:1</code></td>
+          <td class="grade aa">AA</td>
+        </tr>
+        <tr>
+          <td class="sw">
+            <div class="pair"><span style="background: #0e7490"></span><span style="background: #ffffff"></span></div>
+          </td>
+          <td>White on gradient end</td>
+          <td>light</td>
+          <td><code>5.36:1</code></td>
+          <td class="grade aa">AA</td>
+        </tr>
+        <tr>
+          <td class="sw">
+            <div class="pair"><span style="background: #000000"></span><span style="background: #ffffff"></span></div>
+          </td>
+          <td>Body text on page</td>
+          <td>dark</td>
+          <td><code>21.00:1</code></td>
+          <td class="grade aaa">AAA</td>
+        </tr>
+        <tr>
+          <td class="sw">
+            <div class="pair"><span style="background: #000000"></span><span style="background: #a1a1aa"></span></div>
+          </td>
+          <td>Muted text on page</td>
+          <td>dark</td>
+          <td><code>8.19:1</code></td>
+          <td class="grade aaa">AAA</td>
+        </tr>
+        <tr>
+          <td class="sw">
+            <div class="pair"><span style="background: #0e0e0e"></span><span style="background: #2dd4bf"></span></div>
+          </td>
+          <td>Accent link on surface</td>
+          <td>dark</td>
+          <td><code>10.37:1</code></td>
+          <td class="grade aaa">AAA</td>
+        </tr>
+        <tr>
+          <td class="sw">
+            <div class="pair"><span style="background: #0e0e0e"></span><span style="background: #94a3b8"></span></div>
+          </td>
+          <td>Muted text on surface</td>
+          <td>dark</td>
+          <td><code>7.53:1</code></td>
+          <td class="grade aaa">AAA</td>
+        </tr>
+      </tbody>
+    </table>
+    <footer>Generated from source by <code>npm run docs:colors</code>. Do not edit by hand.</footer>
+  </body>
+</html>

@@ -1,10 +1,13 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/metadata'
 import Link from 'next/link'
 import { ArrowRight, Clock } from 'lucide-react'
 import SectionHeader from '@/components/ui/SectionHeader'
 import Card from '@/components/ui/Card'
 import Badge from '@/components/ui/Badge'
 import JsonLd from '@/components/JsonLd'
+import Breadcrumbs from '@/components/ui/Breadcrumbs'
+import PageNav from '@/components/ui/PageNav'
 import { BLOG_POSTS } from '@/content/blog'
 import { blogListSchema } from '@/lib/seo'
 import { formatLongDate } from '@/lib/format'
@@ -12,17 +15,13 @@ import { formatLongDate } from '@/lib/format'
 const description =
   'Writing on applied AI by Taaran Jain — retrieval, LLM applications, and lessons from shipping machine learning systems to production.'
 
-export const metadata: Metadata = {
-  title: 'Blog',
-  description,
-  alternates: { canonical: '/blog' },
-  openGraph: { title: 'Blog — Taaran Jain', description, url: '/blog' },
-}
+export const metadata: Metadata = pageMetadata({ title: 'Blog', description, path: '/blog' })
 
 export default function BlogPage() {
   return (
     <main id="main-content" tabIndex={-1} className="min-h-screen pt-24 md:pt-28 focus:outline-none">
       <JsonLd schema={blogListSchema()} />
+      <Breadcrumbs trail={[{ label: 'Blog' }]} className="px-4 pt-2" />
 
       <section className="section-padding container-wide">
         <SectionHeader
@@ -41,7 +40,7 @@ export default function BlogPage() {
                 </span>
               </div>
 
-              <h2 className="font-display text-lg md:text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+              <h2 className="font-display text-lg md:text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-brand-700 dark:group-hover:text-brand-400 transition-colors">
                 {post.title}
               </h2>
 
@@ -50,14 +49,14 @@ export default function BlogPage() {
               <div className="flex flex-wrap items-center justify-between gap-4 mt-auto">
                 <div className="flex flex-wrap gap-2">
                   {post.tags.map((tag) => (
-                    <Badge key={tag} tone="purple" className="font-mono">
+                    <Badge key={tag} tone="brand" className="font-mono">
                       {tag}
                     </Badge>
                   ))}
                 </div>
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="inline-flex items-center gap-1.5 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:gap-2.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60 rounded"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-700 dark:text-brand-400 hover:gap-2.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60 rounded"
                 >
                   Read <ArrowRight size={15} />
                 </Link>
@@ -66,6 +65,7 @@ export default function BlogPage() {
           ))}
         </div>
       </section>
+      <PageNav path="/blog" />
     </main>
   )
 }

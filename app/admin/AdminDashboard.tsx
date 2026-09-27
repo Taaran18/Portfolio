@@ -2,7 +2,19 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { AlertTriangle, Eye, ExternalLink, Globe, LogOut, MousePointerClick, RefreshCw, Users } from 'lucide-react'
+import {
+  AlertTriangle,
+  Eye,
+  ExternalLink,
+  Globe,
+  LogOut,
+  MousePointerClick,
+  RefreshCw,
+  Trash2,
+  Users,
+} from 'lucide-react'
+import toast from 'react-hot-toast'
+import ConfirmDialog from '@/components/ui/ConfirmDialog'
 import type { AnalyticsSummary, CountRow } from '@/lib/analytics/types'
 
 const RANGES = [7, 30, 90] as const
@@ -14,7 +26,7 @@ function StatTile({ icon: Icon, label, value, sub }: { icon: typeof Eye; label: 
   return (
     <div className={card}>
       <div className="flex items-center gap-2 mb-3">
-        <Icon size={15} className="text-indigo-600 dark:text-indigo-400" />
+        <Icon size={15} className="text-brand-700 dark:text-brand-400" />
         <p className="text-xs text-slate-600 dark:text-slate-400">{label}</p>
       </div>
       <p className="text-3xl font-bold text-slate-900 dark:text-white leading-none">{value.toLocaleString()}</p>
@@ -40,7 +52,7 @@ function BarList({ title, rows, empty }: { title: string; rows: CountRow[]; empt
               </div>
               <div className="h-1.5 rounded-full bg-black/5 dark:bg-white/5 overflow-hidden">
                 <div
-                  className="h-full rounded-full bg-indigo-500"
+                  className="h-full rounded-full bg-brand-500"
                   style={{ width: `${Math.round((row.count / max) * 100)}%` }}
                 />
               </div>
@@ -62,7 +74,7 @@ function Sparkline({ series }: { series: AnalyticsSummary['series'] }) {
           <div
             key={day.date}
             title={`${day.date}: ${day.views} views · ${day.visitors} visitors`}
-            className="flex-1 min-w-[2px] rounded-t bg-indigo-500/70 hover:bg-indigo-500 transition-colors"
+            className="flex-1 min-w-[2px] rounded-t bg-brand-500/70 hover:bg-brand-500 transition-colors"
             style={{ height: `${Math.max(2, Math.round((day.views / max) * 100))}%` }}
           />
         ))}
@@ -81,6 +93,8 @@ export default function AdminDashboard({ email }: { email: string }) {
   const [data, setData] = useState<AnalyticsSummary | null>(null)
   const [loading, setLoading] = useState(true)
   const [loggingOut, setLoggingOut] = useState(false)
+  const [confirmClear, setConfirmClear] = useState(false)
+  const [clearing, setClearing] = useState(false)
 
   const load = useCallback(async (range: number) => {
     setLoading(true)
@@ -98,6 +112,26 @@ export default function AdminDashboard({ email }: { email: string }) {
     load(days)
   }, [days, load])
 
+  async function clearData() {
+    setClearing(true)
+    try {
+      const res = await fetch('/api/analytics/summary', { method: 'DELETE' })
+      if (res.status === 401) {
+        toast.error('Your session has expired. Sign in again to clear data.')
+        router.replace('/admin/login')
+        return
+      }
+      if (!res.ok) throw new Error(String(res.status))
+      toast.success('Analytics data deleted. Counting starts again from zero.')
+      setConfirmClear(false)
+      await load(days)
+    } catch {
+      toast.error("Couldn't delete the data. Check your connection and try again.")
+    } finally {
+      setClearing(false)
+    }
+  }
+
   async function logout() {
     setLoggingOut(true)
     await fetch('/api/admin/logout', { method: 'POST' }).catch(() => {})
@@ -114,7 +148,7 @@ export default function AdminDashboard({ email }: { email: string }) {
             <p className="text-sm text-slate-600 dark:text-slate-400 mt-0.5">{email}</p>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <div className="flex items-center gap-1 p-1 rounded-full surface">
               {RANGES.map((r) => (
                 <button
@@ -123,7 +157,7 @@ export default function AdminDashboard({ email }: { email: string }) {
                   aria-pressed={days === r}
                   className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
                     days === r
-                      ? 'bg-indigo-600 text-white'
+                      ? 'bg-brand-700 text-white'
                       : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
@@ -135,20 +169,49 @@ export default function AdminDashboard({ email }: { email: string }) {
             <button
               onClick={() => load(days)}
               aria-label="Refresh"
-              className="w-9 h-9 rounded-full surface flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+              className="w-9 h-9 rounded-full surface flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-brand-700 dark:hover:text-brand-400 transition-colors"
             >
               <RefreshCw size={15} className={loading ? 'animate-spin' : ''} />
             </button>
 
             <button
+              onClick={() => setConfirmClear(true)}
+              disabled={!data}
+              aria-label="Clear data"
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full surface text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-red-500 hover:border-red-500/40 transition-colors disabled:opacity-50 disabled:pointer-events-none"
+            >
+              <Trash2 size={15} />
+              <span className="hidden sm:inline">Clear Data</span>
+            </button>
+
+            <button
               onClick={logout}
               disabled={loggingOut}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full surface text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-red-500 hover:border-red-500/40 transition-colors disabled:opacity-50"
+              aria-label="Sign out"
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full surface text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-red-500 hover:border-red-500/40 transition-colors disabled:opacity-50"
             >
-              <LogOut size={15} /> {loggingOut ? 'Signing out…' : 'Sign out'}
+              <LogOut size={15} />
+              <span className="hidden sm:inline">{loggingOut ? 'Signing out…' : 'Sign Out'}</span>
             </button>
           </div>
         </header>
+
+        <ConfirmDialog
+          open={confirmClear}
+          tone="danger"
+          title="Delete All Analytics Data?"
+          description={
+            <p>
+              This permanently deletes every recorded page view and link click — all time, not just the last {days}{' '}
+              days. The dashboard will start counting again from zero. This can&apos;t be undone.
+            </p>
+          }
+          confirmLabel="Delete All Data"
+          pendingLabel="Deleting…"
+          pending={clearing}
+          onConfirm={clearData}
+          onCancel={() => setConfirmClear(false)}
+        />
 
         {data?.storage && !data.storage.durable && (
           <div className="flex items-start gap-3 rounded-3xl border border-amber-500/40 bg-amber-500/10 px-5 py-4 mb-6">
@@ -206,9 +269,9 @@ export default function AdminDashboard({ email }: { email: string }) {
                   {data.recent.map((event) => (
                     <li key={event.id} className="flex items-center gap-3 py-2.5 text-sm">
                       {event.type === 'page_view' ? (
-                        <Eye size={14} className="text-indigo-500 shrink-0" />
+                        <Eye size={14} className="text-brand-600 shrink-0" />
                       ) : (
-                        <ExternalLink size={14} className="text-violet-500 shrink-0" />
+                        <ExternalLink size={14} className="text-accent-600 shrink-0" />
                       )}
                       <span className="text-slate-700 dark:text-slate-300 truncate">
                         {event.type === 'page_view' ? event.path : `${event.label} — from ${event.path}`}

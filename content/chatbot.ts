@@ -3,6 +3,7 @@ import { HERO_DESCRIPTION } from '@/content/hero'
 import { ABOUT_STATS, ABOUT_TECH_STACK } from '@/content/about'
 import { EXPERIENCES } from '@/content/experience'
 import { PROJECTS } from '@/content/projects'
+import { CASE_STUDIES } from '@/content/case-studies'
 import { SKILLS, SKILL_CATEGORY_LABELS } from '@/content/skills'
 import { CERTIFICATIONS } from '@/content/certifications'
 import { PUBLISHED_PAPERS } from '@/content/research'
@@ -11,11 +12,7 @@ import { SOCIAL_LINKS } from '@/content/social'
 import { formatMonthYear } from '@/lib/format'
 import type { KnowledgeEntry } from '@/lib/chatbot/types'
 
-export const ASSISTANT = {
-  name: 'Manav',
-  tagline: `${SITE.name.split(' ')[0]}'s AI assistant`,
-  welcome: `Hi, I'm Manav — ${SITE.name.split(' ')[0]}'s AI assistant. Ask me about his projects, skills, or experience, or pick a question below.`,
-} as const
+export { ASSISTANT, STARTER_QUESTIONS } from '@/content/chatbot-ui'
 
 const CURATED: KnowledgeEntry[] = [
   {
@@ -111,26 +108,79 @@ const EXPERIENCE_ENTRIES: KnowledgeEntry[] = EXPERIENCES.map((exp) => ({
 }))
 
 const PROJECT_ENTRIES: KnowledgeEntry[] = PROJECTS.map((project) => ({
-  id: `project-${project._id}`,
+  id: `project-${project.slug}`,
   topic: 'projects',
   keywords: [project.title, ...project.technologies],
   question: `Tell me about ${project.title}`,
-  answer: `${project.title} — ${project.description}\n\nBuilt with: ${project.technologies.join(', ')}.${
+  answer: `${project.title} — ${project.description}\n\nThe problem: ${project.problem}\n\nThe solution, in Taaran's words: ${project.solution}\n\nImpact:\n${project.impact.map((i) => `- ${i}`).join('\n')}\n\nBuilt with: ${project.technologies.join(', ')}.${
     project.liveUrl ? `\nLive: ${project.liveUrl}` : ''
-  }${project.githubUrl ? `\nCode: ${project.githubUrl}` : ''}`,
+  }${project.githubUrl ? `\nCode: ${project.githubUrl}` : ''}${
+    project.caseStudySlug ? `\nCase study: /case-studies/${project.caseStudySlug}` : ''
+  }`,
 }))
 
 const PROJECTS_OVERVIEW: KnowledgeEntry = {
   id: 'projects-overview',
   topic: 'projects',
-  keywords: ['projects', 'show me your work', 'what have you built', 'portfolio projects'],
+  keywords: ['projects', 'show me your work', 'what have you built', 'portfolio projects', 'best project'],
   question: 'What projects has Taaran built?',
-  answer: `Taaran has shipped ${PROJECTS.length} AI/ML projects, including ${PROJECTS.filter((p) => p.featured)
-    .map((p) => p.title)
-    .join(
-      ', '
-    )}. Ask about any of them by name, or check the Projects section for the full list with live demos and source code.`,
+  answer: `Taaran has shipped ${PROJECTS.length} live projects:\n${PROJECTS.map((p) => `- ${p.title}: ${p.tagline}`).join('\n')}\n\nAsk about any of them by name, for example how it works, the hardest problem or the results. Screenshots and live demos are on /projects.`,
   featured: true,
+}
+
+export const PROJECT_ALIASES: Record<string, string[]> = {
+  'nexus-ai': ['nexus', 'nexusai', 'ai assistant project', 'decision board'],
+  'ml-insights': ['ml insights', 'mlinsight', 'ml insight', 'no code ml', 'automl', 'model comparison tool'],
+  'self-driven-car': [
+    'self driven car',
+    'self driving car',
+    'self-driving car',
+    'selfdriving car',
+    'car simulator',
+    'neat car',
+    'neuroevolution project',
+    'driving simulator',
+  ],
+  grabbit: ['grab bit', 'media downloader', 'video downloader', 'downloader'],
+  logvera: ['log vera', 'log analyser', 'log analyzer', 'log analytics', 'log tool'],
+  comet: ['url shortener', 'link shortener', 'short link', 'short links', 'shortener'],
+  decidex: ['decide x', 'churn', 'churn prediction', 'churn model', 'retention tool'],
+}
+
+export const PROJECT_REFERENCE = [
+  ...PROJECTS.map((p) => {
+    const study = CASE_STUDIES.find((s) => s.slug === p.caseStudySlug)
+    return [
+      `## ${p.title}`,
+      `Tagline: ${p.tagline}`,
+      `Summary: ${p.description}`,
+      `Problem: ${p.problem}`,
+      `Solution: ${p.solution}`,
+      `Key metrics: ${p.metrics.map((m) => `${m.value} ${m.label}`).join('; ')}`,
+      `Impact:\n${p.impact.map((i) => `- ${i}`).join('\n')}`,
+      `Technologies: ${p.technologies.join(', ')}`,
+      p.liveUrl ? `Live demo: ${p.liveUrl}` : '',
+      p.githubUrl ? `Source code: ${p.githubUrl}` : '',
+      study
+        ? `Case study (/case-studies/${study.slug}), ${study.timeline ?? 'published ' + study.publishedAt}:\n${study.sections
+            .map(
+              (s) =>
+                `### ${s.heading}\n${s.body.join('\n')}${s.bullets ? '\n' + s.bullets.map((b) => `- ${b}`).join('\n') : ''}`
+            )
+            .join('\n\n')}`
+        : '',
+    ]
+      .filter(Boolean)
+      .join('\n')
+  }),
+].join('\n\n')
+
+const CASE_STUDIES_OVERVIEW: KnowledgeEntry = {
+  id: 'case-studies-overview',
+  topic: 'projects',
+  keywords: ['case study', 'case studies', 'deep dive', 'architecture', 'how did you build', 'trade-offs'],
+  question: 'Where can I read how Taaran built these projects?',
+  answer: `Taaran has written ${CASE_STUDIES.length} engineering case studies covering the problem, constraints, architecture, trade-offs, the hardest bug and results:\n${CASE_STUDIES.map((s) => `- ${s.title}: ${s.tagline} (/case-studies/${s.slug})`).join('\n')}`,
 }
 
 const SKILL_CATEGORY_ENTRIES: KnowledgeEntry[] = Object.entries(SKILL_CATEGORY_LABELS).map(([cat, label]) => {
@@ -188,6 +238,7 @@ export const KNOWLEDGE_BASE: KnowledgeEntry[] = [
   ...CURATED,
   PROJECTS_OVERVIEW,
   ...PROJECT_ENTRIES,
+  CASE_STUDIES_OVERVIEW,
   ...EXPERIENCE_ENTRIES,
   ...SKILL_CATEGORY_ENTRIES,
   CERTIFICATIONS_ENTRY,

@@ -100,7 +100,6 @@ keyword tool before committing further.
 - LangGraph RAG pipeline example
 - multimodal RAG chatbot project
 - pgvector RAG implementation
-- neuroevolution NEAT self-driving car simulation
 - production LLM systems portfolio
 - AI engineer resume RAG LLM MLOps
 

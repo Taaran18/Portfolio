@@ -7,6 +7,7 @@ import AdminDashboard from './AdminDashboard'
 export const metadata: Metadata = {
   title: 'Admin',
   robots: { index: false, follow: false },
+  alternates: { canonical: null },
 }
 
 export default async function AdminPage() {

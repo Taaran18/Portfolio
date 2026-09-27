@@ -22,21 +22,21 @@ Defined on `:root` and overridden under `[data-theme='dark']`.
 | `--surface-border` | `#d4d4d8` | `#2e2e32` | Card and divider borders |
 | `--nav-bg`         | `#ffffff` | `#0e0e0e` | Navigation bar fill      |
 | `--nav-border`     | `#d4d4d8` | `#2e2e32` | Navigation bar border    |
-| `--accent`         | `#4f46e5` | `#4f46e5` | Primary accent           |
-| `--accent-alt`     | `#7c3aed` | `#7c3aed` | Gradient partner         |
+| `--accent`         | `#0d9488` | `#0d9488` | Primary accent           |
+| `--accent-alt`     | `#0891b2` | `#0891b2` | Gradient partner         |
 
 ## Brand palette
 
-Indigo and violet carry the brand. Indigo is the action colour; violet only ever appears alongside it in gradients.
+Teal (`brand`) and cyan (`accent`) carry the brand. Teal is the action colour; cyan only ever appears alongside it in gradients and on tech tags. Both are aliased in tailwind.config.ts, so the palette changes in one place.
 
-| Colour       | Hex       | Uses | Where                                                    |
-| ------------ | --------- | ---- | -------------------------------------------------------- |
-| `indigo-600` | `#4f46e5` | 108  | Primary accent. CTAs, links, active nav, focus rings.    |
-| `indigo-500` | `#6366f1` | 72   | Hover and ring tints, gradient start, chart bars.        |
-| `indigo-400` | `#818cf8` | 48   | Dark-mode accent text (indigo-600 is too dark on black). |
-| `indigo-700` | `#4338ca` | 19   | Pressed state, gradient end on the login CTA.            |
-| `violet-600` | `#7c3aed` | 21   | Gradient partner to indigo. Logo mark, primary button.   |
-| `violet-500` | `#8b5cf6` | 10   | Secondary badge tone, link-click icons.                  |
+| Colour                  | Hex       | Uses | Where                                                                             |
+| ----------------------- | --------- | ---- | --------------------------------------------------------------------------------- |
+| `brand-700 (teal-700)`  | `#0f766e` | 60   | Primary accent. Links, CTA gradient start, active nav, gradient headings (light). |
+| `brand-500 (teal-500)`  | `#14b8a6` | 55   | Focus rings, borders, dots, chart bars (decorative only).                         |
+| `brand-400 (teal-400)`  | `#2dd4bf` | 45   | Dark-mode accent text and gradient headings (dark).                               |
+| `brand-800 (teal-800)`  | `#115e59` | 3    | Hover state on solid brand buttons.                                               |
+| `accent-700 (cyan-700)` | `#0e7490` | 20   | Gradient partner. CTA gradient end, logo mark.                                    |
+| `accent-400 (cyan-400)` | `#22d3ee` | 6    | Dark-mode gradient partner, tech tag text.                                        |
 
 ## Neutrals
 
@@ -71,8 +71,8 @@ These do not follow the theme and must not be tokenised.
 | Colour         | Value                | Why                                                                                |
 | -------------- | -------------------- | ---------------------------------------------------------------------------------- |
 | WhatsApp green | `#25D366`            | Brand-locked. The WhatsApp FAB must use the official colour.                       |
-| Email indigo   | `#4f46e5`            | Hard-coded in the contact email template — mail clients cannot read CSS variables. |
-| OG gradient    | `#818cf8 -> #7c3aed` | Open Graph card headline gradient (indigo-400 to violet-600).                      |
+| Email teal     | `#0f766e`            | Hard-coded in the contact email template — mail clients cannot read CSS variables. |
+| OG gradient    | `#2dd4bf -> #22d3ee` | Open Graph card headline gradient (teal-400 to cyan-400).                          |
 
 ## Measured contrast
 
@@ -82,15 +82,16 @@ WCAG 2.1 ratios computed from the values above. Normal text needs 4.5:1, large o
 | ---------------------- | ----- | ------- | ----- |
 | Body text on page      | light | 21.00:1 | AAA   |
 | Muted text on page     | light | 7.73:1  | AAA   |
-| Accent link on page    | light | 6.29:1  | AA    |
-| White on accent button | light | 6.29:1  | AA    |
+| Accent link on page    | light | 5.47:1  | AA    |
+| White on accent button | light | 5.47:1  | AA    |
+| White on gradient end  | light | 5.36:1  | AA    |
 | Body text on page      | dark  | 21.00:1 | AAA   |
 | Muted text on page     | dark  | 8.19:1  | AAA   |
-| Accent link on surface | dark  | 6.47:1  | AA    |
+| Accent link on surface | dark  | 10.37:1 | AAA   |
 | Muted text on surface  | dark  | 7.53:1  | AAA   |
 
 ### Known limits
 
-- `indigo-600` on white is 6.29:1 — fine for links and bold text, but not for small muted copy.
-- `indigo-500` on white is only 4.47:1. Use it for fills and borders, never for text on a light background.
-- Dark mode swaps to `indigo-400` (6.47:1 on surface) because `indigo-600` drops to 3.07:1 on black.
+- `brand-600` on white is only 3.74:1, so light-mode text and white-on-colour buttons use `brand-700` (5.47:1).
+- `brand-500` on white is 2.49:1. Use it for fills, borders and dots, never for text on a light background.
+- Dark mode swaps to `brand-400` (10.37:1 on surface).

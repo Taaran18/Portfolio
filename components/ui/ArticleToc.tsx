@@ -40,9 +40,9 @@ export default function ArticleToc({ sections }: { sections: ArticleSection[] })
                 href={`#${id}`}
                 aria-current={active ? 'true' : undefined}
                 className={`block -ml-px border-l-2 pl-4 py-1.5 text-[13px] leading-snug transition-colors rounded-r
-                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60 ${
+                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60 ${
                     active
-                      ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400 font-medium'
+                      ? 'border-brand-500 text-brand-700 dark:text-brand-400 font-medium'
                       : 'border-transparent text-slate-500 dark:text-slate-500 hover:text-slate-900 dark:hover:text-slate-200'
                   }`}
               >

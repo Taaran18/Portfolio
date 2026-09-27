@@ -1,20 +1,28 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Inter, Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { Toaster } from 'react-hot-toast'
 import Providers from './providers'
+import SplashScreen from '@/components/ui/SplashScreen'
 import JsonLd from '@/components/JsonLd'
 import { SITE } from '@/lib/site'
 import { rootGraph } from '@/lib/seo'
+import { TWITTER_HANDLE } from '@/lib/metadata'
 
-const geistSans = Geist({ subsets: ['latin'], variable: '--font-sans', display: 'swap' })
-const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-mono', display: 'swap' })
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' })
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['600', '700', '800'],
+  variable: '--font-display',
+  display: 'swap',
+})
+const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono', display: 'swap' })
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
     default: SITE.title,
-    template: '%s — Taaran Jain',
+    template: '%s | Taaran Jain',
   },
   description: SITE.description,
   keywords: [
@@ -66,7 +74,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: SITE.title,
     description: SITE.description,
-    creator: '@Taaran18',
+    creator: TWITTER_HANDLE,
   },
   robots: {
     index: true,
@@ -87,12 +95,23 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${inter.variable} ${jakarta.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(sessionStorage.getItem('splash-seen')||matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.dataset.splash='off'}catch(e){}",
+          }}
+        />
         <JsonLd schema={rootGraph()} />
       </head>
       <body>
         <Providers>
+          <SplashScreen />
           {children}
           <Toaster
             position="bottom-right"

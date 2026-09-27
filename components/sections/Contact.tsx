@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef, useState } from 'react'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Mail, MapPin, Send } from 'lucide-react'
 import toast from 'react-hot-toast'
@@ -46,22 +47,22 @@ export default function Contact() {
   }
 
   const inputCls =
-    'w-full px-4 py-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:border-indigo-500/50 focus:bg-indigo-500/5 focus-visible:ring-2 focus-visible:ring-indigo-400 transition-all text-sm'
+    'w-full px-4 py-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:border-brand-500/50 focus:bg-brand-500/5 focus-visible:ring-2 focus-visible:ring-brand-400 transition-all text-sm'
   const labelCls = 'block text-xs font-mono text-slate-600 dark:text-slate-400 mb-2 uppercase tracking-wider'
 
   return (
     <section id="contact" className="section-padding container-wide">
       <SectionHeader
         sectionId="contact"
-        title="Get In Touch"
+        title="Get in Touch"
         subtitle="Have a role, a product, or a research problem in mind? I reply to every message."
       />
 
-      <div className="grid lg:grid-cols-5 gap-12 items-start">
-        <motion.div {...slideIn('left')} className="lg:col-span-2 space-y-8">
+      <div className="grid lg:grid-cols-5 gap-12">
+        <motion.div {...slideIn('left')} className="lg:col-span-2 flex flex-col gap-8">
           <div>
             <h3 className="text-slate-900 dark:text-white font-bold text-xl mb-4">
-              Let&apos;s build something intelligent
+              Let&apos;s Build Something Intelligent
             </h3>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
               I&apos;m open to full-time{' '}
@@ -73,7 +74,7 @@ export default function Contact() {
 
           <div className="space-y-4">
             {[
-              { icon: Mail, color: 'text-indigo-600', label: 'Email', value: SITE.email, href: `mailto:${SITE.email}` },
+              { icon: Mail, color: 'text-brand-700', label: 'Email', value: SITE.email, href: `mailto:${SITE.email}` },
               ...(WHATSAPP_HREF
                 ? [
                     {
@@ -85,7 +86,7 @@ export default function Contact() {
                     },
                   ]
                 : []),
-              { icon: MapPin, color: 'text-violet-500', label: 'Location', value: SITE.location, href: null },
+              { icon: MapPin, color: 'text-accent-600', label: 'Location', value: SITE.location, href: null },
             ].map(({ icon: Icon, color, label, value, href }) => (
               <div key={label} className="flex items-center gap-4 text-slate-600 dark:text-slate-300">
                 <div className="w-10 h-10 rounded-full surface flex items-center justify-center shrink-0">
@@ -94,10 +95,7 @@ export default function Contact() {
                 <div>
                   <p className="text-xs text-slate-600 dark:text-slate-400 font-mono">{label}</p>
                   {href ? (
-                    <a
-                      href={href}
-                      className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors text-sm"
-                    >
+                    <a href={href} className="hover:text-brand-700 dark:hover:text-brand-400 transition-colors text-sm">
                       {value}
                     </a>
                   ) : (
@@ -108,7 +106,7 @@ export default function Contact() {
             ))}
           </div>
 
-          <div>
+          <div className="lg:mt-auto">
             <p className="text-slate-600 dark:text-slate-400 text-xs font-mono uppercase tracking-widest mb-4">
               Find me on
             </p>
@@ -119,9 +117,9 @@ export default function Contact() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60 focus-visible:ring-offset-2 rounded"
+                  className="flex items-center gap-3 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60 focus-visible:ring-offset-2 rounded"
                 >
-                  <Icon size={16} className="group-hover:text-indigo-500 transition-colors" />
+                  <Icon size={16} className="group-hover:text-brand-600 transition-colors" />
                   <span className="text-sm">{username}</span>
                 </a>
               ))}
@@ -197,6 +195,15 @@ export default function Contact() {
                 </>
               )}
             </Button>
+            <p className="text-xs text-center text-slate-500 dark:text-slate-500">
+              Your message is emailed to me and isn&apos;t stored on this site.{' '}
+              <Link
+                href="/privacy"
+                className="underline underline-offset-4 hover:text-brand-700 dark:hover:text-brand-400 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60"
+              >
+                Privacy
+              </Link>
+            </p>
           </form>
         </motion.div>
       </div>

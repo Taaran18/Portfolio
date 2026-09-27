@@ -1,14 +1,17 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import { pageMetadata } from '@/lib/metadata'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, ExternalLink, Github } from 'lucide-react'
+import { ExternalLink, Github } from 'lucide-react'
 import Badge from '@/components/ui/Badge'
 import ArticleBody from '@/components/ui/ArticleBody'
 import ArticleToc from '@/components/ui/ArticleToc'
 import ShareRail from '@/components/ui/ShareRail'
 import JsonLd from '@/components/JsonLd'
-import { CASE_STUDIES, getCaseStudy } from '@/content/case-studies'
+import Breadcrumbs from '@/components/ui/Breadcrumbs'
+import ImageCarousel from '@/components/ui/ImageCarousel'
+import { PROJECTS } from '@/content/projects'
+import { CASE_STUDIES, getCaseStudy, readingMinutes } from '@/content/case-studies'
 import { caseStudySchema } from '@/lib/seo'
 import { shimmerBlurDataURL } from '@/lib/image-placeholder'
 
@@ -23,24 +26,21 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const study = getCaseStudy(slug)
   if (!study) return {}
 
-  return {
+  return pageMetadata({
     title: study.title,
-    description: study.summary,
-    alternates: { canonical: `/case-studies/${study.slug}` },
-    openGraph: {
-      type: 'article',
-      title: `${study.title} — Case Study`,
-      description: study.summary,
-      url: `/case-studies/${study.slug}`,
-      publishedTime: study.publishedAt,
-    },
-  }
+    shareTitle: `${study.title} | Case Study`,
+    description: study.metaDescription ?? study.summary,
+    path: `/case-studies/${study.slug}`,
+    keywords: study.stack,
+    article: { publishedTime: study.publishedAt, tags: study.stack },
+  })
 }
 
 export default async function CaseStudyPage({ params }: Params) {
   const { slug } = await params
   const study = getCaseStudy(slug)
   if (!study) notFound()
+  const screenshots = PROJECTS.find((project) => project.caseStudySlug === study.slug)?.images ?? []
 
   return (
     <main id="main-content" tabIndex={-1} className="min-h-screen pt-24 md:pt-28 focus:outline-none">
@@ -53,25 +53,33 @@ export default async function CaseStudyPage({ params }: Params) {
           </aside>
 
           <div className="lg:col-span-7 min-w-0">
-            <Link
-              href="/case-studies"
-              className="inline-flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors mb-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60 rounded"
-            >
-              <ArrowLeft size={15} /> All case studies
-            </Link>
+            <Breadcrumbs
+              trail={[{ label: 'Case Studies', href: '/case-studies' }, { label: study.title }]}
+              align="start"
+              className="mb-10"
+            />
 
             <header className="mb-12">
               <h1 className="heading-lg text-slate-900 dark:text-white mb-3">{study.title}</h1>
-              <p className="text-lg text-indigo-600 dark:text-indigo-400 mb-6">{study.tagline}</p>
+              <p className="text-lg text-brand-700 dark:text-brand-400 mb-6">{study.tagline}</p>
 
-              <dl className="grid sm:grid-cols-2 gap-x-8 gap-y-4 py-6 border-y border-[var(--surface-border)]">
+              <dl className="grid grid-cols-2 gap-x-8 py-6 border-y border-[var(--surface-border)]">
                 <div>
-                  <dt className="text-[11px] font-mono uppercase tracking-widest text-slate-500 mb-1">Role</dt>
-                  <dd className="text-sm text-slate-700 dark:text-slate-300">{study.role}</dd>
+                  <dt className="text-[11px] font-mono uppercase tracking-widest text-slate-500 mb-1">
+                    {study.timeline ? 'Timeline' : 'Published'}
+                  </dt>
+                  <dd className="text-sm text-slate-700 dark:text-slate-300">
+                    {study.timeline ??
+                      new Date(study.publishedAt).toLocaleDateString('en-GB', {
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric',
+                      })}
+                  </dd>
                 </div>
                 <div>
-                  <dt className="text-[11px] font-mono uppercase tracking-widest text-slate-500 mb-1">Timeline</dt>
-                  <dd className="text-sm text-slate-700 dark:text-slate-300">{study.timeline}</dd>
+                  <dt className="text-[11px] font-mono uppercase tracking-widest text-slate-500 mb-1">Reading Time</dt>
+                  <dd className="text-sm text-slate-700 dark:text-slate-300">{readingMinutes(study)} min read</dd>
                 </div>
               </dl>
 
@@ -89,9 +97,9 @@ export default async function CaseStudyPage({ params }: Params) {
                     href={study.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-indigo-500/40 text-indigo-600 dark:text-indigo-400 text-sm font-medium hover:bg-indigo-500/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-500/40 text-brand-700 dark:text-brand-400 text-sm font-medium hover:bg-brand-500/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60"
                   >
-                    Live demo <ExternalLink size={14} />
+                    Live Demo <ExternalLink size={14} />
                   </a>
                 )}
                 {study.githubUrl && (
@@ -99,7 +107,7 @@ export default async function CaseStudyPage({ params }: Params) {
                     href={study.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--surface-border)] text-slate-700 dark:text-slate-300 text-sm font-medium hover:border-indigo-500/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--surface-border)] text-slate-700 dark:text-slate-300 text-sm font-medium hover:border-brand-500/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60"
                   >
                     <Github size={14} /> Source
                   </a>
@@ -107,19 +115,29 @@ export default async function CaseStudyPage({ params }: Params) {
               </div>
             </header>
 
-            {study.imageUrl && (
-              <div className="relative aspect-[16/10] rounded-3xl overflow-hidden surface mb-14">
-                <Image
-                  src={study.imageUrl}
-                  alt={`${study.title} interface`}
-                  fill
-                  priority
-                  placeholder="blur"
-                  blurDataURL={shimmerBlurDataURL()}
-                  className="object-cover object-top"
-                  sizes="(max-width: 768px) 100vw, 768px"
-                />
-              </div>
+            {screenshots.length > 0 ? (
+              <ImageCarousel
+                images={screenshots}
+                label={`${study.title} screenshots`}
+                priority
+                className="rounded-3xl surface mb-14"
+                sizes="(max-width: 768px) 100vw, 768px"
+              />
+            ) : (
+              study.imageUrl && (
+                <div className="relative aspect-[16/10] rounded-3xl overflow-hidden surface mb-14">
+                  <Image
+                    src={study.imageUrl}
+                    alt={`${study.title} interface`}
+                    fill
+                    priority
+                    placeholder="blur"
+                    blurDataURL={shimmerBlurDataURL()}
+                    className="object-cover object-top"
+                    sizes="(max-width: 768px) 100vw, 768px"
+                  />
+                </div>
+              )
             )}
 
             <div className="grid grid-cols-3 gap-4 mb-14">

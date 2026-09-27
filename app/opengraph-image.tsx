@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og'
 import { SITE } from '@/lib/site'
 
-export const alt = 'Taaran Jain — AI Engineer'
+export const alt = 'Taaran Jain | AI/ML Engineer'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -16,7 +16,7 @@ export default function OpengraphImage() {
         justifyContent: 'center',
         padding: '80px',
         background:
-          'radial-gradient(1200px 600px at 80% -10%, rgba(168,85,247,0.35), transparent), radial-gradient(900px 600px at 0% 110%, rgba(79,70,229,0.35), transparent), #050510',
+          'radial-gradient(1200px 600px at 80% -10%, rgba(34,211,238,0.28), transparent), radial-gradient(900px 600px at 0% 110%, rgba(20,184,166,0.32), transparent), #041012',
         color: 'white',
         fontFamily: 'sans-serif',
       }}
@@ -26,7 +26,7 @@ export default function OpengraphImage() {
           display: 'flex',
           alignItems: 'center',
           gap: 12,
-          color: '#818cf8',
+          color: '#5eead4',
           fontSize: 28,
           letterSpacing: 4,
           textTransform: 'uppercase',
@@ -40,7 +40,7 @@ export default function OpengraphImage() {
             background: '#34d399',
           }}
         />
-        Open to opportunities
+        Open to Opportunities
       </div>
 
       <div
@@ -59,7 +59,7 @@ export default function OpengraphImage() {
           fontSize: 48,
           fontWeight: 600,
           marginTop: 8,
-          background: 'linear-gradient(90deg, #818cf8, #7c3aed)',
+          background: 'linear-gradient(90deg, #2dd4bf, #22d3ee)',
           backgroundClip: 'text',
           color: 'transparent',
         }}

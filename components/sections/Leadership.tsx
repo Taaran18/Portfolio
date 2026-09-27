@@ -31,14 +31,14 @@ export default function Leadership() {
               hover="lift"
               {...fadeInScale({ delay: (i % PREVIEW_COUNT) * 0.08, duration: 0.55, y: 30 })}
             >
-              <div className="w-11 h-11 rounded-full bg-gradient-to-br from-indigo-500/20 to-violet-600/20 border border-indigo-500/20 flex items-center justify-center mb-5">
-                <Icon size={20} className="text-indigo-600" />
+              <div className="w-11 h-11 rounded-full bg-gradient-to-br from-brand-500/20 to-accent-700/20 border border-brand-500/20 flex items-center justify-center mb-5">
+                <Icon size={20} className="text-brand-700" />
               </div>
 
-              <h3 className="card-title text-slate-900 dark:text-white mb-0.5 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+              <h3 className="card-title text-slate-900 dark:text-white mb-0.5 group-hover:text-brand-700 dark:group-hover:text-brand-400 transition-colors">
                 {role.title}
               </h3>
-              <p className="text-indigo-700 dark:text-indigo-400 text-sm font-semibold mb-1">{role.organisation}</p>
+              <p className="text-brand-700 dark:text-brand-400 text-sm font-semibold mb-1">{role.organisation}</p>
               <p className="text-slate-600 dark:text-slate-400 text-xs font-mono mb-4">{role.period}</p>
 
               <p className="card-body text-slate-600 dark:text-slate-400 mb-4 text-left">{role.description}</p>
@@ -46,7 +46,7 @@ export default function Leadership() {
               <ul className="space-y-1.5">
                 {role.impact.map((point, j) => (
                   <li key={j} className="flex gap-2 text-slate-600 dark:text-slate-400 text-sm">
-                    <span className="text-indigo-500 mt-0.5 shrink-0">▸</span>
+                    <span className="text-brand-600 mt-0.5 shrink-0">▸</span>
                     {point}
                   </li>
                 ))}

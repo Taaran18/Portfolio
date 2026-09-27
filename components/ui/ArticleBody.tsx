@@ -20,7 +20,7 @@ export default function ArticleBody({ sections }: { sections: ArticleSection[] }
             <ul className="space-y-2.5 pt-1">
               {section.bullets.map((point) => (
                 <li key={point} className="flex gap-3 text-slate-600 dark:text-slate-400 text-[15px] leading-relaxed">
-                  <span className="mt-2 w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0" />
+                  <span className="mt-2 w-1.5 h-1.5 rounded-full bg-brand-500 shrink-0" />
                   {point}
                 </li>
               ))}
