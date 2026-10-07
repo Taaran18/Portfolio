@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Briefcase, Mail, MapPin, Send } from 'lucide-react'
+import { ArrowUpRight, Mail, MapPin, Send } from 'lucide-react'
 import toast from 'react-hot-toast'
 import SectionHeader from '@/components/ui/SectionHeader'
 import Button from '@/components/ui/Button'
@@ -66,9 +66,8 @@ export default function Contact() {
             </h3>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
               I&apos;m open to full-time{' '}
-              <span className="text-slate-900 dark:text-white font-medium">{SITE.openToRoles.join(', ')}</span> roles,
-              plus freelance projects and research collaborations. If you have a problem involving data or intelligence,
-              tell me about it.
+              <span className="text-slate-900 dark:text-white font-medium">{SITE.openToRoles.join(', ')}</span> roles
+              and research collaborations. If you have a problem involving data or intelligence, tell me about it.
             </p>
           </div>
 
@@ -76,25 +75,24 @@ export default function Contact() {
             href={SITE.freelanceUrl}
             target="_blank"
             rel="noopener"
-            className="group surface rounded-2xl p-5 flex items-start gap-4 border border-brand-500/20 hover:border-brand-500/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60"
+            className="group block rounded-2xl p-5 border border-brand-500/25 bg-brand-500/[0.06] hover:border-brand-500/50 hover:bg-brand-500/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60"
           >
-            <div className="w-10 h-10 rounded-full bg-brand-500/10 flex items-center justify-center shrink-0">
-              <Briefcase size={18} className="text-brand-700 dark:text-brand-400" />
-            </div>
-            <div className="min-w-0">
-              <p className="text-slate-900 dark:text-white font-semibold text-sm inline-flex items-center gap-1">
-                Hiring for a project?
-                <ArrowUpRight
-                  size={14}
-                  className="text-brand-700 dark:text-brand-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                />
-              </p>
-              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mt-1">
-                I freelance too: websites, web and mobile apps, AI integrations and automation. See services and past
-                client work at{' '}
-                <span className="text-brand-700 dark:text-brand-400 font-medium">studio.taaranjain.com</span>.
-              </p>
-            </div>
+            <span className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-green-700 dark:text-green-400">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+              Accepting client projects
+            </span>
+            <p className="mt-3 text-slate-900 dark:text-white font-semibold">Need a product built, not a hire?</p>
+            <p className="mt-1 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              I also freelance, shipping websites, web and mobile apps, AI integrations and automation for growing
+              businesses.
+            </p>
+            <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 dark:text-brand-400">
+              Visit my studio
+              <ArrowUpRight
+                size={16}
+                className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
+            </span>
           </a>
 
           <div className="space-y-4">
@@ -135,7 +133,7 @@ export default function Contact() {
             <p className="text-slate-600 dark:text-slate-400 text-xs font-mono uppercase tracking-widest mb-4">
               Find me on
             </p>
-            <div className="space-y-3">
+            <div className="flex flex-wrap gap-x-6 gap-y-3">
               {PROFILE_LINKS.map(({ icon: Icon, label, href, username }) => (
                 <a
                   key={label}
@@ -153,7 +151,11 @@ export default function Contact() {
         </motion.div>
 
         <motion.div {...slideIn('right', { delay: 0.1 })} className="lg:col-span-3">
-          <form ref={formRef} onSubmit={handleSubmit} className="surface rounded-3xl p-8 space-y-5">
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className="surface rounded-3xl p-8 space-y-5 h-full flex flex-col"
+          >
             <div className="grid sm:grid-cols-2 gap-5">
               <div>
                 <label htmlFor="contact-name" className={labelCls}>
@@ -195,7 +197,7 @@ export default function Contact() {
                 className={inputCls}
               />
             </div>
-            <div>
+            <div className="flex-1 flex flex-col">
               <label htmlFor="contact-message" className={labelCls}>
                 Message
               </label>
@@ -205,7 +207,7 @@ export default function Contact() {
                 rows={5}
                 required
                 placeholder="Tell me about your project or idea..."
-                className={inputCls + ' resize-none'}
+                className={inputCls + ' resize-none flex-1 min-h-32'}
               />
             </div>
             <Button type="submit" disabled={sending} variant="primary" className="w-full">
@@ -221,7 +223,7 @@ export default function Contact() {
               )}
             </Button>
             <p className="text-xs text-center text-slate-500 dark:text-slate-500">
-              Your message is emailed to me and isn&apos;t stored on this site.{' '}
+              Goes straight to my inbox and is never stored on this site. I usually reply within a day.{' '}
               <Link
                 href="/privacy"
                 className="underline underline-offset-4 hover:text-brand-700 dark:hover:text-brand-400 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60"
