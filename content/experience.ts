@@ -6,7 +6,7 @@ export const EXPERIENCES: Experience[] = [
     company: 'e-Marketing.io',
     role: 'AI Engineer',
     description:
-      'Sole AI Engineer responsible for designing and shipping the full suite of AI-powered products for a performance marketing agency and its clients — owning everything from problem scoping and model selection to deployment and iteration.',
+      'AI Engineer designing and shipping AI-powered products for a performance marketing agency and its clients — owning everything from problem scoping and model selection to deployment and iteration.',
     responsibilities: [
       'Built an AI Meeting Summarizer that converts hour-long recordings into structured briefs with decisions and action items — saving teams hours of follow-up every week.',
       'Developed a Keyword Analysis Engine that replaced gut-feel content decisions with NLP-driven insights on trends, intent, and competitor gaps.',

@@ -22,7 +22,7 @@ export const FAQS: FaqEntry[] = [
     _id: 'experience',
     question: 'How Much Production Experience Do You Have?',
     answer:
-      'Two years across three companies, currently the sole AI Engineer at e-Marketing.io where I own the full suite of AI products end to end. Every project on this site is deployed, with a live demo you can try.',
+      'Two years across three companies, currently an AI Engineer at e-Marketing.io, where I design and ship AI products end to end. Every project on this site is deployed, with a live demo you can try.',
   },
   {
     _id: 'freelance',
