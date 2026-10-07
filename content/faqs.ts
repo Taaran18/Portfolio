@@ -27,8 +27,7 @@ export const FAQS: FaqEntry[] = [
   {
     _id: 'freelance',
     question: 'Do You Take Freelance or Contract Work?',
-    answer:
-      'Yes, alongside full-time conversations. Scoped projects around LLM integration, RAG pipelines, or ML prototyping are the best fit.',
+    answer: `Yes. I run a freelance studio at ${SITE.freelanceUrl.replace('https://', '')} that builds websites, web and mobile apps, AI integrations and business automation. Scoped projects around LLM integration, RAG pipelines, or ML prototyping are the best fit.`,
   },
   {
     _id: 'response',

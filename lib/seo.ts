@@ -83,7 +83,7 @@ export function personSchema() {
       { '@type': 'Language', name: 'English' },
       { '@type': 'Language', name: 'Hindi' },
     ],
-    sameAs: [SITE.socials.github, SITE.socials.linkedin],
+    sameAs: [SITE.socials.github, SITE.socials.linkedin, SITE.freelanceUrl],
     hasCredential: CERTIFICATIONS.map((cert) => ({
       '@type': 'EducationalOccupationalCredential',
       name: cert.name,

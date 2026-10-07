@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Mail, MapPin, Send } from 'lucide-react'
+import { ArrowUpRight, Briefcase, Mail, MapPin, Send } from 'lucide-react'
 import toast from 'react-hot-toast'
 import SectionHeader from '@/components/ui/SectionHeader'
 import Button from '@/components/ui/Button'
@@ -71,6 +71,31 @@ export default function Contact() {
               tell me about it.
             </p>
           </div>
+
+          <a
+            href={SITE.freelanceUrl}
+            target="_blank"
+            rel="noopener"
+            className="group surface rounded-2xl p-5 flex items-start gap-4 border border-brand-500/20 hover:border-brand-500/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60"
+          >
+            <div className="w-10 h-10 rounded-full bg-brand-500/10 flex items-center justify-center shrink-0">
+              <Briefcase size={18} className="text-brand-700 dark:text-brand-400" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-slate-900 dark:text-white font-semibold text-sm inline-flex items-center gap-1">
+                Hiring for a project?
+                <ArrowUpRight
+                  size={14}
+                  className="text-brand-700 dark:text-brand-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
+              </p>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mt-1">
+                I freelance too: websites, web and mobile apps, AI integrations and automation. See services and past
+                client work at{' '}
+                <span className="text-brand-700 dark:text-brand-400 font-medium">studio.taaranjain.com</span>.
+              </p>
+            </div>
+          </a>
 
           <div className="space-y-4">
             {[

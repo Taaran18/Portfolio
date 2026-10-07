@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { MapPin } from 'lucide-react'
+import { Briefcase, MapPin } from 'lucide-react'
 import { SOCIAL_LINKS } from '@/content/social'
 import { ALL_PAGES } from '@/content/sections'
 import { SITE } from '@/lib/site'
@@ -80,6 +80,18 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
+
+              <li>
+                <a
+                  href={SITE.freelanceUrl}
+                  target="_blank"
+                  rel="noopener"
+                  className={`inline-flex items-center gap-2.5 group ${linkCls}`}
+                >
+                  <Briefcase size={15} className="shrink-0 group-hover:text-brand-600 transition-colors" />
+                  Freelance Studio
+                </a>
+              </li>
 
               {RESUME && (
                 <li>

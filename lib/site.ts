@@ -24,6 +24,7 @@ export const SITE = {
   primaryRole: 'AI Engineer',
   availability: 'Available for AI/ML roles',
   openToRoles: ['AI Engineer', 'Machine Learning Engineer', 'Data Scientist'],
+  freelanceUrl: 'https://studio.taaranjain.com',
   resumeUrl: 'https://drive.google.com/file/d/1-ckubTF7jTKD8m9k3MNkf8JmydBHCjuy/view?usp=sharing',
   socials: {
     github: 'https://github.com/Taaran18',

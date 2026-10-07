@@ -51,14 +51,16 @@ const CURATED: KnowledgeEntry[] = [
       'hire',
       'hiring',
       'freelance',
+      'freelancer',
+      'studio',
+      'contract',
       'open to work',
       'looking for a job',
       'full-time',
       'collaborate',
     ],
     question: 'Is Taaran available for hire?',
-    answer:
-      'Yes — Taaran is open to full-time AI/ML engineering roles, freelance projects, and research collaborations. If you have an interesting problem involving data or intelligence, reach out via the contact form or email.',
+    answer: `Yes — Taaran is open to full-time AI/ML engineering roles, freelance projects, and research collaborations. For freelance work (websites, apps, AI integrations, automation), see his studio at ${SITE.freelanceUrl}. Otherwise, reach out via the contact form or email.`,
     featured: true,
   },
   {
