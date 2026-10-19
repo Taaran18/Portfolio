@@ -1,9 +1,16 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
+import { useSyncExternalStore } from 'react'
+
+const subscribe = () => () => {}
 
 export default function RequestedPath() {
-  const pathname = usePathname()
+  // The 404 page is prerendered without a path, so read it only on the client to avoid a hydration mismatch.
+  const pathname = useSyncExternalStore(
+    subscribe,
+    () => window.location.pathname,
+    () => null
+  )
   if (!pathname || pathname === '/') return null
 
   return (

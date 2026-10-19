@@ -7,9 +7,9 @@ import PageNav from '@/components/ui/PageNav'
 import { experiencePageSchema } from '@/lib/seo'
 
 const description =
-  'Professional experience of Taaran Jain as an AI Engineer and Data Scientist building production ML and LLM systems.'
+  'Experience of Taaran Jain, AI Engineer at e-Marketing.io: LLM chatbots, NLP products and anomaly detection shipped across three companies.'
 
-export const metadata: Metadata = pageMetadata({ title: 'Experience', description, path: '/experience' })
+export const metadata: Metadata = pageMetadata({ title: 'AI Engineer Experience', description, path: '/experience' })
 
 export default function ExperiencePage() {
   return (

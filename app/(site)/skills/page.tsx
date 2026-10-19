@@ -7,9 +7,9 @@ import PageNav from '@/components/ui/PageNav'
 import { skillsPageSchema } from '@/lib/seo'
 
 const description =
-  'Technical skills of Taaran Jain across machine learning, deep learning, LLMs, and the full ML engineering stack.'
+  'Skills of Taaran Jain, AI and machine learning engineer: LangGraph, RAG, pgvector, PyTorch, scikit-learn, FastAPI and Next.js, grouped by depth.'
 
-export const metadata: Metadata = pageMetadata({ title: 'Skills', description, path: '/skills' })
+export const metadata: Metadata = pageMetadata({ title: 'AI & Machine Learning Skills', description, path: '/skills' })
 
 export default function SkillsPage() {
   return (

@@ -8,9 +8,9 @@ import Faq from '@/components/sections/Faq'
 import { contactPageSchema } from '@/lib/seo'
 
 const description =
-  'Get in touch with Taaran Jain — open to AI/ML engineering roles, freelance projects, and research collaborations.'
+  'Hire Taaran Jain, an AI Engineer in India, for AI/ML engineering roles (remote or on-site), freelance projects or research collaborations.'
 
-export const metadata: Metadata = pageMetadata({ title: 'Contact', description, path: '/contact' })
+export const metadata: Metadata = pageMetadata({ title: 'Hire an AI Engineer', description, path: '/contact' })
 
 export default function ContactPage() {
   return (

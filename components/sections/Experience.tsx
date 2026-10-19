@@ -1,83 +1,141 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Calendar } from 'lucide-react'
+import { useRef } from 'react'
+import { motion, useInView, useScroll, useSpring } from 'framer-motion'
+import { Briefcase } from 'lucide-react'
+import clsx from 'clsx'
 import SectionHeader from '@/components/ui/SectionHeader'
-import Card from '@/components/ui/Card'
 import Badge from '@/components/ui/Badge'
+import { Reveal } from '@/components/ui/Reveal'
 import { EXPERIENCES } from '@/content/experience'
 import { formatMonthYear } from '@/lib/format'
-import { slideIn } from '@/lib/motion'
+import { EASE_OUT } from '@/lib/motion'
+import type { Experience as ExperienceEntry } from '@/types'
+
+function Role({ exp }: { exp: ExperienceEntry }) {
+  const ref = useRef<HTMLLIElement>(null)
+  const inView = useInView(ref, { margin: '-45% 0px -45% 0px' })
+  const seen = useInView(ref, { once: true, margin: '0px 0px -15% 0px' })
+
+  return (
+    <motion.li
+      ref={ref}
+      initial={{ opacity: 0, y: 28 }}
+      animate={seen ? { opacity: 1, y: 0 } : undefined}
+      transition={{ duration: 0.8, ease: EASE_OUT }}
+      className="relative grid grid-cols-[2.5rem_1fr] gap-4 pb-10 last:pb-0 sm:grid-cols-[3.5rem_1fr] sm:gap-7 sm:pb-14"
+    >
+      <div className="relative flex justify-center">
+        <span
+          className={clsx(
+            'relative z-10 grid size-10 place-items-center rounded-2xl border transition-[background-color,border-color,color,box-shadow] duration-500 sm:size-12',
+            inView || exp.current
+              ? 'border-brand-600 bg-brand-700 text-white shadow-[0_0_0_6px_rgba(13,148,136,0.14)]'
+              : 'border-[var(--surface-border)] bg-[var(--surface-bg)] text-slate-500'
+          )}
+        >
+          <Briefcase size={18} aria-hidden="true" />
+        </span>
+      </div>
+
+      <div
+        className={clsx(
+          'surface rounded-3xl p-6 transition-[border-color,box-shadow] duration-500 sm:p-7',
+          inView && 'border-brand-500/40 surface-raise shadow-[var(--card-shadow-hover)]'
+        )}
+      >
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <h3 className="font-display text-xl font-bold text-slate-900 dark:text-white sm:text-2xl">{exp.role}</h3>
+            <p className="mt-0.5 font-semibold text-brand-700 dark:text-brand-400">{exp.company}</p>
+          </div>
+          <span className="flex items-center gap-2">
+            {exp.current && <Badge tone="green">Current</Badge>}
+            <span className="rounded-full border border-[var(--surface-border)] px-2.5 py-1 font-mono text-[0.7rem] text-slate-600 dark:text-slate-400">
+              {formatMonthYear(exp.startDate)} –{' '}
+              {exp.current ? 'Present' : exp.endDate ? formatMonthYear(exp.endDate) : ''}
+            </span>
+          </span>
+        </div>
+
+        <p className="mt-4 leading-relaxed text-slate-700 dark:text-slate-300">{exp.description}</p>
+
+        <ul className="mt-4 space-y-2">
+          {exp.responsibilities.map((r) => (
+            <li key={r} className="flex gap-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+              <span aria-hidden="true" className="mt-2 size-1.5 shrink-0 rounded-full bg-brand-500" />
+              {r}
+            </li>
+          ))}
+        </ul>
+
+        <ul className="mt-5 flex flex-wrap gap-1.5" aria-label={`${exp.company} stack`}>
+          {exp.technologies.map((t) => (
+            <li key={t}>
+              <Badge tone="brand" className="font-mono">
+                {t}
+              </Badge>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </motion.li>
+  )
+}
 
 export default function Experience() {
+  const ref = useRef<HTMLOListElement>(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 60%', 'end 60%'] })
+  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 })
+  const current = EXPERIENCES.find((e) => e.current)
+
   return (
     <section id="experience" className="section-padding container-wide">
       <SectionHeader
         sectionId="experience"
-        title="Work Experience"
-        subtitle="Shipping AI systems in production across three companies."
+        title="Two Years Shipping AI in Production"
+        subtitle="Three companies so far, starting with a data science internship. Now I build AI products for an agency and its clients."
       />
 
-      <div className="relative">
-        <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-brand-500/50 via-accent-500/30 to-transparent -translate-x-1/2" />
+      <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
+        <Reveal className="lg:col-span-4">
+          <div className="lg:sticky lg:top-28">
+            <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-[var(--surface-border)] bg-[var(--surface-border)]">
+              <div className="flex flex-col bg-[var(--surface-bg)] p-5">
+                <dt className="order-2 mt-1 text-sm text-slate-600 dark:text-slate-400">Years in AI/ML</dt>
+                <dd className="font-display text-4xl font-bold text-gradient">2+</dd>
+              </div>
+              <div className="flex flex-col bg-[var(--surface-bg)] p-5">
+                <dt className="order-2 mt-1 text-sm text-slate-600 dark:text-slate-400">Companies</dt>
+                <dd className="font-display text-4xl font-bold text-gradient">{EXPERIENCES.length}</dd>
+              </div>
+            </dl>
+            {current && (
+              <p className="mt-5 leading-relaxed text-slate-600 dark:text-slate-400">
+                Currently{' '}
+                <span className="font-semibold text-slate-900 dark:text-white">
+                  {current.role} at {current.company}
+                </span>
+                , building the chatbots, meeting summaries and NLP tools its clients use every day.
+              </p>
+            )}
+          </div>
+        </Reveal>
 
-        <div className="space-y-12">
-          {EXPERIENCES.map((exp, i) => {
-            const isLeft = i % 2 === 0
-            return (
-              <motion.div
-                key={exp._id}
-                {...slideIn(isLeft ? 'left' : 'right', { delay: i * 0.08 })}
-                className={`relative flex flex-col md:flex-row gap-8 md:gap-0 pl-12 md:pl-0 ${
-                  isLeft ? 'md:justify-start' : 'md:justify-end'
-                }`}
-              >
-                <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-gradient-to-br from-brand-400 to-accent-500 border-2 border-[var(--bg-primary)] shadow-lg shadow-brand-500/30 z-10 mt-6" />
-
-                <div className={`md:w-[46%] ${isLeft ? 'md:mr-auto md:pr-12' : 'md:ml-auto md:pl-12'}`}>
-                  <Card padding="md" hover="lift" borderGradient>
-                    <div className="flex items-start justify-between mb-3">
-                      <div>
-                        <h3 className="card-title text-slate-900 dark:text-white group-hover:text-brand-700 dark:group-hover:text-brand-400 transition-colors">
-                          {exp.role}
-                        </h3>
-                        <p className="text-brand-700 dark:text-brand-400 font-semibold">{exp.company}</p>
-                      </div>
-                      {exp.current && <Badge tone="green">Current</Badge>}
-                    </div>
-
-                    <div className="flex items-center gap-1 text-slate-600 dark:text-slate-400 text-xs font-mono mb-4">
-                      <Calendar size={12} />
-                      <span>
-                        {formatMonthYear(exp.startDate)} —{' '}
-                        {exp.current ? 'Present' : exp.endDate ? formatMonthYear(exp.endDate) : ''}
-                      </span>
-                    </div>
-
-                    <p className="card-body text-slate-600 dark:text-slate-300 mb-4">{exp.description}</p>
-
-                    <ul className="space-y-1.5 mb-5">
-                      {exp.responsibilities.map((r, j) => (
-                        <li key={j} className="flex gap-2 text-slate-600 dark:text-slate-400 text-sm">
-                          <span className="text-brand-600 mt-0.5 shrink-0">▸</span>
-                          {r}
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div className="flex flex-wrap gap-1.5">
-                      {exp.technologies.map((t) => (
-                        <Badge key={t} tone="brand" className="font-mono">
-                          {t}
-                        </Badge>
-                      ))}
-                    </div>
-                  </Card>
-                </div>
-              </motion.div>
-            )
-          })}
-        </div>
+        <ol ref={ref} className="relative lg:col-span-8">
+          <span
+            aria-hidden="true"
+            className="absolute top-6 bottom-6 left-5 w-px -translate-x-1/2 bg-[var(--surface-border)] sm:left-7"
+          />
+          <motion.span
+            aria-hidden="true"
+            style={{ scaleY: progress }}
+            className="absolute top-6 bottom-6 left-5 w-px origin-top -translate-x-1/2 bg-brand-500 sm:left-7"
+          />
+          {EXPERIENCES.map((exp) => (
+            <Role key={exp._id} exp={exp} />
+          ))}
+        </ol>
       </div>
     </section>
   )

@@ -1,3 +1,5 @@
+import { PROJECTS } from '@/content/projects'
+
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.taaranjain.com').replace(/\/$/, '')
 
 export const WHATSAPP_NUMBER = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '918955535949').replace(/[^\d]/g, '')
@@ -15,15 +17,14 @@ export const SITE = {
   name: 'Taaran Jain',
 
   alternateNames: ['taaranjain', 'Taaran', 'Taaran Jain Portfolio'],
-  title: 'Taaran Jain | AI/ML Engineer Building LLM & RAG Systems',
-  description:
-    'AI and Machine Learning Engineer building LLM applications — RAG pipelines with LangGraph and pgvector, fine-tuned transformers, and production ML systems.',
+  title: 'Taaran Jain | AI Engineer Building RAG & Agentic AI Apps',
+  description: `AI Engineer and full-stack developer in India. I build RAG apps, LangGraph agents and ML systems. ${PROJECTS.length} live projects with demos and case studies.`,
   url: SITE_URL,
   email: 'taaranjain16@gmail.com',
   location: 'Jaipur, Rajasthan, India',
   primaryRole: 'AI Engineer',
-  availability: 'Available for AI/ML roles',
-  openToRoles: ['AI Engineer', 'Machine Learning Engineer', 'Data Scientist'],
+  availability: 'Open to AI Engineer roles · Remote or on-site',
+  openToRoles: ['AI Engineer', 'Machine Learning Engineer', 'Full Stack Engineer', 'Data Scientist'],
   freelanceUrl: 'https://studio.taaranjain.com',
   resumeUrl: 'https://drive.google.com/file/d/1-ckubTF7jTKD8m9k3MNkf8JmydBHCjuy/view?usp=sharing',
   socials: {

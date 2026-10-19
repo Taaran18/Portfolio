@@ -7,9 +7,9 @@ import PageNav from '@/components/ui/PageNav'
 import { aboutPageSchema } from '@/lib/seo'
 
 const description =
-  'Learn about Taaran Jain — an AI Engineer specialising in LLMs, RAG, and production ML systems, based in Jaipur, India.'
+  'About Taaran Jain, an AI Engineer and full-stack developer in India who builds RAG pipelines, LangGraph agents and machine learning systems.'
 
-export const metadata: Metadata = pageMetadata({ title: 'About', description, path: '/about' })
+export const metadata: Metadata = pageMetadata({ title: 'About · AI Engineer in India', description, path: '/about' })
 
 export default function AboutPage() {
   return (

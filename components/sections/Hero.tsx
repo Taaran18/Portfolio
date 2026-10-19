@@ -1,165 +1,182 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
-import { useIntroDone } from '@/lib/intro'
+import { Fragment, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown, MapPin } from 'lucide-react'
+import clsx from 'clsx'
+import { ArrowRight, FileText } from 'lucide-react'
 import Button from '@/components/ui/Button'
-import { HERO_TITLE, HERO_CAPABILITIES, HERO_DESCRIPTION } from '@/content/hero'
+import HeroConsole from '@/components/sections/HeroConsole'
+import { HERO_DESCRIPTION, HERO_HEADLINE, HERO_NAME, HERO_ROLE_LINE, HERO_STACK, HERO_STATS } from '@/content/hero'
+import { EXPERIENCES } from '@/content/experience'
 import { SOCIAL_LINKS } from '@/content/social'
 import { SITE } from '@/lib/site'
-import { EASE_OUT } from '@/lib/motion'
+import { EASE_OUT, fadeUp } from '@/lib/motion'
+import { useIntroDone } from '@/lib/intro'
 
-const PROFILE_LINKS = SOCIAL_LINKS.filter(
-  (s) => s.id === 'github' || s.id === 'linkedin' || s.id === 'email' || s.id === 'resume'
-)
+const PROFILE_LINKS = SOCIAL_LINKS.filter((s) => s.id === 'github' || s.id === 'linkedin' || s.id === 'email')
+const CURRENT = EXPERIENCES.find((e) => e.current)
+
+function MaskWord({
+  children,
+  delay,
+  active,
+  className,
+}: {
+  children: string
+  delay: number
+  active: boolean
+  className?: string
+}) {
+  return (
+    <span className="inline-block overflow-hidden pb-[0.1em] align-bottom">
+      <motion.span
+        className={clsx('inline-block', className)}
+        initial={{ y: '105%' }}
+        animate={active ? { y: 0 } : undefined}
+        transition={{ duration: 0.9, ease: EASE_OUT, delay }}
+      >
+        {children}
+      </motion.span>
+    </span>
+  )
+}
 
 export default function Hero() {
-  const [roleIndex, setRoleIndex] = useState(0)
-  const [displayed, setDisplayed] = useState('')
-  const [isDeleting, setIsDeleting] = useState(false)
-  const [reducedMotion, setReducedMotion] = useState(false)
   const introDone = useIntroDone()
-
-  const sectionRef = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] })
-
-  const contentScale = useTransform(scrollYProgress, [0, 0.6], [1, 0.82])
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
-  const contentY = useTransform(scrollYProgress, [0, 0.6], [0, -60])
-
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setReducedMotion(mq.matches)
-    const onChange = () => setReducedMotion(mq.matches)
-    mq.addEventListener('change', onChange)
-    return () => mq.removeEventListener('change', onChange)
-  }, [])
-
-  useEffect(() => {
-    if (reducedMotion) return
-    const current = HERO_CAPABILITIES[roleIndex]
-    let timeout: NodeJS.Timeout
-
-    if (!isDeleting) {
-      if (displayed.length < current.length) {
-        timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 80)
-      } else {
-        timeout = setTimeout(() => setIsDeleting(true), 1800)
-      }
-    } else {
-      if (displayed.length > 0) {
-        timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length - 1)), 40)
-      } else {
-        setIsDeleting(false)
-        setRoleIndex((i) => (i + 1) % HERO_CAPABILITIES.length)
-      }
-    }
-
-    return () => clearTimeout(timeout)
-  }, [displayed, isDeleting, roleIndex, reducedMotion])
+  const ref = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 40])
+  const consoleY = useTransform(scrollYProgress, [0, 1], [0, 90])
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="ambient-glow" aria-hidden="true" />
+    <section ref={ref} aria-labelledby="hero-title" className="relative isolate overflow-hidden pt-24 sm:pt-28">
+      <div aria-hidden="true" className="blueprint radial-mask pointer-events-none absolute inset-0 -z-10" />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[70%] bg-[radial-gradient(60%_50%_at_75%_0%,rgba(13,148,136,0.12),transparent)]"
+      />
 
-      <motion.div
-        style={{ scale: contentScale, opacity: contentOpacity, y: contentY }}
-        className="relative z-10 text-center px-6 max-w-5xl mx-auto"
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={introDone ? { opacity: 1, y: 0 } : undefined}
-          transition={{ delay: 0.05, duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full surface border border-brand-500/20 mb-8"
-        >
-          <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-          <span className="text-sm text-slate-600 dark:text-slate-300 font-mono">{SITE.availability}</span>
-        </motion.div>
+      <div className="container-wide px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 2xl:px-32 grid items-center gap-14 pt-8 pb-16 xl:min-h-[calc(100svh-7rem)] xl:grid-cols-12 xl:gap-12 lg:pb-24">
+        <motion.div style={{ y: textY }} className="xl:col-span-7">
+          <motion.p
+            {...fadeUp(0.05, introDone)}
+            className="inline-flex items-center gap-2.5 rounded-full surface py-1.5 pl-2 pr-4 text-sm text-slate-600 dark:text-slate-300"
+          >
+            <span className="flex items-center gap-1.5 rounded-full bg-green-500/15 px-2 py-0.5 font-mono text-[0.7rem] font-medium text-green-700 dark:text-green-400">
+              <span className="pulse-dot size-1.5 rounded-full bg-green-500 text-green-500" />
+              Open
+            </span>
+            {SITE.availability}
+          </motion.p>
 
-        <motion.h1
-          initial={{ opacity: 0, scale: 0.9, y: 30 }}
-          animate={introDone ? { opacity: 1, scale: 1, y: 0 } : undefined}
-          transition={{ delay: 0.15, duration: 0.8, ease: EASE_OUT }}
-          className="heading-xl mb-4 text-slate-900 dark:text-white"
-        >
-          Hi, I&apos;m <span className="text-gradient">Taaran Jain</span>
-        </motion.h1>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={introDone ? { opacity: 1 } : undefined}
-          transition={{ delay: 0.25 }}
-          className="text-2xl md:text-3xl text-slate-600 dark:text-slate-300 font-light mb-6 h-10"
-        >
-          <span className="font-medium text-slate-900 dark:text-white">{HERO_TITLE}</span>
-          <span className="mx-2 text-brand-700 dark:text-brand-400">·</span>
-          <span>{reducedMotion ? HERO_CAPABILITIES[0] : displayed}</span>
-          {!reducedMotion && <span className="inline-block w-0.5 h-7 bg-brand-500 ml-1 animate-blink" />}
-        </motion.div>
-
-        <p className="text-slate-600 dark:text-slate-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-10">
-          {HERO_DESCRIPTION}
-        </p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={introDone ? { opacity: 1, y: 0 } : undefined}
-          transition={{ delay: 0.38, duration: 0.5 }}
-          className="flex items-center justify-center gap-1.5 text-slate-600 dark:text-slate-400 text-sm font-mono mb-10 -mt-4"
-        >
-          <MapPin size={13} className="text-brand-700" />
-          <span>{SITE.location}</span>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={introDone ? { opacity: 1, scale: 1 } : undefined}
-          transition={{ delay: 0.44, duration: 0.6, ease: EASE_OUT }}
-          className="flex flex-wrap items-center justify-center gap-4 mb-16"
-        >
-          <Button as="a" href="#projects" variant="primary" className="glow-accent">
-            View My Work
-          </Button>
-          <Button as="a" href="#contact" variant="secondary">
-            Get in Touch
-          </Button>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={introDone ? { opacity: 1 } : undefined}
-          transition={{ delay: 0.5 }}
-          className="flex items-center justify-center gap-6 mb-20"
-        >
-          {PROFILE_LINKS.map(({ icon: Icon, href, label }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-              className="group flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-brand-700 dark:hover:text-brand-400 transition-colors text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60 focus-visible:ring-offset-2 rounded"
+          <h1 id="hero-title" className="mt-8">
+            <motion.span
+              {...fadeUp(0.08, introDone)}
+              className="mb-4 block font-mono text-sm font-medium text-brand-700 dark:text-brand-400"
             >
-              <Icon size={22} strokeWidth={1.75} className="group-hover:scale-110 transition-transform" />
-              <span className="hidden sm:inline">{label}</span>
-            </a>
-          ))}
-        </motion.div>
-      </motion.div>
+              {HERO_ROLE_LINE}
+            </motion.span>
+            <span className="display-1 block">
+              {HERO_NAME.map((word, i) => (
+                <Fragment key={word}>
+                  <MaskWord delay={0.12 + i * 0.07} active={introDone}>
+                    {word}
+                  </MaskWord>
+                  {i < HERO_NAME.length - 1 && ' '}
+                </Fragment>
+              ))}
+            </span>
+          </h1>
 
-      <motion.a
-        href="#about"
-        initial={{ opacity: 0 }}
-        animate={introDone ? { opacity: 1 } : undefined}
-        transition={{ delay: 0.7, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-brand-600 transition-colors"
-      >
-        <span className="text-xs font-mono tracking-widest uppercase">Scroll</span>
-        <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}>
-          <ArrowDown size={16} />
+          <p className="mt-4 max-w-[24ch] font-display text-[clamp(1.5rem,1rem+1.6vw,2.5rem)] font-semibold leading-[1.15] tracking-tight text-slate-700 dark:text-slate-200 text-balance">
+            {HERO_HEADLINE.map((word, i) => (
+              <Fragment key={word.text}>
+                <MaskWord
+                  delay={0.3 + i * 0.045}
+                  active={introDone}
+                  className={word.accent ? 'text-brand-700 dark:text-brand-400' : undefined}
+                >
+                  {word.text}
+                </MaskWord>
+                {i < HERO_HEADLINE.length - 1 && ' '}
+              </Fragment>
+            ))}
+          </p>
+
+          <motion.p {...fadeUp(0.6, introDone)} className="lead mt-6 max-w-[38rem]">
+            {HERO_DESCRIPTION}
+          </motion.p>
+
+          <motion.div {...fadeUp(0.7, introDone)} className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <Button as="a" href="#projects" variant="primary" className="glow-accent">
+              See Live Projects <ArrowRight size={16} />
+            </Button>
+            <Button as="a" href={SITE.resumeUrl} target="_blank" rel="noopener noreferrer" variant="secondary">
+              <FileText size={16} /> View Resume
+            </Button>
+          </motion.div>
+
+          <motion.dl
+            {...fadeUp(0.78, introDone)}
+            className="mt-12 grid max-w-xl grid-cols-3 divide-x divide-[var(--surface-border)] border-y border-[var(--surface-border)]"
+          >
+            {HERO_STATS.map((stat) => (
+              <div key={stat.label} className="flex flex-col px-3 py-4 first:pl-0 sm:px-5">
+                <dt className="order-2 mt-1 text-xs leading-snug text-slate-600 dark:text-slate-400 sm:text-[0.8rem]">
+                  {stat.label}
+                </dt>
+                <dd className="font-display text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+                  {stat.value}
+                </dd>
+              </div>
+            ))}
+          </motion.dl>
+
+          <motion.ul {...fadeUp(0.85, introDone)} className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+            {PROFILE_LINKS.map(({ icon: Icon, href, label }) => (
+              <li key={label}>
+                <a
+                  href={href}
+                  target={href.startsWith('mailto:') ? undefined : '_blank'}
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-brand-700 dark:hover:text-brand-400 transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60"
+                >
+                  <Icon size={17} strokeWidth={1.75} className="transition-transform group-hover:-rotate-6" />
+                  {label}
+                </a>
+              </li>
+            ))}
+          </motion.ul>
         </motion.div>
-      </motion.a>
+
+        <motion.div style={{ y: consoleY }} className="xl:col-span-5">
+          <HeroConsole />
+        </motion.div>
+      </div>
+
+      <div className="border-y border-[var(--surface-border)] bg-white/60 dark:bg-black/40 backdrop-blur-sm">
+        <div className="container-wide px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 2xl:px-32 flex flex-col gap-4 py-5 lg:flex-row lg:items-center lg:gap-10">
+          {CURRENT && (
+            <p className="shrink-0 text-sm text-slate-600 dark:text-slate-400">
+              <span className="eyebrow mr-2">Currently</span>
+              {CURRENT.role} at <span className="font-semibold text-slate-900 dark:text-white">{CURRENT.company}</span>
+            </p>
+          )}
+          <div className="marquee fade-mask-x relative min-w-0 flex-1 overflow-hidden">
+            <ul aria-label="Core stack" className="marquee-track flex w-max gap-2.5">
+              {[...HERO_STACK, ...HERO_STACK].map((tech, i) => (
+                <li
+                  key={`${tech}-${i}`}
+                  aria-hidden={i >= HERO_STACK.length || undefined}
+                  className="rounded-full border border-[var(--surface-border)] bg-[var(--surface-bg)] px-3 py-1.5 font-mono text-[0.78rem] whitespace-nowrap text-slate-600 dark:text-slate-300"
+                >
+                  {tech}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
   )
 }

@@ -1,15 +1,14 @@
-import { BrainCircuit, Rocket, Database, BookOpen } from 'lucide-react'
+import { BrainCircuit, Rocket, LineChart, Gauge } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { EXPERIENCES } from '@/content/experience'
+import { PROJECTS } from '@/content/projects'
 import { PUBLISHED_PAPERS } from '@/content/research'
-import { CERTIFICATIONS } from '@/content/certifications'
-import { LEADERSHIP_ROLES } from '@/content/leadership'
 
 export const ABOUT_STATS = [
-  { value: String(EXPERIENCES.length), label: 'Companies Shipped For' },
-  { value: String(PUBLISHED_PAPERS.length), label: 'Papers Published' },
-  { value: String(CERTIFICATIONS.length), label: 'Certifications Earned' },
-  { value: String(LEADERSHIP_ROLES.length), label: 'Leadership Roles' },
+  { value: String(PROJECTS.length), label: 'AI products live with demos' },
+  { value: String(EXPERIENCES.length), label: 'Companies shipped for' },
+  { value: '260+', label: 'Backend tests across projects' },
+  { value: String(PUBLISHED_PAPERS.length), label: 'Research papers published' },
 ]
 
 interface AboutTrait {
@@ -21,42 +20,38 @@ interface AboutTrait {
 export const ABOUT_TRAITS: AboutTrait[] = [
   {
     icon: BrainCircuit,
-    title: 'LLM Engineering',
-    desc: 'Building RAG pipelines over vector databases, orchestrating agentic workflows with LangGraph, and deploying production-grade LLM applications.',
+    title: 'LLM & RAG Engineering',
+    desc: 'RAG pipelines that cite the exact page and line, LangGraph agents that pick which tool to call, and one app that runs on 8 LLM providers.',
   },
   {
-    icon: Database,
-    title: 'Data Science',
-    desc: 'End-to-end ML pipelines — from raw data ingestion and feature engineering to model evaluation.',
+    icon: LineChart,
+    title: 'Machine Learning',
+    desc: 'Anomaly detection on production logs, churn models with calibrated probabilities, and a workbench that compares 68 algorithms on your data.',
   },
   {
     icon: Rocket,
-    title: 'MLOps & Deployment',
-    desc: 'Taking models from notebook to production with robust CI/CD, monitoring, and scalability.',
+    title: 'Full-Stack Engineering',
+    desc: 'FastAPI backends, Next.js and TypeScript front ends, Docker deploys, rate limits and quotas, plus the tests that keep it all working after launch.',
   },
   {
-    icon: BookOpen,
-    title: 'Research-Driven',
-    desc: 'Staying close to SOTA research and translating cutting-edge ideas into practical systems.',
+    icon: Gauge,
+    title: 'Numbers Over Adjectives',
+    desc: 'Held-out evaluation, calibration error, and latency and token cost per request. The case studies also cover what failed the first time.',
   },
 ]
 
 export const ABOUT_TECH_STACK = [
   'Python',
-  'PyTorch',
-  'TensorFlow',
-  'Scikit-learn',
-  'LangChain',
-  'HuggingFace',
-  'OpenAI API',
-  'RAG',
   'LangGraph',
+  'LangChain',
+  'RAG',
   'pgvector',
-  'Prompt Engineering',
-  'Pandas',
-  'OpenCV',
+  'Hugging Face',
+  'PyTorch',
+  'scikit-learn',
   'FastAPI',
+  'Next.js',
+  'TypeScript',
   'Docker',
   'GCP',
-  'MLflow',
 ]

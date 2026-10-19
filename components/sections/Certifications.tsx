@@ -1,74 +1,78 @@
 'use client'
 
-import { useState } from 'react'
-import { ExternalLink } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import SectionHeader from '@/components/ui/SectionHeader'
-import Card from '@/components/ui/Card'
-import Badge from '@/components/ui/Badge'
-import Button from '@/components/ui/Button'
-import { CERTIFICATIONS, CERT_COLOR_MAP } from '@/content/certifications'
-import { fadeInScale } from '@/lib/motion'
+import { Stagger, StaggerItem } from '@/components/ui/Reveal'
+import { CERTIFICATIONS } from '@/content/certifications'
 
-const PREVIEW_COUNT = 4
+const ISSUER_MARKS: Record<string, string> = {
+  WorldQuant: 'WQ',
+  '365 Financial Analyst': '365',
+  'DeepLearning.AI': 'DL',
+  Google: 'G',
+  'Indian School of Business': 'ISB',
+  Microsoft: 'MS',
+}
+
+function issuerMark(issuer: string) {
+  const main = issuer.split('·')[0].trim()
+  return ISSUER_MARKS[main] ?? main.slice(0, 2).toUpperCase()
+}
 
 export default function Certifications() {
-  const [showAll, setShowAll] = useState(false)
-  const visible = showAll ? CERTIFICATIONS : CERTIFICATIONS.slice(0, PREVIEW_COUNT)
-
   return (
     <section id="certifications" className="section-padding container-wide">
       <SectionHeader
         sectionId="certifications"
         title="Certifications"
-        subtitle="Formal training across AI, ML, and cloud — foundations through production."
+        subtitle={`${CERTIFICATIONS.length} credentials in machine learning, MLOps, deep learning and analytics from DeepLearning.AI, Google and Microsoft, plus a WorldQuant research award.`}
       />
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        {visible.map((cert, i) => {
-          const c = CERT_COLOR_MAP[cert.color]
+      <Stagger as="ul" className="grid gap-x-10 border-t border-[var(--surface-border)] md:grid-cols-2" gap={0.04}>
+        {CERTIFICATIONS.map((cert) => {
+          const award = /silver|gold|award/i.test(cert.name)
           return (
-            <Card
-              key={cert._id}
-              as="a"
-              href={cert.credential}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`View the ${cert.name} credential from ${cert.issuer}`}
-              padding="sm"
-              className={`flex flex-col ${c.hover}`}
-              {...fadeInScale({ delay: (i % PREVIEW_COUNT) * 0.07, y: 30 })}
-            >
-              <div className="flex items-center justify-between mb-4">
-                <span className={`w-2.5 h-2.5 rounded-full ${c.dot} shadow-md`} />
-                <span className="text-slate-600 dark:text-slate-400 text-xs font-mono">{cert.date}</span>
-              </div>
-
-              <h3 className="card-title text-slate-900 dark:text-white leading-snug mb-2 group-hover:text-brand-700 dark:group-hover:text-brand-400 transition-colors">
-                {cert.name}
-              </h3>
-
-              <Badge tone={cert.color} className="mb-3 self-start">
-                {cert.issuer}
-              </Badge>
-
-              <p className="card-body text-slate-600 dark:text-slate-400 mb-4 flex-1 text-left">{cert.description}</p>
-
-              <div className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-400 group-hover:text-brand-600 transition-colors">
-                <ExternalLink size={12} />
-                <span>View Credential</span>
-              </div>
-            </Card>
+            <StaggerItem as="li" key={cert._id} className="border-b border-[var(--surface-border)]">
+              <a
+                href={cert.credential}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Verify the ${cert.name} credential from ${cert.issuer} (opens in a new tab)`}
+                className="group relative isolate flex items-center gap-4 rounded-lg py-4 pr-1 pl-1 sm:py-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60"
+              >
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-0 -z-10 origin-left scale-x-0 rounded-lg bg-brand-500/[0.05] transition-transform duration-500 ease-out group-hover:scale-x-100"
+                />
+                <span
+                  aria-hidden="true"
+                  className="grid size-11 shrink-0 place-items-center rounded-xl border border-[var(--surface-border)] bg-[var(--surface-bg)] font-mono text-xs font-bold text-brand-700 dark:text-brand-400"
+                >
+                  {issuerMark(cert.issuer)}
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="flex flex-wrap items-center gap-2">
+                    <span className="font-semibold leading-snug text-slate-900 transition-colors group-hover:text-brand-700 dark:text-white dark:group-hover:text-brand-400">
+                      {cert.name}
+                    </span>
+                    {award && (
+                      <span className="rounded-full bg-amber-400/15 px-2 py-0.5 font-mono text-[0.65rem] font-medium text-amber-700 dark:text-amber-400">
+                        Award
+                      </span>
+                    )}
+                  </span>
+                  <span className="mt-0.5 block text-sm text-slate-600 dark:text-slate-400">
+                    {cert.issuer} · <span className="font-mono text-xs">{cert.date}</span>
+                  </span>
+                </span>
+                <span className="grid size-9 shrink-0 place-items-center rounded-full border border-[var(--surface-border)] text-slate-500 transition-[background-color,border-color,color,transform] duration-300 group-hover:rotate-45 group-hover:border-brand-600 group-hover:bg-brand-700 group-hover:text-white">
+                  <ArrowUpRight size={15} aria-hidden="true" />
+                </span>
+              </a>
+            </StaggerItem>
           )
         })}
-      </div>
-
-      {CERTIFICATIONS.length > PREVIEW_COUNT && (
-        <div className="flex justify-center mt-10">
-          <Button variant="ghost" onClick={() => setShowAll((v) => !v)}>
-            {showAll ? 'Show Less' : `Show All (${CERTIFICATIONS.length - PREVIEW_COUNT} more)`}
-          </Button>
-        </div>
-      )}
+      </Stagger>
     </section>
   )
 }

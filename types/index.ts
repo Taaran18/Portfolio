@@ -9,6 +9,7 @@ export interface ProjectImage {
 export interface Project {
   slug: string
   title: string
+  category: string
   tagline: string
   description: string
   problem: string

@@ -1,0 +1,197 @@
+KEYWORD RESEARCH WITH SEARCH VOLUMES - taaranjain.com
+=====================================================
+
+Research date : 7 October 2026
+Markets       : India and United States
+Data source   : seodata.dev API, which returns Google Ads (Keyword Planner) data
+
+
+HOW TO READ THE NUMBERS
+-----------------------
+- India/mo and US/mo are average monthly Google searches over the last 12 months,
+  rounded into Google Ads' usual buckets (10, 20 ... 880, 1,000, 1,300 ... 22,200).
+- "<10" means Google reports no meaningful volume. It does not mean zero searches,
+  just too few to measure.
+- CPC is what advertisers bid per click, as returned by the API (US dollars). A high
+  CPC means people searching that term are worth money, i.e. buyer intent.
+- "-" means that keyword was not looked up for that country.
+- Volumes are for Google only. They do not cover LinkedIn, GitHub or ChatGPT, where a
+  lot of recruiter discovery actually happens.
+
+
+KEY FINDINGS
+------------
+1. "AI Engineer" is the right headline title.
+   India: ai engineer 22,200/mo vs machine learning engineer 4,400/mo (5x).
+   US:    ai engineer 12,100/mo vs machine learning engineer  9,900/mo.
+   Keep leading with AI Engineer and carry Machine Learning Engineer as the second
+   title, as the site already does.
+
+2. Nobody searches for "portfolio" terms or for your name yet.
+   "ai engineer portfolio", "machine learning engineer portfolio", "llm developer" and
+   "taaran jain" all return <10. Don't spend effort optimising for them. Recruiters reach
+   you through LinkedIn, GitHub and your resume link. Search traffic will come from
+   your content, not your title.
+
+3. The real opportunity is technical content on the stack you already use.
+   langgraph (22,200 US), pgvector (4,400 US), rag pipeline (1,900 US),
+   retrieval augmented generation (8,100 India) and agentic ai (49,500 India) are all
+   things your projects use. Their competition scores are low (langgraph 0.05,
+   rag chunking 0.12, pgvector 0.17), so well-written posts and case studies can rank.
+
+4. Your existing blog post has a clear target.
+   "chunking strategies" (320 US) and "rag chunking" (140 US) are realistic for
+   /blog/rag-chunking-boundaries. Put "chunking strategies for RAG" in its title, H1
+   and description.
+
+5. Freelance terms carry money, mostly in the US.
+   hire ai developer 880/mo at $66.95 CPC, ai automation agency 1,900/mo at $20.29,
+   ai developers for hire 210/mo at $163.26. CPCs that high mean buyers. These terms
+   belong on studio.taaranjain.com; the portfolio should support them with the studio
+   link rather than compete for them. The Indian equivalents
+   ("freelance ai developer") return <10.
+
+6. Head terms are out of reach for a personal site.
+   "data scientist" (165,000 India), "rag" (74,000 US) and "agentic ai" are dominated
+   by Wikipedia, IBM, AWS, Coursera and job boards. Use them in copy so Google
+   understands the topic, but target the longer phrases below them.
+
+
+1. ROLE KEYWORDS  (who you are; homepage, About, Experience)
+------------------------------------------------------------
+Keyword                                       India/mo     US/mo   CPC IN   CPC US
+ai engineer                                     22,200    12,100    $0.98   $15.16
+ai engineering                                  22,200    12,100    $0.92   $12.50
+artificial intelligence engineer                18,100    12,100    $0.86   $15.16
+machine learning engineer                        4,400     9,900    $0.98   $13.51
+machine learning engineering                     4,400     9,900    $0.98   $15.43
+ml engineer                                      2,400     2,400    $1.16   $16.26
+llm engineer                                         -       480        -    $9.52
+llm engineers                                        -       390        -    $5.98
+data scientist                                 165,000         -    $0.78        -
+how to become an ai engineer                     3,600     1,300    $0.80   $10.04
+what is ai engineering                           1,300         -    $1.84        -
+
+
+2. SKILL & TOPIC KEYWORDS  (blog posts, case studies, Skills page)
+------------------------------------------------------------------
+Keyword                                       India/mo     US/mo   CPC IN   CPC US
+rag                                             49,500    74,000    $0.83    $7.40
+retrieval augmented generation                   8,100         -    $2.65        -
+what is rag                                      6,600         -    $4.26        -
+rag llm                                          2,400     5,400    $0.79    $8.93
+llm rag                                              -     1,900        -   $16.32
+rag architecture                                     -     1,900        -   $11.24
+rag application                                      -     1,000        -   $10.58
+rag pipeline                                         -     1,900        -    $8.40
+rag pipeline architecture                            -        40        -   $11.90
+agentic ai                                      49,500         -    $1.22        -
+what is agentic ai                               8,100         -    $1.80        -
+agentic ai examples                              1,600         -    $1.18        -
+agentic ai use cases                               880         -    $1.28        -
+agentic ai tools                                   880         -    $2.14        -
+langgraph                                            -    22,200        -   $13.91
+langgraph tutorial                                   -     1,300        -    $8.02
+langgraph agents                                     -       880        -   $15.35
+langgraph agent                                      -       720        -   $19.76
+pgvector                                             -     4,400        -   $15.44
+postgres pgvector                                    -       260        -   $21.13
+postgresql pgvector                                  -       260        -   $13.69
+what is pgvector                                     -       110        -    $0.00
+
+
+3. CHUNKING KEYWORDS  (your blog post /blog/rag-chunking-boundaries)
+--------------------------------------------------------------------
+Keyword                                       India/mo     US/mo   CPC IN   CPC US
+chunking strategies                                  -       320        -    $0.00
+chunking strategy                                    -       320        -    $0.00
+data chunking                                        -       210        -    $0.00
+rag chunking                                         -       140        -   $15.44
+rag chunking strategies                              -        90        -    $6.74
+chunking strategies for rag                          -        70        -   $12.35
+chunking strategy for rag                            -        70        -    $0.00
+recursive chunking                                   -        50        -    $0.00
+document chunking                                    -        50        -    $0.00
+
+
+4. HIRE & FREELANCE KEYWORDS  (buyer intent; Contact card, studio.taaranjain.com)
+---------------------------------------------------------------------------------
+Keyword                                       India/mo     US/mo   CPC IN   CPC US
+ai agency                                            -    49,500        -   $37.78
+ai automation agency                                 -     1,900        -   $20.29
+ai automation agencies                               -       880        -   $29.29
+hire ai developer                                    -       880        -   $66.95
+hire ai developers                                   -       880        -   $66.95
+hire artificial intelligence developers              -       880        -   $55.32
+business automation agency                           -       480        -   $26.33
+hire ai engineer                                     -       390        -   $47.35
+ai freelancer                                        -       320        -    $9.17
+ai automation services                               -       320        -   $20.82
+ai freelance                                         -       260        -    $7.42
+ai developers for hire                               -       210        -  $163.26
+freelance ai developer                             <10       170        -   $33.06
+freelance ai engineer                                -       140        -   $40.13
+ai developer for hire                                -        70        -  $119.73
+hire ai expert                                       -        50        -   $95.06
+ai developer freelancer                              -        30        -   $24.64
+
+
+5. PORTFOLIO & BRANDED KEYWORDS
+-------------------------------
+Keyword                                       India/mo     US/mo   CPC IN   CPC US
+taaran jain                                        <10         -        -        -
+ai engineer portfolio                              <10       <10        -        -
+machine learning engineer portfolio                  -       <10        -        -
+llm developer                                      <10         -        -        -
+
+
+WHERE EACH KEYWORD SHOULD LIVE
+------------------------------
+Page                               Primary keyword                 Supporting keywords
+---------------------------------  ------------------------------  -----------------------------------
+/  (homepage)                      ai engineer                     machine learning engineer,
+                                                                   llm engineer, rag, agentic ai
+/about, /experience                artificial intelligence         ml engineer, data scientist
+                                   engineer
+/skills                            rag pipeline                    langgraph, pgvector, agentic ai tools
+/case-studies/nexus-ai             rag application                 langgraph agents, postgres pgvector,
+                                                                   rag architecture
+/blog/rag-chunking-boundaries      chunking strategies for rag     rag chunking, chunking strategies,
+                                                                   recursive chunking, document chunking
+/contact  (freelance card)         hire ai developer               freelance ai engineer, ai freelancer
+studio.taaranjain.com              ai automation agency            hire ai developers, ai automation
+                                                                   services, business automation agency
+
+
+CONTENT IDEAS RANKED BY DEMAND
+------------------------------
+Each idea is backed by a project you have already shipped, so the posts are credible.
+
+ 1. LangGraph tutorial: building a RAG agent       langgraph tutorial 1,300 US;
+    (from Nexus AI)                                langgraph agents 880 US
+ 2. pgvector on Postgres/Supabase for RAG          pgvector 4,400 US;
+                                                   postgres pgvector 260 US
+ 3. RAG architecture explained with a real         rag architecture 1,900 US;
+    pipeline                                       retrieval augmented generation 8,100 IN
+ 4. Agentic AI examples from production            agentic ai examples 1,600 IN;
+                                                   agentic ai use cases 880 IN
+ 5. Chunking strategies for RAG                    chunking strategies 320 US
+    (refresh the existing post)
+
+
+SUGGESTED LOOKUPS FOR THE NEXT RUN
+----------------------------------
+The free API tier allows 20 lookups a day without an account, and this run used all 20.
+Worth checking next:
+- India versions of: langgraph, pgvector, rag pipeline, hire ai developer, llm engineer
+- Project topics: log anomaly detection (Logvera), url shortener system design (Comet),
+  neural network self driving car (Self-Driven-Car), ml model comparison (ML Insights)
+- Local: ai developer jaipur, web development company jaipur, ai company jaipur
+- Studio services: business automation services, custom crm development,
+  ai chatbot development company
+
+
+SOURCES
+-------
+- seodata.dev keyword API (Google Ads data): https://www.seodata.dev
+  Example: https://api.seodata.dev/v1/keyword?q=ai+engineer&country=in

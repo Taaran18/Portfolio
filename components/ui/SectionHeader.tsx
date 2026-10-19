@@ -1,9 +1,8 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { motion } from 'framer-motion'
 import { sectionEyebrow } from '@/content/sections'
-import { EASE_OUT } from '@/lib/motion'
+import { Reveal } from '@/components/ui/Reveal'
 
 interface Props {
   sectionId: string
@@ -13,23 +12,26 @@ interface Props {
 
 export default function SectionHeader({ sectionId, title, subtitle }: Props) {
   const pathname = usePathname()
-  const label = sectionEyebrow(sectionId, pathname === '/')
+  const isHome = pathname === '/'
+  const { index, name } = sectionEyebrow(sectionId, isHome)
+  // On a standalone page this header is the page title, so it becomes the h1.
+  const Heading = isHome ? 'h2' : 'h1'
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.5, ease: EASE_OUT }}
-      className="text-center mb-16"
-    >
-      <p className="text-brand-700 dark:text-brand-400 font-mono text-sm tracking-[0.3em] uppercase mb-4">{label}</p>
-      <h2 className="heading-lg text-gradient mb-4">{title}</h2>
-      {subtitle && (
-        <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-          {subtitle}
+    <div className="mb-12 md:mb-16 grid gap-5 lg:grid-cols-12 lg:items-end lg:gap-12">
+      <Reveal className="lg:col-span-7">
+        <p className="eyebrow flex items-center gap-3">
+          {index && <span>{index}</span>}
+          {index && <span aria-hidden="true" className="h-px w-8 bg-current opacity-40" />}
+          <span>{name}</span>
         </p>
+        <Heading className="heading-lg mt-4 text-slate-900 dark:text-white text-balance">{title}</Heading>
+      </Reveal>
+      {subtitle && (
+        <Reveal delay={0.08} className="lg:col-span-5">
+          <p className="lead lg:pb-1.5">{subtitle}</p>
+        </Reveal>
       )}
-    </motion.div>
+    </div>
   )
 }

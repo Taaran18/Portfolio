@@ -3,11 +3,11 @@ import type { BlogPost } from '@/types'
 export const BLOG_POSTS: BlogPost[] = [
   {
     slug: 'rag-chunking-boundaries',
-    title: 'Your RAG Pipeline Is Probably Splitting Tables in Half',
+    title: 'RAG Chunking Strategies: Why Your Pipeline Splits Tables in Half',
     excerpt:
       'Most retrieval failures I have debugged were not embedding problems or ranking problems. They were chunking problems — and they are invisible until you read the retrieved context directly.',
     metaDescription:
-      'Most RAG retrieval failures are chunking problems, not embedding or ranking ones. Why tables get split in half, and how to spot it in retrieved context.',
+      'Chunking strategies for RAG: most retrieval failures are chunking problems, not embedding ones. Why tables get split in half and how to catch it.',
     publishedAt: '2026-01-18',
     readingMinutes: 6,
     tags: ['RAG', 'LLM', 'Retrieval'],

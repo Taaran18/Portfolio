@@ -1,3 +1,4 @@
+import { listWith } from '@/lib/format'
 import { SITE, SITE_UPDATED, SITE_URL } from '@/lib/site'
 import { SECTIONS } from '@/content/sections'
 import { PROJECTS } from '@/content/projects'
@@ -149,7 +150,7 @@ export function contactPageSchema() {
         '@id': `${SITE_URL}/contact#page`,
         url: `${SITE_URL}/contact`,
         name: `Contact ${SITE.name}`,
-        description: `Get in touch with ${SITE.name} about ${SITE.openToRoles.join(', ')} roles, freelance projects, or research collaboration.`,
+        description: `Get in touch with ${SITE.name} about ${listWith(SITE.openToRoles, 'or')} roles, freelance projects or research collaboration.`,
         isPartOf: { '@id': WEBSITE_ID },
         about: { '@id': PERSON_ID },
         inLanguage: 'en',

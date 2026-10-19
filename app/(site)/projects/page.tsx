@@ -5,11 +5,11 @@ import JsonLd from '@/components/JsonLd'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import PageNav from '@/components/ui/PageNav'
 import { projectsPageSchema } from '@/lib/seo'
+import { PROJECTS } from '@/content/projects'
 
-const description =
-  'Selected AI/ML projects by Taaran Jain — LLM applications, RAG pipelines, and end-to-end ML platforms with live demos.'
+const description = `${PROJECTS.length} live AI projects by Taaran Jain: RAG and LangGraph apps, ML platforms and agentic AI tools, each with a demo, metrics and a case study.`
 
-export const metadata: Metadata = pageMetadata({ title: 'Projects', description, path: '/projects' })
+export const metadata: Metadata = pageMetadata({ title: 'AI Projects With Live Demos', description, path: '/projects' })
 
 export default function ProjectsPage() {
   return (

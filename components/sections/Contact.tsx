@@ -2,22 +2,39 @@
 
 import { useRef, useState } from 'react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { ArrowUpRight, Mail, MapPin, Send } from 'lucide-react'
+import { Clock, FileText, Globe, Mail, Send } from 'lucide-react'
 import toast from 'react-hot-toast'
-import SectionHeader from '@/components/ui/SectionHeader'
+import { usePathname } from 'next/navigation'
+import { Reveal } from '@/components/ui/Reveal'
 import Button from '@/components/ui/Button'
 import { SOCIAL_LINKS } from '@/content/social'
 import { WhatsApp } from '@/components/ui/icons'
 import { SITE, whatsappUrl } from '@/lib/site'
-import { slideIn } from '@/lib/motion'
+import { sectionEyebrow } from '@/content/sections'
+import { listWith } from '@/lib/format'
 
-const PROFILE_LINKS = SOCIAL_LINKS.filter((s) => s.id === 'github' || s.id === 'linkedin')
+const PROFILE_LINKS = SOCIAL_LINKS.filter((s) => s.id === 'linkedin' || s.id === 'github')
 
 const WHATSAPP_HREF = whatsappUrl()
 
+const DIRECT_LINKS = [
+  { label: 'Email', href: `mailto:${SITE.email}`, icon: Mail },
+  ...(WHATSAPP_HREF ? [{ label: 'WhatsApp', href: WHATSAPP_HREF, icon: WhatsApp }] : []),
+  ...PROFILE_LINKS.map(({ label, href, icon }) => ({ label, href, icon })),
+  { label: 'Resume', href: SITE.resumeUrl, icon: FileText },
+]
+
+const STEPS = [
+  { title: 'Send the Role or the Problem', text: 'A job description, a link or a few lines is enough.' },
+  { title: 'A Reply Within a Day', text: 'I confirm fit and availability, and answer anything you need from me.' },
+  { title: 'Intro or Technical Call', text: 'Happy to walk through any project on this site in depth, code included.' },
+]
+
 export default function Contact() {
   const formRef = useRef<HTMLFormElement>(null)
+  const isHome = usePathname() === '/'
+  const { index } = sectionEyebrow('contact', isHome)
+  const Heading = isHome ? 'h2' : 'h1'
   const [sending, setSending] = useState(false)
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -47,114 +64,59 @@ export default function Contact() {
   }
 
   const inputCls =
-    'w-full px-4 py-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:border-brand-500/50 focus:bg-brand-500/5 focus-visible:ring-2 focus-visible:ring-brand-400 transition-all text-sm'
-  const labelCls = 'block text-xs font-mono text-slate-600 dark:text-slate-400 mb-2 uppercase tracking-wider'
+    'w-full px-4 py-3 rounded-xl bg-black/[0.03] dark:bg-white/[0.04] border border-[var(--surface-border)] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-brand-500/60 focus:bg-brand-500/[0.04] focus-visible:ring-2 focus-visible:ring-brand-500/30 transition-colors text-[0.95rem]'
+  const labelCls = 'block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2'
+  const linkCls =
+    'inline-flex items-center gap-3 text-slate-800 dark:text-slate-200 hover:text-brand-700 dark:hover:text-brand-400 transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60'
 
   return (
-    <section id="contact" className="section-padding container-wide">
-      <SectionHeader
-        sectionId="contact"
-        title="Get in Touch"
-        subtitle="Have a role, a product, or a research problem in mind? I reply to every message."
-      />
+    <section id="contact" aria-labelledby="contact-title" className="section-padding container-wide">
+      <div className="grid gap-12 lg:grid-cols-12 lg:gap-12 xl:gap-20">
+        <Reveal className="lg:col-span-5">
+          <p className="eyebrow flex items-center gap-3">
+            {index && <span>{index}</span>}
+            {index && <span aria-hidden="true" className="h-px w-8 bg-current opacity-40" />}
+            <span>Contact</span>
+          </p>
+          <Heading id="contact-title" className="heading-lg mt-4 text-slate-900 dark:text-white text-balance">
+            Hiring an AI Engineer? Let&apos;s Talk.
+          </Heading>
+          <p className="lead mt-6 max-w-lg">
+            I&apos;m looking for full-time {listWith(SITE.openToRoles, 'or')} roles. Remote or on-site both work, and
+            I&apos;m happy to relocate for the right team.
+          </p>
 
-      <div className="grid lg:grid-cols-5 gap-12">
-        <motion.div {...slideIn('left')} className="lg:col-span-2 flex flex-col gap-8">
-          <div>
-            <h3 className="text-slate-900 dark:text-white font-bold text-xl mb-4">
-              Let&apos;s Build Something Intelligent
-            </h3>
-            <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              I&apos;m open to full-time{' '}
-              <span className="text-slate-900 dark:text-white font-medium">{SITE.openToRoles.join(', ')}</span> roles
-              and research collaborations. If you have a problem involving data or intelligence, tell me about it.
-            </p>
-          </div>
-
-          <a
-            href={SITE.freelanceUrl}
-            target="_blank"
-            rel="noopener"
-            className="group block rounded-2xl p-5 border border-brand-500/25 bg-brand-500/[0.06] hover:border-brand-500/50 hover:bg-brand-500/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60"
-          >
-            <span className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-green-700 dark:text-green-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-              Accepting client projects
-            </span>
-            <p className="mt-3 text-slate-900 dark:text-white font-semibold">Need a product built, not a hire?</p>
-            <p className="mt-1 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              I also freelance, shipping websites, web and mobile apps, AI integrations and automation for growing
-              businesses.
-            </p>
-            <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 dark:text-brand-400">
-              Visit my studio
-              <ArrowUpRight
-                size={16}
-                className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              />
-            </span>
-          </a>
-
-          <div className="space-y-4">
-            {[
-              { icon: Mail, color: 'text-brand-700', label: 'Email', value: SITE.email, href: `mailto:${SITE.email}` },
-              ...(WHATSAPP_HREF
-                ? [
-                    {
-                      icon: WhatsApp,
-                      color: 'text-green-600 dark:text-green-500',
-                      label: 'WhatsApp',
-                      value: 'Start a chat',
-                      href: WHATSAPP_HREF,
-                    },
-                  ]
-                : []),
-              { icon: MapPin, color: 'text-accent-600', label: 'Location', value: SITE.location, href: null },
-            ].map(({ icon: Icon, color, label, value, href }) => (
-              <div key={label} className="flex items-center gap-4 text-slate-600 dark:text-slate-300">
-                <div className="w-10 h-10 rounded-full surface flex items-center justify-center shrink-0">
-                  <Icon size={18} className={color} />
-                </div>
-                <div>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 font-mono">{label}</p>
-                  {href ? (
-                    <a href={href} className="hover:text-brand-700 dark:hover:text-brand-400 transition-colors text-sm">
-                      {value}
-                    </a>
-                  ) : (
-                    <p className="text-sm">{value}</p>
-                  )}
-                </div>
-              </div>
+          <ol className="mt-8 flex flex-col border-t border-[var(--surface-border)]">
+            {STEPS.map((step, i) => (
+              <li key={step.title} className="flex gap-5 border-b border-[var(--surface-border)] py-4">
+                <span className="font-mono text-xs text-brand-700 dark:text-brand-400">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span>
+                  <span className="block font-semibold text-slate-900 dark:text-white">{step.title}</span>
+                  <span className="mt-1 block text-sm text-slate-600 dark:text-slate-400">{step.text}</span>
+                </span>
+              </li>
             ))}
-          </div>
+          </ol>
 
-          <div className="lg:mt-auto">
-            <p className="text-slate-600 dark:text-slate-400 text-xs font-mono uppercase tracking-widest mb-4">
-              Find me on
-            </p>
-            <div className="flex flex-wrap gap-x-6 gap-y-3">
-              {PROFILE_LINKS.map(({ icon: Icon, label, href, username }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60 focus-visible:ring-offset-2 rounded"
-                >
-                  <Icon size={16} className="group-hover:text-brand-600 transition-colors" />
-                  <span className="text-sm">{username}</span>
-                </a>
-              ))}
-            </div>
-          </div>
-        </motion.div>
+          <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-600 dark:text-slate-400">
+            <li className="flex items-center gap-2">
+              <Clock size={15} aria-hidden="true" className="text-brand-700 dark:text-brand-400" />
+              Replies usually within a day
+            </li>
+            <li className="flex items-center gap-2">
+              <Globe size={15} aria-hidden="true" className="text-brand-700 dark:text-brand-400" />
+              {SITE.location} · IST (UTC+5:30)
+            </li>
+          </ul>
+        </Reveal>
 
-        <motion.div {...slideIn('right', { delay: 0.1 })} className="lg:col-span-3">
+        <Reveal delay={0.1} className="lg:col-span-7">
           <form
             ref={formRef}
             onSubmit={handleSubmit}
-            className="surface rounded-3xl p-8 space-y-5 h-full flex flex-col"
+            className="surface shadow-pop rounded-3xl p-6 sm:p-8 xl:p-10 space-y-5"
           >
             <div className="grid sm:grid-cols-2 gap-5">
               <div>
@@ -179,35 +141,35 @@ export default function Contact() {
                   name="email"
                   type="email"
                   required
-                  placeholder="your@email.com"
+                  placeholder="you@company.com"
                   className={inputCls}
                 />
               </div>
             </div>
             <div>
               <label htmlFor="contact-subject" className={labelCls}>
-                Subject
+                Role or Topic
               </label>
               <input
                 id="contact-subject"
                 name="subject"
                 type="text"
                 required
-                placeholder="What's this about?"
+                placeholder="e.g. AI Engineer role at your company"
                 className={inputCls}
               />
             </div>
-            <div className="flex-1 flex flex-col">
+            <div>
               <label htmlFor="contact-message" className={labelCls}>
                 Message
               </label>
               <textarea
                 id="contact-message"
                 name="message"
-                rows={5}
+                rows={6}
                 required
-                placeholder="Tell me about your project or idea..."
-                className={inputCls + ' resize-none flex-1 min-h-32'}
+                placeholder="A link to the job description, the problem you are solving, or anything you want to ask."
+                className={inputCls + ' resize-none'}
               />
             </div>
             <Button type="submit" disabled={sending} variant="primary" className="w-full">
@@ -232,7 +194,25 @@ export default function Contact() {
               </Link>
             </p>
           </form>
-        </motion.div>
+
+          <div className="mt-8">
+            <p className="eyebrow mb-3">Or reach me directly</p>
+            <ul className="flex flex-wrap gap-2.5">
+              {DIRECT_LINKS.map(({ label, href, icon: Icon }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    {...(href.startsWith('mailto:') ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
+                    className="inline-flex h-10 items-center gap-2 rounded-full border border-[var(--surface-border)] bg-[var(--surface-bg)] px-4 text-sm font-medium text-slate-700 transition-colors hover:border-brand-500/50 hover:text-brand-700 dark:text-slate-300 dark:hover:text-brand-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60"
+                  >
+                    <Icon size={15} aria-hidden="true" />
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
       </div>
     </section>
   )

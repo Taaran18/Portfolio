@@ -16,9 +16,13 @@ import { shimmerBlurDataURL } from '@/lib/image-placeholder'
 import type { CaseStudy } from '@/types'
 
 const description =
-  'In-depth engineering case studies by Taaran Jain — architecture decisions, tradeoffs, and what broke, on production AI and ML systems.'
+  'Engineering case studies by Taaran Jain on RAG architecture, LangGraph agents and ML systems: design decisions, tradeoffs and what failed first.'
 
-export const metadata: Metadata = pageMetadata({ title: 'Case Studies', description, path: '/case-studies' })
+export const metadata: Metadata = pageMetadata({
+  title: 'AI Engineering Case Studies',
+  description,
+  path: '/case-studies',
+})
 
 function CaseStudyCard({ study, index }: { study: CaseStudy; index: number }) {
   const href = `/case-studies/${study.slug}`
@@ -121,7 +125,7 @@ export default function CaseStudiesPage() {
         <SectionHeader
           sectionId="case-studies"
           title="Case Studies"
-          subtitle="The reasoning behind the systems — constraints, architecture, tradeoffs, and the parts that did not work first time."
+          subtitle="How each system works, the constraints and tradeoffs behind it, and the parts that didn't work the first time."
         />
 
         <div className="mx-auto grid max-w-3xl gap-8 lg:max-w-[1440px]">

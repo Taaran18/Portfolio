@@ -18,3 +18,8 @@ export function formatLongDate(iso: string): string {
     year: 'numeric',
   })
 }
+
+export function listWith(items: readonly string[], conjunction: 'and' | 'or' = 'and'): string {
+  if (items.length <= 1) return items.join('')
+  return `${items.slice(0, -1).join(', ')} ${conjunction} ${items[items.length - 1]}`
+}

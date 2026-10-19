@@ -50,12 +50,6 @@ export const SKILL_TIER_LABELS: Record<SkillTier, string> = {
 
 export const SKILL_TIER_ORDER: SkillTier[] = ['core', 'production', 'working']
 
-export const SKILL_TIER_STYLES: Record<SkillTier, string> = {
-  core: 'bg-brand-700 border-brand-600 text-white',
-  production: 'bg-brand-500/10 border-brand-500/35 text-brand-700 dark:text-brand-300',
-  working: 'bg-transparent border-[var(--surface-border)] text-[var(--text-muted)]',
-}
-
 export const SKILL_CATEGORY_LABELS: Record<string, string> = {
   llm: 'LLM / NLP',
   ml: 'Machine Learning',
@@ -80,3 +74,21 @@ export const SKILL_CATEGORY_COLORS: Record<string, { dot: string }> = {
 
 export const SKILL_CATEGORIES = ['all', 'llm', 'ml', 'dl', 'languages', 'fullstack', 'data', 'cloud', 'viz'] as const
 export type SkillCategory = (typeof SKILL_CATEGORIES)[number]
+
+// Where a concept skill was used, when the project or job stack doesn't name it directly.
+// Keys are skill names; values are project slugs or the first word of a company name.
+export const SKILL_EVIDENCE: Record<string, string[]> = {
+  RAG: ['nexus-ai'],
+  LLMs: ['e-Marketing.io', 'nexus-ai'],
+  'Prompt Engineering': ['e-Marketing.io', 'nexus-ai'],
+  NLP: ['e-Marketing.io'],
+  'Agentic Workflows': ['nexus-ai'],
+  'Anomaly Detection': ['logvera'],
+  'pgvector / Vector DBs': ['nexus-ai'],
+  Supabase: ['nexus-ai'],
+}
+
+export const SKILL_ALIASES: Record<string, string[]> = {
+  SQL: ['postgresql', 'sqlite'],
+  'REST APIs': ['fastapi'],
+}

@@ -13,9 +13,9 @@ import { blogListSchema } from '@/lib/seo'
 import { formatLongDate } from '@/lib/format'
 
 const description =
-  'Writing on applied AI by Taaran Jain — retrieval, LLM applications, and lessons from shipping machine learning systems to production.'
+  'Writing on applied AI by Taaran Jain: RAG chunking strategies, retrieval pipelines and lessons from shipping LLM systems to production.'
 
-export const metadata: Metadata = pageMetadata({ title: 'Blog', description, path: '/blog' })
+export const metadata: Metadata = pageMetadata({ title: 'Applied AI Blog', description, path: '/blog' })
 
 export default function BlogPage() {
   return (
@@ -27,7 +27,7 @@ export default function BlogPage() {
         <SectionHeader
           sectionId="blog"
           title="Writing"
-          subtitle="Notes on applied AI — mostly the unglamorous parts that decide whether a system actually works."
+          subtitle="Notes on applied AI, mostly the unglamorous parts that decide whether a system actually works."
         />
 
         <div className="max-w-3xl mx-auto space-y-6">

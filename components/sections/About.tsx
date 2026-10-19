@@ -1,39 +1,39 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import SectionHeader from '@/components/ui/SectionHeader'
-import Card from '@/components/ui/Card'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
+import { Reveal, Stagger, StaggerItem } from '@/components/ui/Reveal'
 import { ABOUT_STATS, ABOUT_TRAITS, ABOUT_TECH_STACK } from '@/content/about'
 import { getSocialLink } from '@/content/social'
-import { EASE_OUT, slideIn } from '@/lib/motion'
 
 export default function About() {
   return (
     <section id="about" className="section-padding container-wide">
       <SectionHeader
         sectionId="about"
-        title="About Me"
-        subtitle="I'm obsessed with making machines learn — and making sure what they learn is actually useful."
+        title="An AI Engineer Who Builds the Whole App"
+        subtitle="Model, API, interface, deployment. I build all four, then test whether the result actually holds up."
       />
 
-      <div className="grid lg:grid-cols-2 gap-16">
-        <motion.div {...slideIn('left', { duration: 0.7, margin: '-80px' })} className="flex flex-col gap-6">
-          <p className="text-slate-700 dark:text-slate-300 text-lg leading-relaxed text-left">
-            Hey! I&apos;m <span className="text-brand-700 dark:text-brand-400 font-semibold">Taaran</span>, an AI
-            Engineer passionate about building systems at the intersection of{' '}
-            <span className="text-accent-700 dark:text-accent-400 font-semibold">large language models</span>, deep
-            learning, and real-world applications.
+      <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+        <Reveal className="flex flex-col gap-6 lg:col-span-6">
+          <p className="text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+            I&apos;m <span className="font-semibold text-slate-900 dark:text-white">Taaran</span>, an AI engineer in
+            Jaipur. I&apos;ve spent the last two years building machine learning and LLM systems at three companies, and
+            right now I build the AI tools that{' '}
+            <span className="font-semibold text-slate-900 dark:text-white">e-Marketing.io</span> and its clients use.
           </p>
-          <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-left">
-            I work across the full ML lifecycle — from exploratory data analysis and model research to serving models at
-            scale in production. My current focus is on LLM-powered applications: retrieval-augmented generation (RAG),
-            agentic AI, and multimodal systems.
+          <p className="leading-relaxed text-slate-600 dark:text-slate-400">
+            Most of my work today is LLM work: RAG pipelines that cite their sources and LangGraph agents that decide
+            which tool to call. I write the FastAPI backends and Next.js front ends around them too, so I can take an
+            idea all the way to something people use. Before this, I worked on anomaly detection over production logs at
+            LogiScope.
           </p>
-          <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-left">
-            When I&apos;m not training models or writing code, I&apos;m reading the latest papers on arXiv, contributing
-            to open-source AI tools, or experimenting with new architectures.
+          <p className="leading-relaxed text-slate-600 dark:text-slate-400">
+            I care about the unglamorous parts as well: evaluation, latency, cost, error handling and tests. Each
+            project here has a live demo, and the case studies show the numbers along with what didn&apos;t work the
+            first time.
           </p>
 
           <div className="flex flex-col gap-6 pt-2 lg:mt-auto">
@@ -44,7 +44,6 @@ export default function About() {
                 </Badge>
               ))}
             </div>
-
             <div>
               <Button
                 as="a"
@@ -58,52 +57,35 @@ export default function About() {
               </Button>
             </div>
           </div>
-        </motion.div>
+        </Reveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:auto-rows-fr gap-4">
-          {ABOUT_TRAITS.map((trait, i) => (
-            <Card
+        <Stagger className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-6 lg:auto-rows-fr">
+          {ABOUT_TRAITS.map((trait) => (
+            <StaggerItem
               key={trait.title}
-              padding="md"
-              hover="subtle"
-              initial={{ opacity: 0, scale: 0.82, y: 20 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.55, delay: i * 0.1, ease: EASE_OUT }}
+              className="group surface surface-raise rounded-3xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-500/40"
             >
-              <trait.icon
-                size={22}
-                className="text-brand-700 dark:text-brand-400 mb-3 group-hover:scale-110 transition-transform"
-              />
-              <h3 className="card-title text-slate-900 dark:text-white mb-1">{trait.title}</h3>
+              <span className="mb-4 flex size-10 items-center justify-center rounded-xl bg-brand-500/10 text-brand-700 dark:text-brand-400 transition-transform duration-300 group-hover:-rotate-6">
+                <trait.icon size={20} />
+              </span>
+              <h3 className="card-title mb-1.5 text-slate-900 dark:text-white">{trait.title}</h3>
               <p className="card-body text-slate-600 dark:text-slate-400">{trait.desc}</p>
-            </Card>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </div>
 
-      <motion.div
-        {...slideIn('right', { duration: 0.7, margin: '-80px' })}
-        className="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-4"
+      <Stagger
+        as="dl"
+        className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-[var(--surface-border)] bg-[var(--surface-border)] lg:grid-cols-4"
       >
-        {ABOUT_STATS.map((stat, i) => (
-          <Card
-            key={stat.label}
-            padding="md"
-            hover="none"
-            borderGradient
-            group={false}
-            initial={{ opacity: 0, scale: 0.7 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.1, ease: EASE_OUT }}
-            className="text-center"
-          >
-            <p className="text-3xl md:text-4xl font-bold text-gradient mb-1">{stat.value}</p>
-            <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">{stat.label}</p>
-          </Card>
+        {ABOUT_STATS.map((stat) => (
+          <StaggerItem key={stat.label} className="flex flex-col bg-[var(--surface-bg)] p-6 md:p-8">
+            <dt className="order-2 mt-1 text-sm text-slate-600 dark:text-slate-400">{stat.label}</dt>
+            <dd className="font-display text-4xl font-bold tracking-tight text-gradient md:text-5xl">{stat.value}</dd>
+          </StaggerItem>
         ))}
-      </motion.div>
+      </Stagger>
     </section>
   )
 }
