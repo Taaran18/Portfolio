@@ -14,7 +14,6 @@ import { EASE_OUT, fadeUp } from '@/lib/motion'
 import { useIntroDone } from '@/lib/intro'
 
 const PROFILE_LINKS = SOCIAL_LINKS.filter((s) => s.id === 'github' || s.id === 'linkedin' || s.id === 'email')
-const CURRENT = EXPERIENCES.find((e) => e.current)
 
 function MaskWord({
   children,
@@ -156,12 +155,12 @@ export default function Hero() {
 
       <div className="border-y border-[var(--surface-border)] bg-white/60 dark:bg-black/40 backdrop-blur-sm">
         <div className="container-wide px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 2xl:px-32 flex flex-col gap-4 py-5 lg:flex-row lg:items-center lg:gap-10">
-          {CURRENT && (
-            <p className="shrink-0 text-sm text-slate-600 dark:text-slate-400">
-              <span className="eyebrow mr-2">Currently</span>
-              {CURRENT.role} at <span className="font-semibold text-slate-900 dark:text-white">{CURRENT.company}</span>
-            </p>
-          )}
+          <p className="shrink-0 text-sm text-slate-600 dark:text-slate-400">
+            <span className="eyebrow mr-2">Experience</span>
+            <span className="font-semibold text-slate-900 dark:text-white">
+              2+ years · {EXPERIENCES.length} companies · 6+ industries
+            </span>
+          </p>
           <div className="marquee fade-mask-x relative min-w-0 flex-1 overflow-hidden">
             <ul aria-label="Core stack" className="marquee-track flex w-max gap-2.5">
               {[...HERO_STACK, ...HERO_STACK].map((tech, i) => (

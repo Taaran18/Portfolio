@@ -23,19 +23,19 @@ export default function About() {
             I&apos;m <span className="font-semibold text-slate-900 dark:text-white">Taaran</span>, an AI Engineer based
             in Jaipur, India. Over two years I&apos;ve worked across{' '}
             <span className="font-semibold text-slate-900 dark:text-white">3 companies</span> and delivered client work
-            in <span className="font-semibold text-slate-900 dark:text-white">6+ industries</span>, and today I build
-            the AI tools that e-Marketing.io and its clients rely on.
+            in <span className="font-semibold text-slate-900 dark:text-white">6+ industries</span>, building AI that
+            businesses rely on every day.
           </p>
           <p className="leading-relaxed text-slate-600 dark:text-slate-400">
-            Most of my work is LLM products: retrieval systems that cite their sources and AI agents that decide which
-            tool to use. The backend and the interface around them are part of the job too, so an idea goes from rough
-            concept to a product people can actually use. Earlier, at LogiScope, I built machine learning and deep
-            learning models that detect anomalies in production logs.
+            I started in data science, moved on to machine learning and deep learning models that catch anomalies in
+            production systems, and now focus on LLM products: retrieval systems that cite their sources and AI agents
+            that decide which tool to use. I also build the backend and the interface around them, so an idea goes from
+            rough concept to a product people can actually use.
           </p>
           <p className="leading-relaxed text-slate-600 dark:text-slate-400">
-            What matters most is whether an AI product actually works: how accurate it is, how fast, and what it costs
-            to run. Every project on this site has a live demo, and each case study shares the real numbers, including
-            what didn&apos;t work the first time.
+            I judge my work by one thing: whether the AI actually holds up for the people using it. That means caring
+            about how accurate it is, how fast it responds and what it costs to run, and it&apos;s what I&apos;d bring
+            to your team.
           </p>
 
           <div className="flex flex-col gap-6 pt-2 lg:mt-auto">

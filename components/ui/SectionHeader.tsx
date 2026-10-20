@@ -18,7 +18,7 @@ export default function SectionHeader({ sectionId, title, subtitle }: Props) {
   const Heading = isHome ? 'h2' : 'h1'
 
   return (
-    <div className="mb-12 md:mb-16 grid gap-5 lg:grid-cols-12 lg:items-end lg:gap-12">
+    <div className="mb-12 md:mb-16 grid gap-5 lg:grid-cols-12 lg:items-start lg:gap-12">
       <Reveal className="lg:col-span-7">
         <p className="eyebrow flex items-center gap-3">
           {index && <span>{index}</span>}
@@ -29,7 +29,7 @@ export default function SectionHeader({ sectionId, title, subtitle }: Props) {
       </Reveal>
       {subtitle && (
         <Reveal delay={0.08} className="lg:col-span-5">
-          <p className="lead lg:pb-1.5">{subtitle}</p>
+          <p className="lead">{subtitle}</p>
         </Reveal>
       )}
     </div>

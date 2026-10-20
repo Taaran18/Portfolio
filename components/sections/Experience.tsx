@@ -87,14 +87,13 @@ export default function Experience() {
   const ref = useRef<HTMLOListElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start 60%', 'end 60%'] })
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 })
-  const current = EXPERIENCES.find((e) => e.current)
 
   return (
     <section id="experience" className="section-padding container-wide">
       <SectionHeader
         sectionId="experience"
         title="Two Years Shipping AI in Production"
-        subtitle="From data science at Celebal Technologies to anomaly detection at LogiScope, and now AI products at e-Marketing.io used by clients across 6+ industries."
+        subtitle="Data Science at Celebal Technologies, Anomaly Detection at LogiScope and AI Products at e-Marketing.io, with client work across 6+ industries."
       />
 
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
@@ -110,15 +109,10 @@ export default function Experience() {
                 <dd className="font-display text-4xl font-bold text-gradient">{EXPERIENCES.length}</dd>
               </div>
             </dl>
-            {current && (
-              <p className="mt-5 leading-relaxed text-slate-600 dark:text-slate-400">
-                Currently{' '}
-                <span className="font-semibold text-slate-900 dark:text-white">
-                  {current.role} at {current.company}
-                </span>
-                , building the chatbots, meeting summaries and NLP tools its clients use every day.
-              </p>
-            )}
+            <p className="mt-5 leading-relaxed text-slate-600 dark:text-slate-400">
+              From data science to deep learning on production systems to LLM products, with client work across{' '}
+              <span className="font-semibold text-slate-900 dark:text-white">6+ industries</span> along the way.
+            </p>
           </div>
         </Reveal>
 

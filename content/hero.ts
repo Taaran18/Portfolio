@@ -20,9 +20,8 @@ export const HERO_HEADLINE: { text: string; accent?: boolean }[] = [
 ]
 
 export const HERO_DESCRIPTION =
-  "I'm an AI Engineer at e-Marketing.io, where the AI tools I build are used by clients every day. " +
-  `On my own I've launched ${PROJECTS.length} products, including a churn model that spots 85.6% of customers who are about to leave. ` +
-  'Every one is live below, so you can try them yourself.'
+  "I'm an AI Engineer with two years of hands-on experience across 3 companies and 6+ industries. " +
+  "I take AI products from first idea to launch on my own, and I'm at my best when I own a problem from start to finish."
 
 export const HERO_STATS = [
   { value: String(PROJECTS.length), label: 'Live products to try' },
