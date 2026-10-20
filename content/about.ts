@@ -7,7 +7,7 @@ import { PUBLISHED_PAPERS } from '@/content/research'
 export const ABOUT_STATS = [
   { value: String(PROJECTS.length), label: 'AI products live with demos' },
   { value: String(EXPERIENCES.length), label: 'Companies shipped for' },
-  { value: '260+', label: 'Backend tests across projects' },
+  { value: '6+', label: 'Industries served' },
   { value: String(PUBLISHED_PAPERS.length), label: 'Research papers published' },
 ]
 
@@ -25,13 +25,13 @@ export const ABOUT_TRAITS: AboutTrait[] = [
   },
   {
     icon: LineChart,
-    title: 'Machine Learning',
-    desc: 'Anomaly detection on production logs, churn models with calibrated probabilities, and a workbench that compares 68 algorithms on your data.',
+    title: 'Machine & Deep Learning',
+    desc: 'ML and deep learning anomaly detection on production logs, neural networks that learn to drive, calibrated churn models, and a workbench comparing 68 algorithms.',
   },
   {
     icon: Rocket,
     title: 'Full-Stack Engineering',
-    desc: 'FastAPI backends, Next.js and TypeScript front ends, Docker deploys, rate limits and quotas, plus the tests that keep it all working after launch.',
+    desc: 'FastAPI backends, Next.js and TypeScript front ends, Docker deploys, and the rate limits and quotas that let strangers use a free demo safely.',
   },
   {
     icon: Gauge,

@@ -25,7 +25,7 @@ export default function Certifications() {
       <SectionHeader
         sectionId="certifications"
         title="Certifications"
-        subtitle={`${CERTIFICATIONS.length} credentials in machine learning, MLOps, deep learning and analytics from DeepLearning.AI, Google and Microsoft, plus a WorldQuant research award.`}
+        subtitle={`A WorldQuant Challenge silver, plus ${CERTIFICATIONS.length - 1} credentials in machine learning, deep learning, MLOps and analytics from DeepLearning.AI, Google, Microsoft and ISB.`}
       />
 
       <Stagger as="ul" className="grid gap-x-10 border-t border-[var(--surface-border)] md:grid-cols-2" gap={0.04}>

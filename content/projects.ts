@@ -4,7 +4,7 @@ export const PROJECTS: Project[] = [
   {
     slug: 'nexus-ai',
     title: 'Nexus AI',
-    category: 'RAG · LangGraph agent',
+    category: 'RAG · LangGraph Agent',
     tagline: 'An AI assistant that shows its sources and confidence',
     description:
       "An AI assistant that shows where every answer came from: the route it took, the exact page and line it cited, and a calibrated score when you're weighing a decision.",
@@ -69,7 +69,7 @@ export const PROJECTS: Project[] = [
   {
     slug: 'ml-insights',
     title: 'MLInsights',
-    category: 'AutoML workbench',
+    category: 'AutoML Workbench',
     tagline: 'From spreadsheet to the best-fit ML model, no code needed',
     description:
       'A no-code ML workbench: upload a spreadsheet, clean it, train up to 68 models, see which one actually wins, and export the report and trained models.',
@@ -192,7 +192,7 @@ export const PROJECTS: Project[] = [
   {
     slug: 'grabbit',
     title: 'Grabbit',
-    category: 'Full-stack media tool',
+    category: 'Full-Stack Media Tool',
     tagline: 'Save exactly the clip, quality or format a source really offers',
     description:
       'Paste a link from 15 sites and get exactly the quality, format or clip you want. Options come from the source itself, and files delete themselves.',
@@ -248,7 +248,7 @@ export const PROJECTS: Project[] = [
   {
     slug: 'logvera',
     title: 'Logvera',
-    category: 'ML anomaly detection',
+    category: 'ML Anomaly Detection',
     tagline: 'Turns raw logs into incidents, attacks and root causes',
     description:
       'Upload any server, network or app log and get ML anomaly detection, attack findings and an AI root-cause summary, with no sign-up.',
@@ -304,7 +304,7 @@ export const PROJECTS: Project[] = [
   {
     slug: 'comet',
     title: 'Comet',
-    category: 'AI link safety · Systems',
+    category: 'AI Link Safety · Systems',
     tagline: 'Short links that check their destination, then self-destruct',
     description:
       'Short links that check each destination with AI before anyone clicks, encrypt it at rest, and delete themselves within 7 days.',
@@ -360,7 +360,7 @@ export const PROJECTS: Project[] = [
   {
     slug: 'decidex',
     title: 'DecideX',
-    category: 'ML churn prediction',
+    category: 'ML Churn Prediction',
     tagline: 'Tells customer teams who might leave, why, and what to do',
     description:
       'Predicts which customers will leave, explains why, puts a dollar value on the risk and drafts the retention offer for a person to approve.',

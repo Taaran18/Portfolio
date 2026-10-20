@@ -6,6 +6,7 @@ import Button from '@/components/ui/Button'
 import { Reveal, Stagger, StaggerItem } from '@/components/ui/Reveal'
 import { ABOUT_STATS, ABOUT_TRAITS, ABOUT_TECH_STACK } from '@/content/about'
 import { getSocialLink } from '@/content/social'
+import { PROJECTS } from '@/content/projects'
 
 export default function About() {
   return (
@@ -13,27 +14,28 @@ export default function About() {
       <SectionHeader
         sectionId="about"
         title="An AI Engineer Who Builds the Whole App"
-        subtitle="Model, API, interface, deployment. I build all four, then test whether the result actually holds up."
+        subtitle={`Give me a problem and I'll take it all the way to a product people can use. ${PROJECTS.length} of them are live on this site.`}
       />
 
       <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
         <Reveal className="flex flex-col gap-6 lg:col-span-6">
           <p className="text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-            I&apos;m <span className="font-semibold text-slate-900 dark:text-white">Taaran</span>, an AI engineer in
-            Jaipur. I&apos;ve spent the last two years building machine learning and LLM systems at three companies, and
-            right now I build the AI tools that{' '}
-            <span className="font-semibold text-slate-900 dark:text-white">e-Marketing.io</span> and its clients use.
+            I&apos;m <span className="font-semibold text-slate-900 dark:text-white">Taaran</span>, an AI Engineer based
+            in Jaipur, India. Over two years I&apos;ve worked across{' '}
+            <span className="font-semibold text-slate-900 dark:text-white">3 companies</span> and delivered client work
+            in <span className="font-semibold text-slate-900 dark:text-white">6+ industries</span>, and today I build
+            the AI tools that e-Marketing.io and its clients rely on.
           </p>
           <p className="leading-relaxed text-slate-600 dark:text-slate-400">
-            Most of my work today is LLM work: RAG pipelines that cite their sources and LangGraph agents that decide
-            which tool to call. I write the FastAPI backends and Next.js front ends around them too, so I can take an
-            idea all the way to something people use. Before this, I worked on anomaly detection over production logs at
-            LogiScope.
+            Most of my work is LLM products: retrieval systems that cite their sources and AI agents that decide which
+            tool to use. The backend and the interface around them are part of the job too, so an idea goes from rough
+            concept to a product people can actually use. Earlier, at LogiScope, I built machine learning and deep
+            learning models that detect anomalies in production logs.
           </p>
           <p className="leading-relaxed text-slate-600 dark:text-slate-400">
-            I care about the unglamorous parts as well: evaluation, latency, cost, error handling and tests. Each
-            project here has a live demo, and the case studies show the numbers along with what didn&apos;t work the
-            first time.
+            What matters most is whether an AI product actually works: how accurate it is, how fast, and what it costs
+            to run. Every project on this site has a live demo, and each case study shares the real numbers, including
+            what didn&apos;t work the first time.
           </p>
 
           <div className="flex flex-col gap-6 pt-2 lg:mt-auto">

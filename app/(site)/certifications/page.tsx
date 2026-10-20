@@ -6,7 +6,8 @@ import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import PageNav from '@/components/ui/PageNav'
 import { certificationsPageSchema } from '@/lib/seo'
 
-const description = 'Professional certifications earned by Taaran Jain in AI, machine learning, and data science.'
+const description =
+  'Professional certifications earned by Taaran Jain in AI, machine learning, deep learning and data science.'
 
 export const metadata: Metadata = pageMetadata({ title: 'Certifications', description, path: '/certifications' })
 

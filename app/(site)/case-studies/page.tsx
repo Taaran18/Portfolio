@@ -16,7 +16,7 @@ import { shimmerBlurDataURL } from '@/lib/image-placeholder'
 import type { CaseStudy } from '@/types'
 
 const description =
-  'Engineering case studies by Taaran Jain on RAG architecture, LangGraph agents and ML systems: design decisions, tradeoffs and what failed first.'
+  'Engineering case studies by Taaran Jain on RAG architecture, LangGraph agents, and ML and deep learning systems: design decisions, tradeoffs and what failed first.'
 
 export const metadata: Metadata = pageMetadata({
   title: 'AI Engineering Case Studies',

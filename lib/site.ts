@@ -18,7 +18,7 @@ export const SITE = {
 
   alternateNames: ['taaranjain', 'Taaran', 'Taaran Jain Portfolio'],
   title: 'Taaran Jain | AI Engineer Building RAG & Agentic AI Apps',
-  description: `AI Engineer and full-stack developer in India. I build RAG apps, LangGraph agents and ML systems. ${PROJECTS.length} live projects with demos and case studies.`,
+  description: `AI Engineer and Full-Stack Developer in India building RAG apps, LangGraph agents, and ML and deep learning systems. ${PROJECTS.length} live projects to try.`,
   url: SITE_URL,
   email: 'taaranjain16@gmail.com',
   location: 'Jaipur, Rajasthan, India',

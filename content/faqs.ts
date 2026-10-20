@@ -17,7 +17,7 @@ export const FAQS: FaqEntry[] = [
     _id: 'stack',
     question: 'What Do You Actually Build?',
     answer:
-      'Mostly LLM apps: RAG pipelines, LangGraph agents and the ML models behind them. I build the full stack myself, usually Python and FastAPI on the backend, PyTorch or scikit-learn for the models, and Next.js with TypeScript for the front end.',
+      'Mostly LLM apps: RAG pipelines, LangGraph agents, and the machine learning and deep learning models behind them. I build the full stack myself, usually Python and FastAPI on the backend, PyTorch or scikit-learn for the models, and Next.js with TypeScript for the front end.',
   },
   {
     _id: 'experience',
@@ -28,7 +28,7 @@ export const FAQS: FaqEntry[] = [
   {
     _id: 'freelance',
     question: 'Do You Take Freelance or Contract Work?',
-    answer: `Yes. I take client work through my studio at ${SITE.freelanceUrl.replace('https://', '')}: websites, web and mobile apps, AI integrations and automation. Projects involving LLMs, RAG or ML prototypes are the best fit.`,
+    answer: `Yes. I take client work through my studio at ${SITE.freelanceUrl.replace('https://', '')}: websites, web and mobile apps, AI integrations and automation. Projects involving LLMs, RAG, or ML and deep learning prototypes are the best fit.`,
   },
   {
     _id: 'response',

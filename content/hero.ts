@@ -1,4 +1,5 @@
 import { PROJECTS } from '@/content/projects'
+import { PUBLISHED_PAPERS } from '@/content/research'
 
 export const HERO_ROLE_LINE = 'AI Engineer · Full-Stack · Jaipur, India'
 
@@ -19,14 +20,14 @@ export const HERO_HEADLINE: { text: string; accent?: boolean }[] = [
 ]
 
 export const HERO_DESCRIPTION =
-  "I'm an AI Engineer at e-Marketing.io and I've been shipping ML and LLM work for two years. " +
-  'I build the whole app myself, from the LangGraph agent to the FastAPI backend and the Next.js front end. ' +
-  `All ${PROJECTS.length} projects below are live, so you can try them.`
+  "I'm an AI Engineer at e-Marketing.io, where the AI tools I build are used by clients every day. " +
+  `On my own I've launched ${PROJECTS.length} products, including a churn model that spots 85.6% of customers who are about to leave. ` +
+  'Every one is live below, so you can try them yourself.'
 
 export const HERO_STATS = [
   { value: String(PROJECTS.length), label: 'Live products to try' },
-  { value: '2+', label: 'Years shipping AI/ML' },
-  { value: '260+', label: 'Backend tests written' },
+  { value: '2+', label: 'Years in ML & deep learning' },
+  { value: String(PUBLISHED_PAPERS.length), label: 'Research papers published' },
 ]
 
 export const HERO_STACK = [

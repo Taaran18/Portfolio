@@ -30,6 +30,7 @@ export const metadata: Metadata = {
     'Taaran Jain AI engineer',
     'AI engineer',
     'machine learning engineer',
+    'deep learning engineer',
     'artificial intelligence engineer',
     'LLM engineer',
     'full stack engineer',

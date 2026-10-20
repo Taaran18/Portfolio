@@ -94,7 +94,7 @@ export default function Experience() {
       <SectionHeader
         sectionId="experience"
         title="Two Years Shipping AI in Production"
-        subtitle="Three companies so far, starting with a data science internship. Now I build AI products for an agency and its clients."
+        subtitle="From data science at Celebal Technologies to anomaly detection at LogiScope, and now AI products at e-Marketing.io used by clients across 6+ industries."
       />
 
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
@@ -102,7 +102,7 @@ export default function Experience() {
           <div className="lg:sticky lg:top-28">
             <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-[var(--surface-border)] bg-[var(--surface-border)]">
               <div className="flex flex-col bg-[var(--surface-bg)] p-5">
-                <dt className="order-2 mt-1 text-sm text-slate-600 dark:text-slate-400">Years in AI/ML</dt>
+                <dt className="order-2 mt-1 text-sm text-slate-600 dark:text-slate-400">Years in ML & deep learning</dt>
                 <dd className="font-display text-4xl font-bold text-gradient">2+</dd>
               </div>
               <div className="flex flex-col bg-[var(--surface-bg)] p-5">

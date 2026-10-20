@@ -31,7 +31,7 @@ export const SECTIONS: SectionMeta[] = [
     id: 'certifications',
     path: '/certifications',
     navLabel: 'Certifications',
-    blurb: 'Courses and credentials in AI, ML and cloud.',
+    blurb: 'Courses and credentials in AI, ML, deep learning and cloud.',
   },
   { id: 'contact', path: '/contact', navLabel: 'Contact', blurb: 'Roles, projects or collaborations. Get in touch.' },
 ]

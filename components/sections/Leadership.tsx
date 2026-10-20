@@ -22,7 +22,7 @@ export default function Leadership() {
       <SectionHeader
         sectionId="leadership"
         title="Leadership & Community"
-        subtitle={`${LEADERSHIP_ROLES.length} college roles leading teams, mentoring students and running hackathons and technical events.`}
+        subtitle={`${LEADERSHIP_ROLES.length} roles across GDSC, AICTE, HackerEarth and the student council, from leading the AI/ML team at GDSC to running hackathons and mentoring students.`}
       />
 
       <Stagger key={showAll ? 'all' : 'preview'} as="ul" className="border-t border-[var(--surface-border)]" gap={0.05}>

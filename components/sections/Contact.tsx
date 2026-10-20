@@ -82,8 +82,7 @@ export default function Contact() {
             Hiring an AI Engineer? Let&apos;s Talk.
           </Heading>
           <p className="lead mt-6 max-w-lg">
-            I&apos;m looking for full-time {listWith(SITE.openToRoles, 'or')} roles. Remote or on-site both work, and
-            I&apos;m happy to relocate for the right team.
+            {`I'm looking for full-time ${listWith(SITE.openToRoles, 'or')} roles. Remote or on-site both work, and I'm happy to relocate for the right team.`}
           </p>
 
           <ol className="mt-8 flex flex-col border-t border-[var(--surface-border)]">

@@ -5,6 +5,8 @@ import { SOCIAL_LINKS } from '@/content/social'
 import { ALL_PAGES } from '@/content/sections'
 import { LEGAL_DOCS } from '@/content/legal'
 import { SITE } from '@/lib/site'
+import { PROJECTS } from '@/content/projects'
+import { EXPERIENCES } from '@/content/experience'
 
 const CONNECT_LINKS = SOCIAL_LINKS.filter((s) => s.id !== 'resume')
 
@@ -49,7 +51,7 @@ export default function Footer() {
           </div>
           <div className="flex flex-col gap-5 lg:col-span-4 lg:items-end lg:text-right">
             <p className="max-w-sm text-slate-400">
-              Send me the role or the problem. I reply to every message, usually within a day.
+              Share the role you're hiring for and I'll reply within a day with the projects most relevant to it.
             </p>
             <div className="flex flex-wrap gap-3 lg:justify-end">
               <Link
@@ -79,8 +81,7 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-4">
             <Logo onDark />
             <p className="mt-6 max-w-sm text-[0.95rem] leading-relaxed text-slate-400">
-              AI engineer and full-stack developer. I build RAG apps, LangGraph agents and ML systems, and you can try
-              every one of them.
+              {`AI Engineer and Full-Stack Developer who turns ideas into working products. ${PROJECTS.length} live projects, ${EXPERIENCES.length} companies and client work across 6+ industries.`}
             </p>
             <p className="mt-5 inline-flex items-center gap-2 text-sm text-slate-400">
               <MapPin size={14} aria-hidden="true" className="text-brand-400" />

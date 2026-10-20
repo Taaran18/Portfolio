@@ -66,7 +66,7 @@ function FeaturedProject({ project, index }: { project: Project; index: number }
 
   const rows = [
     { label: 'Problem', value: project.problem },
-    { label: 'What I built', value: project.solution },
+    { label: 'What I Built', value: project.solution },
     { label: 'Result', value: project.impact[0] },
   ]
 
@@ -305,7 +305,7 @@ export default function Projects() {
       <SectionHeader
         sectionId="projects"
         title="AI Projects You Can Try Live"
-        subtitle={`${PROJECTS.length} products I designed and built myself, front end to back end. Each one has a live demo and a case study on how it works and what I'd do differently.`}
+        subtitle={`Each one solves a real problem and is live to try: an AI assistant that cites its sources, a churn model that tells teams who's about to leave, a log analyser that caught 588 login attacks, and ${PROJECTS.length - 3} more.`}
       />
 
       <div className="flex flex-col gap-24 lg:gap-32">
