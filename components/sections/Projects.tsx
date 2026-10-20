@@ -3,8 +3,8 @@
 import { useRef, useState, type PointerEvent } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { AnimatePresence, motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion'
-import { ArrowRight, ArrowUpRight, ExternalLink, Github } from 'lucide-react'
+import { AnimatePresence, m, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion'
+import { ArrowRight, ArrowUpRight, ExternalLink, FlaskConical, Github } from 'lucide-react'
 import clsx from 'clsx'
 import SectionHeader from '@/components/ui/SectionHeader'
 import Badge from '@/components/ui/Badge'
@@ -78,9 +78,9 @@ function FeaturedProject({ project, index }: { project: Project; index: number }
             aria-hidden="true"
             className="absolute -inset-3 -z-10 rounded-[2rem] lg:-inset-6 bg-[radial-gradient(closest-side,rgba(13,148,136,0.18),transparent)] opacity-70 blur-xl transition-opacity duration-700 group-hover:opacity-100"
           />
-          <motion.div style={{ y: previewY }}>
-            <BrowserFrame project={project} priority={index === 0} />
-          </motion.div>
+          <m.div style={{ y: previewY }}>
+            <BrowserFrame project={project} priority={false} />
+          </m.div>
         </div>
       </Reveal>
 
@@ -126,18 +126,21 @@ function FeaturedProject({ project, index }: { project: Project; index: number }
           ))}
         </dl>
 
-        <dl className="mt-6 grid grid-cols-3 gap-3">
+        <div className="mt-6 grid grid-cols-3 gap-3">
           {project.metrics.map((metric) => (
             <div key={metric.label} className="surface flex flex-col rounded-2xl p-3.5">
-              <dt className="order-2 mt-1 text-[0.72rem] leading-snug text-slate-500 dark:text-slate-400">
-                {metric.label}
-              </dt>
-              <dd className="font-display text-xl font-bold tracking-tight text-gradient sm:text-2xl">
-                {metric.value}
-              </dd>
+              <p className="font-display text-xl font-bold tracking-tight text-gradient sm:text-2xl">{metric.value}</p>
+              <p className="mt-1 text-[0.72rem] leading-snug text-slate-500 dark:text-slate-400">{metric.label}</p>
             </div>
           ))}
-        </dl>
+        </div>
+        <p className="mt-3 flex gap-2 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+          <FlaskConical size={14} aria-hidden="true" className="mt-0.5 shrink-0 text-brand-700 dark:text-brand-400" />
+          <span>
+            <span className="font-semibold text-slate-700 dark:text-slate-300">How it was measured: </span>
+            {project.evidence}
+          </span>
+        </p>
 
         <ul className="mt-6 flex flex-wrap gap-1.5" aria-label={`${project.title} stack`}>
           {project.technologies.slice(0, 7).map((tech) => (
@@ -265,7 +268,7 @@ function ProjectIndex({ projects, startIndex }: { projects: Project[]; startInde
 
       <AnimatePresence>
         {preview && (
-          <motion.div
+          <m.div
             key="preview"
             aria-hidden="true"
             style={{ left: springX, top: springY }}
@@ -277,7 +280,7 @@ function ProjectIndex({ projects, startIndex }: { projects: Project[]; startInde
           >
             <div className="relative aspect-[16/10] bg-slate-900">
               <AnimatePresence mode="popLayout" initial={false}>
-                <motion.div
+                <m.div
                   key={preview.slug}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -286,13 +289,13 @@ function ProjectIndex({ projects, startIndex }: { projects: Project[]; startInde
                   className="absolute inset-0"
                 >
                   <Image src={preview.images[0].src} alt="" fill sizes="352px" className="object-cover object-top" />
-                </motion.div>
+                </m.div>
               </AnimatePresence>
             </div>
             <p className="border-t border-[var(--surface-border)] px-3.5 py-2.5 text-xs text-slate-600 dark:text-slate-400">
               {preview.metrics[0].value} · {preview.metrics[0].label}
             </p>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>

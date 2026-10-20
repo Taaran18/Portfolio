@@ -3,7 +3,6 @@ import { Inter, Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { Toaster } from 'react-hot-toast'
 import Providers from './providers'
-import SplashScreen from '@/components/ui/SplashScreen'
 import JsonLd from '@/components/JsonLd'
 import { SITE } from '@/lib/site'
 import { rootGraph } from '@/lib/seo'
@@ -15,8 +14,10 @@ const jakarta = Plus_Jakarta_Sans({
   weight: ['600', '700', '800'],
   variable: '--font-display',
   display: 'swap',
+  // Only the body font is preloaded; it renders the hero paragraph, which is the LCP element.
+  preload: false,
 })
-const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono', display: 'swap' })
+const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono', display: 'swap', preload: false })
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -107,17 +108,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              "try{if(sessionStorage.getItem('splash-seen')||matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.dataset.splash='off'}catch(e){}",
-          }}
-        />
         <JsonLd schema={rootGraph()} />
       </head>
       <body>
         <Providers>
-          <SplashScreen />
           {children}
           <Toaster
             position="bottom-right"

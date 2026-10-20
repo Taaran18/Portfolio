@@ -3,7 +3,7 @@
 import { useTheme } from 'next-themes'
 import { useEffect, useRef, useState } from 'react'
 import { flushSync } from 'react-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import { Sun, Moon } from 'lucide-react'
 
 type Theme = 'light' | 'dark'
@@ -82,7 +82,7 @@ export default function ThemeToggle() {
         transition-[color,border-color,transform] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/60"
     >
       <AnimatePresence mode="popLayout" initial={false}>
-        <motion.span
+        <m.span
           key={isDark ? 'moon' : 'sun'}
           initial={{ opacity: 0, scale: 0.3, rotate: isDark ? -120 : 120 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -91,7 +91,7 @@ export default function ThemeToggle() {
           className="absolute inset-0 flex items-center justify-center"
         >
           {isDark ? <Moon size={16} /> : <Sun size={16} />}
-        </motion.span>
+        </m.span>
       </AnimatePresence>
     </button>
   )

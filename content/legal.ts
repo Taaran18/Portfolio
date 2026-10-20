@@ -131,7 +131,7 @@ const disclaimer: LegalDoc = {
   title: 'Disclaimer',
   navLabel: 'Disclaimer',
   description:
-    'Content on taaranjain.com reflects personal views and is shared for information only. Chat assistant answers can be wrong; the site owner is the source of truth.',
+    'Content on taaranjain.com reflects personal views and is for information only. Chat assistant answers can be wrong; the site owner is the source of truth.',
   updated: UPDATED,
   summary:
     'Everything on this site is shared in good faith and for general information. Please read it as one engineer’s experience rather than professional advice.',

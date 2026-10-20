@@ -10,6 +10,8 @@ export interface Project {
   slug: string
   title: string
   category: string
+  // How the headline numbers were measured: dataset, benchmark or production.
+  evidence: string
   tagline: string
   description: string
   problem: string
@@ -64,6 +66,9 @@ export interface Paper {
   title: string
   authors?: string
   venue?: string
+  // e.g. 'Peer-reviewed journal', 'Conference paper', 'Preprint'.
+  status?: string
+  doi?: string
   year: string
   summary: string
   link: string
@@ -98,6 +103,8 @@ export interface CaseStudy {
   tagline: string
   summary: string
   metaDescription?: string
+  // Descriptive page title for search, e.g. 'Nexus AI: LangGraph RAG Assistant With Citations'.
+  seoTitle?: string
   timeline?: string
   stack: string[]
   liveUrl?: string

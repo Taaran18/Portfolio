@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, type HTMLMotionProps } from 'framer-motion'
+import { m, type HTMLMotionProps } from 'framer-motion'
 import clsx from 'clsx'
 
 type CardPadding = 'none' | 'sm' | 'md'
@@ -52,15 +52,15 @@ export default function Card({
 
   if (as === 'a') {
     return (
-      <motion.a className={classes} {...(motionProps as HTMLMotionProps<'a'>)}>
+      <m.a className={classes} {...(motionProps as HTMLMotionProps<'a'>)}>
         {children}
-      </motion.a>
+      </m.a>
     )
   }
 
   return (
-    <motion.div className={classes} {...(motionProps as HTMLMotionProps<'div'>)}>
+    <m.div className={classes} {...(motionProps as HTMLMotionProps<'div'>)}>
       {children}
-    </motion.div>
+    </m.div>
   )
 }

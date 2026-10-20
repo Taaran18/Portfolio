@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState, useId } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import { MessageCircle, X, Send, Sparkles } from 'lucide-react'
 import Link from 'next/link'
 import { useStreamedText } from './useStreamedText'
@@ -143,7 +143,7 @@ export default function ChatWidget() {
 
   return (
     <>
-      <motion.button
+      <m.button
         ref={toggleRef}
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
@@ -153,7 +153,7 @@ export default function ChatWidget() {
         className="fixed bottom-6 left-6 z-50 w-14 h-14 rounded-full bg-accent-700 bg-gradient-to-br from-brand-700 to-accent-700 flex items-center justify-center shadow-lg shadow-brand-500/30 hover:opacity-90 hover:scale-105 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2"
       >
         <AnimatePresence mode="wait" initial={false}>
-          <motion.span
+          <m.span
             key={open ? 'close' : 'open'}
             initial={{ opacity: 0, rotate: -45 }}
             animate={{ opacity: 1, rotate: 0 }}
@@ -161,13 +161,13 @@ export default function ChatWidget() {
             transition={{ duration: 0.15 }}
           >
             {open ? <X size={22} className="text-white" /> : <MessageCircle size={22} className="text-white" />}
-          </motion.span>
+          </m.span>
         </AnimatePresence>
-      </motion.button>
+      </m.button>
 
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             ref={panelRef}
             role="dialog"
             aria-modal="true"
@@ -212,7 +212,7 @@ export default function ChatWidget() {
               {pending && (
                 <div className="max-w-[60%] rounded-3xl rounded-bl-sm surface px-4 py-3 flex gap-1">
                   {[0, 1, 2].map((i) => (
-                    <motion.span
+                    <m.span
                       key={i}
                       className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-500"
                       animate={{ opacity: [0.3, 1, 0.3] }}
@@ -277,7 +277,7 @@ export default function ChatWidget() {
                 <Send size={15} className="text-white" />
               </button>
             </form>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

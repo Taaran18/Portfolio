@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { AnimatePresence, motion, useMotionValueEvent, useScroll, useSpring } from 'framer-motion'
+import { AnimatePresence, m, useMotionValueEvent, useScroll, useSpring } from 'framer-motion'
 import { ArrowUpRight, FileText } from 'lucide-react'
 import clsx from 'clsx'
 import ThemeToggle from './ThemeToggle'
@@ -12,7 +12,6 @@ import { NAV_LINKS, SCROLL_SECTION_IDS } from '@/content/sections'
 import { SOCIAL_LINKS } from '@/content/social'
 import { SITE } from '@/lib/site'
 import { EASE_OUT } from '@/lib/motion'
-import { useIntroDone } from '@/lib/intro'
 
 const navLinks = NAV_LINKS.map((s) => ({ label: s.navLabel, href: s.path, id: s.id }))
 const MOBILE_SOCIALS = SOCIAL_LINKS.filter((s) => s.id === 'github' || s.id === 'linkedin' || s.id === 'email')
@@ -23,7 +22,6 @@ const focusRing =
 export default function Navbar() {
   const pathname = usePathname()
   const isHome = pathname === '/'
-  const introDone = useIntroDone()
   const { scrollY, scrollYProgress } = useScroll()
   const progress = useSpring(scrollYProgress, { stiffness: 200, damping: 40, restDelta: 0.001 })
   const [scrolled, setScrolled] = useState(false)
@@ -88,12 +86,7 @@ export default function Navbar() {
   const contactHref = isHome ? '#contact' : '/contact'
 
   return (
-    <motion.header
-      initial={{ y: -24, opacity: 0 }}
-      animate={introDone ? { y: 0, opacity: 1 } : undefined}
-      transition={{ duration: 0.6, ease: EASE_OUT }}
-      className="fixed inset-x-0 top-0 z-[60]"
-    >
+    <header className="fixed inset-x-0 top-0 z-[60]">
       <div
         className={clsx(
           'relative border-b transition-[background-color,border-color] duration-300',
@@ -125,7 +118,7 @@ export default function Navbar() {
                       )}
                     >
                       {indicator === link.href && (
-                        <motion.span
+                        <m.span
                           layoutId="nav-indicator"
                           aria-hidden="true"
                           className={clsx(
@@ -197,7 +190,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        <motion.div
+        <m.div
           aria-hidden="true"
           style={{ scaleX: progress }}
           className="absolute inset-x-0 -bottom-px h-0.5 origin-left bg-gradient-to-r from-brand-600 to-accent-500"
@@ -206,7 +199,7 @@ export default function Navbar() {
 
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
+          <m.div
             id="mobile-menu"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -218,7 +211,7 @@ export default function Navbar() {
                 {navLinks.map((link, index) => {
                   const active = isLinkActive(link)
                   return (
-                    <motion.li
+                    <m.li
                       key={link.href}
                       initial={{ opacity: 0, y: 18 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -247,12 +240,12 @@ export default function Navbar() {
                           className="size-5 text-slate-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                         />
                       </Link>
-                    </motion.li>
+                    </m.li>
                   )
                 })}
               </ul>
 
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: EASE_OUT, delay: 0.36 }}
@@ -288,11 +281,11 @@ export default function Navbar() {
                     </li>
                   ))}
                 </ul>
-              </motion.div>
+              </m.div>
             </nav>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   )
 }

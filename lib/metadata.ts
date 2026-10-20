@@ -10,6 +10,7 @@ export const TWITTER_HANDLE = '@Taaran18'
 
 interface PageMetadataInput {
   title: string
+  absoluteTitle?: boolean
   shareTitle?: string
   description: string
   path: string
@@ -23,6 +24,7 @@ interface PageMetadataInput {
 
 export function pageMetadata({
   title,
+  absoluteTitle = false,
   shareTitle = `${title} | ${SITE.name}`,
   description,
   path,
@@ -30,7 +32,7 @@ export function pageMetadata({
   keywords,
 }: PageMetadataInput): Metadata {
   return {
-    title,
+    title: absoluteTitle ? { absolute: title } : title,
     description,
     ...(keywords ? { keywords } : {}),
     alternates: { canonical: path },

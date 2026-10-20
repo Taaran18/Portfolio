@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import { ArrowUpRight, FileText, GitBranch, Search, Sparkles } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { EASE_OUT } from '@/lib/motion'
@@ -39,7 +39,7 @@ export default function HeroConsole() {
         aria-hidden="true"
         className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-[radial-gradient(60%_60%_at_60%_40%,rgba(13,148,136,0.16),transparent)]"
       />
-      <motion.div
+      <m.div
         initial={{ opacity: 0, rotateX: 8, y: 24 }}
         animate={active ? { opacity: 1, rotateX: 0, y: 0 } : undefined}
         transition={{ duration: 1.1, ease: EASE_OUT, delay: 0.3 }}
@@ -63,13 +63,13 @@ export default function HeroConsole() {
         </div>
 
         <div className="space-y-4 p-4 sm:p-5">
-          <motion.div {...panel(0.55, active)} className="flex justify-end">
+          <m.div {...panel(0.55, active)} className="flex justify-end">
             <p className="max-w-[85%] rounded-2xl rounded-br-md bg-brand-700 px-4 py-2.5 text-sm text-white">
               What notice period does our leave policy require?
             </p>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             {...panel(0.7, active)}
             className="rounded-2xl border border-[var(--surface-border)] bg-black/[0.02] dark:bg-white/[0.02] p-3"
           >
@@ -80,7 +80,7 @@ export default function HeroConsole() {
             <ol className="relative grid grid-cols-4 gap-2">
               <span className="absolute left-[12.5%] right-[12.5%] top-4 h-px bg-[var(--surface-border)]" />
               {!reduce && active && (
-                <motion.span
+                <m.span
                   className="absolute top-[13px] size-2 rounded-full bg-brand-500 shadow-[0_0_10px_rgba(20,184,166,0.8)]"
                   initial={{ left: '12.5%' }}
                   animate={{ left: ['12.5%', '86%'] }}
@@ -88,7 +88,7 @@ export default function HeroConsole() {
                 />
               )}
               {STEPS.map((step, i) => (
-                <motion.li
+                <m.li
                   key={step.name}
                   initial={{ opacity: 0, y: 8 }}
                   animate={active ? { opacity: 1, y: 0 } : undefined}
@@ -103,12 +103,12 @@ export default function HeroConsole() {
                     {step.detail}
                   </span>
                   <span className="mt-1 font-mono text-[0.65rem] text-brand-700 dark:text-brand-400">{step.ms}</span>
-                </motion.li>
+                </m.li>
               ))}
             </ol>
-          </motion.div>
+          </m.div>
 
-          <motion.div {...panel(1.35, active)} className="max-w-[92%] rounded-2xl rounded-bl-md surface px-4 py-3">
+          <m.div {...panel(1.35, active)} className="max-w-[92%] rounded-2xl rounded-bl-md surface px-4 py-3">
             <p className="text-sm leading-relaxed text-slate-700 dark:text-slate-300">
               Employees must give{' '}
               <span className="font-semibold text-slate-900 dark:text-white">30 days&apos; notice</span> for planned
@@ -118,21 +118,21 @@ export default function HeroConsole() {
               <FileText size={11} />
               leave-policy.pdf · p.4 · lines 12–18
             </p>
-          </motion.div>
+          </m.div>
 
-          <motion.dl
+          <m.div
             {...panel(1.55, active)}
             className="grid grid-cols-3 divide-x divide-[var(--surface-border)] rounded-2xl border border-[var(--surface-border)]"
           >
             {METRICS.map((m) => (
               <div key={m.label} className="flex flex-col px-3 py-2.5">
-                <dt className="order-2 text-[0.68rem] text-slate-500">{m.label}</dt>
-                <dd className="font-display text-lg font-bold text-slate-900 dark:text-white">{m.value}</dd>
+                <p className="font-display text-lg font-bold text-slate-900 dark:text-white">{m.value}</p>
+                <p className="text-[0.68rem] text-slate-500">{m.label}</p>
               </div>
             ))}
-          </motion.dl>
+          </m.div>
         </div>
-      </motion.div>
+      </m.div>
 
       <figcaption className="mt-4 flex flex-wrap items-center justify-between gap-2 px-1 text-xs text-slate-500 dark:text-slate-400">
         <span>Illustrative trace of how Nexus AI answers: route, retrieve, generate, cite.</span>

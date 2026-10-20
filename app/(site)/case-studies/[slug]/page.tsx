@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!study) return {}
 
   return pageMetadata({
-    title: study.title,
+    title: study.seoTitle ?? study.title,
     shareTitle: `${study.title} | Case Study`,
     description: study.metaDescription ?? study.summary,
     path: `/case-studies/${study.slug}`,
@@ -40,7 +40,8 @@ export default async function CaseStudyPage({ params }: Params) {
   const { slug } = await params
   const study = getCaseStudy(slug)
   if (!study) notFound()
-  const screenshots = PROJECTS.find((project) => project.caseStudySlug === study.slug)?.images ?? []
+  const project = PROJECTS.find((p) => p.caseStudySlug === study.slug)
+  const screenshots = project?.images ?? []
 
   return (
     <main id="main-content" tabIndex={-1} className="min-h-screen pt-24 md:pt-28 focus:outline-none">
@@ -140,13 +141,23 @@ export default async function CaseStudyPage({ params }: Params) {
               )
             )}
 
-            <div className="grid grid-cols-3 gap-4 mb-14">
-              {study.metrics.map((metric) => (
-                <div key={metric.label} className="surface rounded-3xl p-5 text-center">
-                  <p className="text-2xl font-bold text-gradient">{metric.value}</p>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">{metric.label}</p>
-                </div>
-              ))}
+            <div className="mb-14">
+              <div className="grid grid-cols-3 gap-4">
+                {study.metrics.map((metric) => (
+                  <div key={metric.label} className="surface rounded-3xl p-5 text-center">
+                    <p className="text-2xl font-bold text-gradient">{metric.value}</p>
+                    <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">{metric.label}</p>
+                  </div>
+                ))}
+              </div>
+              {project?.evidence && (
+                <p className="mt-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                  <span className="font-semibold text-slate-800 dark:text-slate-200">
+                    How these numbers were measured:{' '}
+                  </span>
+                  {project.evidence}
+                </p>
+              )}
             </div>
 
             <ArticleBody sections={study.sections} />

@@ -27,6 +27,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
   return pageMetadata({
     title: post.title,
+    // Long post titles skip the '| Taaran Jain' suffix so search results don't cut them off.
+    absoluteTitle: post.title.length > 50,
     shareTitle: post.title,
     description: post.metaDescription ?? post.excerpt,
     path: `/blog/${post.slug}`,

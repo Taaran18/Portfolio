@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, type Variants } from 'framer-motion'
+import { m, type Variants } from 'framer-motion'
 import type { ReactNode } from 'react'
 import { EASE_OUT, VIEWPORT } from '@/lib/motion'
 
@@ -13,7 +13,7 @@ interface RevealProps {
 
 export function Reveal({ children, className, delay = 0, y = 28 }: RevealProps) {
   return (
-    <motion.div
+    <m.div
       className={className}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -21,7 +21,7 @@ export function Reveal({ children, className, delay = 0, y = 28 }: RevealProps) 
       transition={{ duration: 0.85, ease: EASE_OUT, delay }}
     >
       {children}
-    </motion.div>
+    </m.div>
   )
 }
 
@@ -44,7 +44,7 @@ interface StaggerProps {
 }
 
 export function Stagger({ children, className, gap = 0.07, delay = 0, as = 'div' }: StaggerProps) {
-  const Component = as === 'ul' ? motion.ul : as === 'ol' ? motion.ol : as === 'dl' ? motion.dl : motion.div
+  const Component = as === 'ul' ? m.ul : as === 'ol' ? m.ol : as === 'dl' ? m.dl : m.div
   return (
     <Component
       className={className}
@@ -67,7 +67,7 @@ export function StaggerItem({
   className?: string
   as?: 'div' | 'li'
 }) {
-  const Component = as === 'li' ? motion.li : motion.div
+  const Component = as === 'li' ? m.li : m.div
   return (
     <Component className={className} variants={itemVariants}>
       {children}

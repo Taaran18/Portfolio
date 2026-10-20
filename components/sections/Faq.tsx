@@ -1,7 +1,7 @@
 'use client'
 
 import { useId, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import { Mail, Plus } from 'lucide-react'
 import clsx from 'clsx'
 import { usePathname } from 'next/navigation'
@@ -114,7 +114,7 @@ export default function Faq() {
                 </h3>
                 <AnimatePresence initial={false}>
                   {open && (
-                    <motion.div
+                    <m.div
                       id={panelId}
                       role="region"
                       aria-labelledby={buttonId}
@@ -127,7 +127,7 @@ export default function Faq() {
                       <p className="max-w-3xl pr-12 pb-7 pl-12 text-[0.98rem] leading-relaxed text-slate-600 dark:text-slate-400 sm:pl-[4.25rem]">
                         {faq.answer}
                       </p>
-                    </motion.div>
+                    </m.div>
                   )}
                 </AnimatePresence>
               </StaggerItem>

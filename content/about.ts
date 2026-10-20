@@ -7,7 +7,7 @@ import { PUBLISHED_PAPERS } from '@/content/research'
 export const ABOUT_STATS = [
   { value: String(PROJECTS.length), label: 'AI products live with demos' },
   { value: String(EXPERIENCES.length), label: 'Companies shipped for' },
-  { value: '6+', label: 'Industries served' },
+  { value: '10+', label: 'Industries served' },
   { value: String(PUBLISHED_PAPERS.length), label: 'Research papers published' },
 ]
 

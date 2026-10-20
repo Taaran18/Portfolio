@@ -12,16 +12,6 @@ export const CERTIFICATIONS: Certification[] = [
     color: 'brand',
   },
   {
-    _id: '1',
-    name: 'Financial Analyst Career Track',
-    issuer: '365 Financial Analyst',
-    date: 'Nov 2024',
-    description:
-      'Financial modelling, valuation, and data-driven investment analysis — adding a quantitative finance lens to complement my ML engineering background.',
-    credential: 'https://learn.365financialanalyst.com/certificates/DD-FB6D812B4E/',
-    color: 'brand',
-  },
-  {
     _id: '2',
     name: 'MLOps Specialization',
     issuer: 'DeepLearning.AI · Coursera',
@@ -52,36 +42,6 @@ export const CERTIFICATIONS: Certification[] = [
     color: 'orange',
   },
   {
-    _id: '5',
-    name: 'Advanced Analytics Professional Certificate',
-    issuer: 'Google · Coursera',
-    date: 'Aug 2023',
-    description:
-      'Advanced-level data analytics with Python and statistical modelling — translating complex analysis into decisions that drive measurable outcomes.',
-    credential: 'https://www.coursera.org/account/accomplishments/professional-cert/BZGJQBE4JRE2',
-    color: 'green',
-  },
-  {
-    _id: '6',
-    name: 'Google Data Analytics Professional Certificate',
-    issuer: 'Google · Coursera',
-    date: 'Aug 2023',
-    description:
-      "Google's professional data analytics track — data cleaning, SQL, R, and Tableau to turn raw data into clear, actionable insights.",
-    credential: 'https://coursera.org/share/b7640004570568bb820df9b25115339d',
-    color: 'green',
-  },
-  {
-    _id: '7',
-    name: 'Business Analytics & Digital Media',
-    issuer: 'Indian School of Business · Coursera',
-    date: 'Jun 2023',
-    description:
-      'Covers data-driven decision making, digital marketing analytics, and business strategy — bridging the gap between ML outputs and real business impact.',
-    credential: 'https://coursera.org/share/efdaf8b4eee4b6da9ca235cac7b50dc0',
-    color: 'brand',
-  },
-  {
     _id: '8',
     name: 'Machine Learning Specialization',
     issuer: 'DeepLearning.AI · Coursera',
@@ -102,6 +62,26 @@ export const CERTIFICATIONS: Certification[] = [
     color: 'blue',
   },
   {
+    _id: '5',
+    name: 'Advanced Analytics Professional Certificate',
+    issuer: 'Google · Coursera',
+    date: 'Aug 2023',
+    description:
+      'Advanced-level data analytics with Python and statistical modelling — translating complex analysis into decisions that drive measurable outcomes.',
+    credential: 'https://www.coursera.org/account/accomplishments/professional-cert/BZGJQBE4JRE2',
+    color: 'green',
+  },
+  {
+    _id: '6',
+    name: 'Google Data Analytics Professional Certificate',
+    issuer: 'Google · Coursera',
+    date: 'Aug 2023',
+    description:
+      "Google's professional data analytics track — data cleaning, SQL, R, and Tableau to turn raw data into clear, actionable insights.",
+    credential: 'https://coursera.org/share/b7640004570568bb820df9b25115339d',
+    color: 'green',
+  },
+  {
     _id: '10',
     name: 'Azure Data Fundamentals',
     issuer: 'Microsoft',
@@ -110,6 +90,26 @@ export const CERTIFICATIONS: Certification[] = [
       'Validates core data concepts on Azure — relational and non-relational databases, analytics workloads, and cloud data storage fundamentals.',
     credential: 'https://www.credly.com/badges/cabc0e27-e5a9-44f4-b931-d97c635d50ab/linked_in_profile',
     color: 'blue',
+  },
+  {
+    _id: '1',
+    name: 'Financial Analyst Career Track',
+    issuer: '365 Financial Analyst',
+    date: 'Nov 2024',
+    description:
+      'Financial modelling, valuation, and data-driven investment analysis — adding a quantitative finance lens to complement my ML engineering background.',
+    credential: 'https://learn.365financialanalyst.com/certificates/DD-FB6D812B4E/',
+    color: 'brand',
+  },
+  {
+    _id: '7',
+    name: 'Business Analytics & Digital Media',
+    issuer: 'Indian School of Business · Coursera',
+    date: 'Jun 2023',
+    description:
+      'Covers data-driven decision making, digital marketing analytics, and business strategy — bridging the gap between ML outputs and real business impact.',
+    credential: 'https://coursera.org/share/efdaf8b4eee4b6da9ca235cac7b50dc0',
+    color: 'brand',
   },
 ]
 

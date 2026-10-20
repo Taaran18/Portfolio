@@ -23,7 +23,7 @@ export const FAQS: FaqEntry[] = [
     _id: 'experience',
     question: 'How Much Production Experience Do You Have?',
     answer:
-      'Two years across three companies, with client work in 6+ industries. I started in data science, moved into machine learning and deep learning on production systems, and now build LLM products. Everything on this site is deployed, so you can try it instead of taking my word for it.',
+      'Two years across three companies, with client work in 10+ industries. I started in data science, moved into machine learning and deep learning on production systems, and now build LLM products. Everything on this site is deployed, so you can try it instead of taking my word for it.',
   },
   {
     _id: 'freelance',

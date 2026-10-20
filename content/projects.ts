@@ -5,6 +5,7 @@ export const PROJECTS: Project[] = [
     slug: 'nexus-ai',
     title: 'Nexus AI',
     category: 'RAG · LangGraph Agent',
+    evidence: "Local testing with real API keys. Cold start is the backend's import time before and after the change.",
     tagline: 'An AI assistant that shows its sources and confidence',
     description:
       "An AI assistant that shows where every answer came from: the route it took, the exact page and line it cited, and a calibrated score when you're weighing a decision.",
@@ -70,6 +71,7 @@ export const PROJECTS: Project[] = [
     slug: 'ml-insights',
     title: 'MLInsights',
     category: 'AutoML Workbench',
+    evidence: 'Bundled public Diabetes sample (442 rows). A smoke test trained all 68 models before release.',
     tagline: 'From spreadsheet to the best-fit ML model, no code needed',
     description:
       'A no-code ML workbench: upload a spreadsheet, clean it, train up to 68 models, see which one actually wins, and export the report and trained models.',
@@ -137,6 +139,7 @@ export const PROJECTS: Project[] = [
     slug: 'self-driven-car',
     title: 'Self-Driven Car',
     category: 'Neuroevolution · Simulation',
+    evidence: 'Server time on my own machine for a 30-car run over 25 generations.',
     tagline: 'Watch neural networks learn to drive, code and all',
     description:
       'A browser lab where cars teach themselves to drive with NEAT, while you watch their neural networks evolve and step through the real Python code running each tick.',
@@ -193,6 +196,8 @@ export const PROJECTS: Project[] = [
     slug: 'grabbit',
     title: 'Grabbit',
     category: 'Full-Stack Media Tool',
+    evidence:
+      'CPU and cold-start times measured on real jobs. The storage figure is the worst-case cap set by the default limits.',
     tagline: 'Save exactly the clip, quality or format a source really offers',
     description:
       'Paste a link from 15 sites and get exactly the quality, format or clip you want. Options come from the source itself, and files delete themselves.',
@@ -249,6 +254,7 @@ export const PROJECTS: Project[] = [
     slug: 'logvera',
     title: 'Logvera',
     category: 'ML Anomaly Detection',
+    evidence: 'A bundled sample of one day of e-commerce Nginx traffic with planted incidents, not a production log.',
     tagline: 'Turns raw logs into incidents, attacks and root causes',
     description:
       'Upload any server, network or app log and get ML anomaly detection, attack findings and an AI root-cause summary, with no sign-up.',
@@ -305,6 +311,8 @@ export const PROJECTS: Project[] = [
     slug: 'comet',
     title: 'Comet',
     category: 'AI Link Safety · Systems',
+    evidence:
+      'An in-process load test on a laptop, excluding network overhead, so it compares layers rather than end-to-end latency.',
     tagline: 'Short links that check their destination, then self-destruct',
     description:
       'Short links that check each destination with AI before anyone clicks, encrypt it at rest, and delete themselves within 7 days.',
@@ -361,6 +369,8 @@ export const PROJECTS: Project[] = [
     slug: 'decidex',
     title: 'DecideX',
     category: 'ML Churn Prediction',
+    evidence:
+      'Public IBM Telco dataset (7,043 customers), stratified 60/20/20 split, scored on the 1,409 held-out customers.',
     tagline: 'Tells customer teams who might leave, why, and what to do',
     description:
       'Predicts which customers will leave, explains why, puts a dollar value on the risk and drafts the retention offer for a person to approve.',

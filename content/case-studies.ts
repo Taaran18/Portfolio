@@ -4,6 +4,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: 'nexus-ai',
     title: 'Nexus AI',
+    seoTitle: 'Nexus AI: LangGraph RAG Assistant With Citations',
     tagline: 'Cites the exact line and scores options with calibrated confidence',
     summary:
       'A LangGraph assistant that shows its route, cites the exact page and line from your documents, and scores decisions with a calibrated decision model. Built on FastAPI, Next.js and JEV.',
@@ -88,6 +89,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: 'ml-insights',
     title: 'MLInsights',
+    seoTitle: 'MLInsights: No-Code ML Model Comparison',
     tagline: '68 ML models, no code, and a backend that scales to zero',
     summary:
       'I rebuilt MLInsights so anyone can upload a spreadsheet, then train, compare and export 68 ML models in the browser. The backend has no database and scales to zero, which forced careful choices about storage, long-running training and, unexpectedly, bot traffic.',
@@ -187,6 +189,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: 'self-driven-car',
     title: 'Self-Driven Car',
+    seoTitle: 'Self-Driven Car: Neuroevolution Driving Simulator',
     tagline: 'Real neuroevolution in the browser, with the actual training code stepping live',
     summary:
       'I rebuilt a Pygame neuroevolution project as a browser lab where anyone can watch cars learn to drive with NEAT. A vectorised NumPy engine streams live frames over WebSockets, and the code panel shows the real Python source running each step.',
@@ -282,6 +285,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: 'grabbit',
     title: 'Grabbit',
+    seoTitle: 'Grabbit: Full-Stack Media Downloader',
     tagline: 'A media downloader that never offers a format it cannot deliver',
     summary:
       'Grabbit turns a public link from 15 sources into exactly the file you want, offering only the qualities and formats the media and server can genuinely produce. I built it with a FastAPI, yt-dlp and ffmpeg backend and a static Next.js frontend.',
@@ -378,6 +382,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: 'logvera',
     title: 'Logvera',
+    seoTitle: 'Logvera: ML Log Anomaly Detection',
     tagline: 'Five anomaly models vote on every log window and explain themselves',
     summary:
       'A private log analyser that turns any server, network or app log into a health score, explained anomalies and security findings. Five ML detectors vote on each time window, and an LLM summarises only redacted aggregates.',
@@ -465,6 +470,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: 'comet',
     title: 'Comet',
+    seoTitle: 'Comet: AI Phishing Checks for Short Links',
     tagline: 'A link shortener that blocks phishing before the link exists',
     summary:
       'Comet is a URL shortener where every link is checked by rules and an AI model before it exists, encrypted at rest, and deleted within 7 days. I built it to run on one small container, with a hand-written Bloom filter, HyperLogLog and request tracing.',
@@ -554,6 +560,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: 'decidex',
     title: 'DecideX',
+    seoTitle: 'DecideX: Calibrated Churn Prediction',
     tagline: 'Catches 85.6% of leavers on held-out data, then drafts the offer',
     summary:
       'I built a churn decision app that reads account notes with an LLM, scores customers with a calibrated model and recommends what to do, with reasons. A cost-tuned threshold catches 85.6% of leavers on held-out data.',

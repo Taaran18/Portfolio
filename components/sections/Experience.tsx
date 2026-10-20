@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion, useInView, useScroll, useSpring } from 'framer-motion'
+import { m, useInView, useScroll, useSpring } from 'framer-motion'
 import { Briefcase } from 'lucide-react'
 import clsx from 'clsx'
 import SectionHeader from '@/components/ui/SectionHeader'
@@ -18,7 +18,7 @@ function Role({ exp }: { exp: ExperienceEntry }) {
   const seen = useInView(ref, { once: true, margin: '0px 0px -15% 0px' })
 
   return (
-    <motion.li
+    <m.li
       ref={ref}
       initial={{ opacity: 0, y: 28 }}
       animate={seen ? { opacity: 1, y: 0 } : undefined}
@@ -79,7 +79,7 @@ function Role({ exp }: { exp: ExperienceEntry }) {
           ))}
         </ul>
       </div>
-    </motion.li>
+    </m.li>
   )
 }
 
@@ -93,25 +93,25 @@ export default function Experience() {
       <SectionHeader
         sectionId="experience"
         title="Two Years Shipping AI in Production"
-        subtitle="Data Science at Celebal Technologies, Anomaly Detection at LogiScope and AI Products at e-Marketing.io, with client work across 6+ industries."
+        subtitle="Data Science at Celebal Technologies, Anomaly Detection at LogiScope and AI Products at e-Marketing.io, with client work across 10+ industries."
       />
 
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
         <Reveal className="lg:col-span-4">
           <div className="lg:sticky lg:top-28">
-            <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-[var(--surface-border)] bg-[var(--surface-border)]">
+            <div className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-[var(--surface-border)] bg-[var(--surface-border)]">
               <div className="flex flex-col bg-[var(--surface-bg)] p-5">
-                <dt className="order-2 mt-1 text-sm text-slate-600 dark:text-slate-400">Years in ML & deep learning</dt>
-                <dd className="font-display text-4xl font-bold text-gradient">2+</dd>
+                <p className="font-display text-4xl font-bold text-gradient">2+</p>
+                <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">Years of professional ML & DL work</p>
               </div>
               <div className="flex flex-col bg-[var(--surface-bg)] p-5">
-                <dt className="order-2 mt-1 text-sm text-slate-600 dark:text-slate-400">Companies</dt>
-                <dd className="font-display text-4xl font-bold text-gradient">{EXPERIENCES.length}</dd>
+                <p className="font-display text-4xl font-bold text-gradient">{EXPERIENCES.length}</p>
+                <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">Companies</p>
               </div>
-            </dl>
+            </div>
             <p className="mt-5 leading-relaxed text-slate-600 dark:text-slate-400">
               From data science to deep learning on production systems to LLM products, with client work across{' '}
-              <span className="font-semibold text-slate-900 dark:text-white">6+ industries</span> along the way.
+              <span className="font-semibold text-slate-900 dark:text-white">10+ industries</span> along the way.
             </p>
           </div>
         </Reveal>
@@ -121,7 +121,7 @@ export default function Experience() {
             aria-hidden="true"
             className="absolute top-6 bottom-6 left-5 w-px -translate-x-1/2 bg-[var(--surface-border)] sm:left-7"
           />
-          <motion.span
+          <m.span
             aria-hidden="true"
             style={{ scaleY: progress }}
             className="absolute top-6 bottom-6 left-5 w-px origin-top -translate-x-1/2 bg-brand-500 sm:left-7"

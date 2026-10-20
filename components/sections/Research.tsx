@@ -1,5 +1,3 @@
-'use client'
-
 import { ArrowUpRight } from 'lucide-react'
 import SectionHeader from '@/components/ui/SectionHeader'
 import { Stagger, StaggerItem } from '@/components/ui/Reveal'
@@ -36,6 +34,9 @@ export default function Research() {
                   <span aria-hidden="true" className="size-1.5 rounded-full bg-brand-500" />
                   {paper.category}
                 </span>
+                {paper.status && (
+                  <span className="font-mono text-[0.7rem] text-slate-500 dark:text-slate-400">{paper.status}</span>
+                )}
                 {paper.venue && <span className="text-sm text-slate-600 dark:text-slate-400">{paper.venue}</span>}
               </div>
 

@@ -58,7 +58,7 @@ export default function Footer() {
                 href="/contact"
                 className="inline-flex h-12 items-center gap-2 rounded-full bg-gradient-to-r from-brand-600 to-accent-600 px-6 font-semibold text-white shadow-lg shadow-brand-900/40 transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050908]"
               >
-                Get in Touch <ArrowUpRight size={16} aria-hidden="true" />
+                Let&apos;s Talk <ArrowUpRight size={16} aria-hidden="true" />
               </Link>
               <a
                 href={SITE.resumeUrl}
@@ -81,7 +81,7 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-4">
             <Logo onDark />
             <p className="mt-6 max-w-sm text-[0.95rem] leading-relaxed text-slate-400">
-              {`AI Engineer and Full-Stack Developer who turns ideas into working products. ${PROJECTS.length} live projects, ${EXPERIENCES.length} companies and client work across 6+ industries.`}
+              {`AI Engineer and Full-Stack Developer who turns ideas into working products. ${PROJECTS.length} live projects, ${EXPERIENCES.length} companies and client work across 10+ industries.`}
             </p>
             <p className="mt-5 inline-flex items-center gap-2 text-sm text-slate-400">
               <MapPin size={14} aria-hidden="true" className="text-brand-400" />

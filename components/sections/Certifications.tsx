@@ -1,5 +1,3 @@
-'use client'
-
 import { ArrowUpRight } from 'lucide-react'
 import SectionHeader from '@/components/ui/SectionHeader'
 import { Stagger, StaggerItem } from '@/components/ui/Reveal'

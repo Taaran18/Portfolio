@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { WhatsApp } from '@/components/ui/icons'
 import { whatsappUrl } from '@/lib/site'
 
@@ -10,7 +10,7 @@ export default function WhatsAppFab() {
   if (!HREF) return null
 
   return (
-    <motion.a
+    <m.a
       href={HREF}
       target="_blank"
       rel="noopener noreferrer"
@@ -26,6 +26,6 @@ export default function WhatsAppFab() {
         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2"
     >
       <WhatsApp size={26} className="text-white" />
-    </motion.a>
+    </m.a>
   )
 }

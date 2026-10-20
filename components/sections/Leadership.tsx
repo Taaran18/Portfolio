@@ -1,7 +1,7 @@
 'use client'
 
 import { useId, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import clsx from 'clsx'
 import SectionHeader from '@/components/ui/SectionHeader'
@@ -72,7 +72,7 @@ export default function Leadership() {
               </button>
               <AnimatePresence initial={false}>
                 {open && (
-                  <motion.div
+                  <m.div
                     id={panelId}
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
@@ -94,7 +94,7 @@ export default function Leadership() {
                         ))}
                       </ul>
                     </div>
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
             </StaggerItem>
