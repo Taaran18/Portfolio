@@ -239,7 +239,13 @@ function ProjectIndex({ projects, startIndex }: { projects: Project[]; startInde
                 className="absolute inset-0 -z-10 origin-left scale-x-0 rounded-lg bg-brand-500/[0.06] transition-transform duration-500 ease-out group-hover:scale-x-100"
               />
               <span className="relative aspect-[16/10] w-20 overflow-hidden rounded-xl border border-[var(--surface-border)] bg-slate-900 md:hidden">
-                <Image src={project.images[0].src} alt="" fill sizes="80px" className="object-cover object-top" />
+                <Image
+                  src={project.images[0].src}
+                  alt={`${project.title} screenshot`}
+                  fill
+                  sizes="80px"
+                  className="object-cover object-top"
+                />
               </span>
               <span className="hidden font-mono text-xs text-slate-500 md:col-span-1 md:block md:pl-2">
                 {String(startIndex + index + 1).padStart(2, '0')}
@@ -288,7 +294,13 @@ function ProjectIndex({ projects, startIndex }: { projects: Project[]; startInde
                   transition={{ duration: 0.2 }}
                   className="absolute inset-0"
                 >
-                  <Image src={preview.images[0].src} alt="" fill sizes="352px" className="object-cover object-top" />
+                  <Image
+                    src={preview.images[0].src}
+                    alt={`${preview.title} preview`}
+                    fill
+                    sizes="352px"
+                    className="object-cover object-top"
+                  />
                 </m.div>
               </AnimatePresence>
             </div>
