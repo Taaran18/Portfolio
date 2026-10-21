@@ -35,7 +35,7 @@ export function pageMetadata({
     title: absoluteTitle ? { absolute: title } : title,
     description,
     ...(keywords ? { keywords } : {}),
-    alternates: { canonical: path },
+    alternates: { canonical: path, languages: { en: path, 'x-default': path } },
     openGraph: {
       siteName: SITE.name,
       locale: 'en_US',

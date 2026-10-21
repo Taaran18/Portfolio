@@ -68,6 +68,8 @@ export const metadata: Metadata = {
   category: 'technology',
   alternates: {
     canonical: '/',
+    // English only; a self-referencing hreflang tells search engines there are no other versions.
+    languages: { en: '/', 'x-default': '/' },
   },
   openGraph: {
     type: 'website',
