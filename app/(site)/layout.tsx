@@ -4,6 +4,7 @@ import ScrollToTop from '@/components/ui/ScrollToTop'
 import WhatsAppFab from '@/components/ui/WhatsAppFab'
 import ChatWidgetLoader from '@/components/chatbot/ChatWidgetLoader'
 import Tracker from '@/components/analytics/Tracker'
+import GoogleAnalytics from '@/components/analytics/GoogleAnalytics'
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -15,6 +16,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
         Skip to main content
       </a>
       <Tracker />
+      <GoogleAnalytics />
       <Navbar />
       {children}
       <Footer />

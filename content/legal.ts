@@ -22,20 +22,22 @@ const privacy: LegalDoc = {
   title: 'Privacy Policy',
   navLabel: 'Privacy',
   description:
-    'What taaranjain.com collects and why: anonymous visit statistics, contact form messages and chat. No advertising or tracking cookies.',
-  updated: UPDATED,
+    'What taaranjain.com collects and why: visit statistics from its own analytics and Google Analytics, contact form messages and chat. No advertising.',
+  updated: '2026-10-21',
   summary:
-    'This site collects as little as it can: anonymous visit counts, and whatever you choose to send through the contact form or chat. No advertising, no tracking cookies, and nothing is sold or shared.',
+    'This site collects as little as it can: visit statistics, and whatever you choose to send through the contact form or chat. No advertising, and nothing is sold.',
   sections: [
     {
       heading: 'Visit Statistics',
       body: [
-        'To see which pages people read, the site records a small event when a page loads or when you click a link to another website. It uses its own first-party analytics, not Google Analytics or any other third-party tracker.',
+        'To see which pages people read, the site records a small event when a page loads or when you click a link to another website. It does this with its own first-party analytics and with Google Analytics 4.',
       ],
       bullets: [
         'Recorded: the page path, the outbound link you clicked, the website that referred you (domain only), your device type and your country as reported by the hosting provider.',
         'Visitor counts use a one-way hash of your IP address and browser details. Your IP address itself is not stored.',
         'Only the most recent 50,000 events are kept; older ones are deleted automatically.',
+        'Google Analytics records the pages you view, scrolling, outbound link clicks, your device type and approximate location. Google Analytics 4 does not log or store IP addresses, and the data is not used for advertising.',
+        'You can opt out of Google Analytics with Google’s opt-out browser add-on or by blocking cookies for this site.',
       ],
     },
     {
@@ -54,7 +56,7 @@ const privacy: LegalDoc = {
     {
       heading: 'Cookies and Browser Storage',
       body: [
-        'The site sets no advertising or tracking cookies. It remembers your light or dark theme choice in your browser’s local storage, which never leaves your device. Fonts are served from this site, so loading a page makes no requests to Google Fonts.',
+        'The only cookies are set by Google Analytics (_ga and _ga_ZWPEP9X6EP) to tell one visit from another. There are no advertising cookies. The site remembers your light or dark theme choice in your browser’s local storage, which never leaves your device. Fonts are served from this site, so loading a page makes no requests to Google Fonts.',
       ],
     },
     {
