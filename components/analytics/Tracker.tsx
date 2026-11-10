@@ -75,7 +75,6 @@ export default function Tracker() {
   const view = useRef<View | null>(null)
 
   useEffect(() => {
-    if (pathname.startsWith('/admin')) return
     if (view.current?.path === pathname) return
 
     const previous = view.current

@@ -23,10 +23,3 @@ export function listWith(items: readonly string[], conjunction: 'and' | 'or' = '
   if (items.length <= 1) return items.join('')
   return `${items.slice(0, -1).join(', ')} ${conjunction} ${items[items.length - 1]}`
 }
-
-export function formatDuration(seconds: number): string {
-  if (seconds < 60) return `${seconds}s`
-  const minutes = Math.floor(seconds / 60)
-  if (minutes < 60) return seconds % 60 ? `${minutes}m ${seconds % 60}s` : `${minutes}m`
-  return minutes % 60 ? `${Math.floor(minutes / 60)}h ${minutes % 60}m` : `${Math.floor(minutes / 60)}h`
-}
