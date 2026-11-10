@@ -23,19 +23,19 @@ const privacy: LegalDoc = {
   navLabel: 'Privacy',
   description:
     'What taaranjain.com collects and why: visit statistics from its own analytics and Google Analytics, contact form messages and chat. No advertising.',
-  updated: '2026-10-21',
+  updated: '2026-11-10',
   summary:
     'This site collects as little as it can: visit statistics, and whatever you choose to send through the contact form or chat. No advertising, and nothing is sold.',
   sections: [
     {
       heading: 'Visit Statistics',
       body: [
-        'To see which pages people read, the site records a small event when a page loads or when you click a link to another website. It does this with its own first-party analytics and with Google Analytics 4.',
+        'To see which pages people read and for how long, the site records each page you open. It does this with its own first-party analytics and with Google Analytics 4.',
       ],
       bullets: [
-        'Recorded: the page path, the outbound link you clicked, the website that referred you (domain only), your device type and your country as reported by the hosting provider.',
-        'Visitor counts use a one-way hash of your IP address and browser details. Your IP address itself is not stored.',
-        'Only the most recent 50,000 events are kept; older ones are deleted automatically.',
+        'Recorded for each page: its address and title, how long it was open and visible, how far down you scrolled, the website that referred you (domain only), any campaign tags in the link (utm_source, utm_medium, utm_campaign), your device type, browser, operating system, screen width and language, and your country, region and city as reported by the hosting provider.',
+        'To tell visits apart, your browser keeps a random visitor ID in local storage and a random visit ID in session storage. They don’t identify you by name, and your IP address is not stored.',
+        'These statistics are kept in this site’s own database (hosted on Railway). They are not shared or sold.',
         'Google Analytics records the pages you view, scrolling, outbound link clicks, your device type and approximate location. Google Analytics 4 does not log or store IP addresses, and the data is not used for advertising.',
         'You can opt out of Google Analytics with Google’s opt-out browser add-on or by blocking cookies for this site.',
       ],
@@ -43,7 +43,7 @@ const privacy: LegalDoc = {
     {
       heading: 'Contact Form',
       body: [
-        `Your name, email address, subject and message are sent as an email to ${SITE.email}. They are not saved in a database on this site, and are used only to reply to you.`,
+        `Your name, email address, subject and message are sent as an email to ${SITE.email} and saved in this site’s database, so no enquiry is lost if the email fails. Saved with it: the page you sent it from, the page your visit started on, the referring website and campaign tags, your device type, your approximate location and the visitor ID described above. This is used only to reply to you and to see which pages lead to enquiries.`,
       ],
     },
     {
@@ -56,7 +56,7 @@ const privacy: LegalDoc = {
     {
       heading: 'Cookies and Browser Storage',
       body: [
-        'The only cookies are set by Google Analytics (_ga and _ga_ZWPEP9X6EP) to tell one visit from another. There are no advertising cookies. The site remembers your light or dark theme choice in your browser’s local storage, which never leaves your device. Fonts are served from this site, so loading a page makes no requests to Google Fonts.',
+        'The only cookies are set by Google Analytics (_ga and _ga_ZWPEP9X6EP) to tell one visit from another. There are no advertising cookies. Your browser’s storage holds the random visitor and visit IDs used for visit statistics, which are sent with each page view, and your light or dark theme choice, which never leaves your device. Fonts are served from this site, so loading a page makes no requests to Google Fonts.',
       ],
     },
     {

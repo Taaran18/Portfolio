@@ -1,49 +1,51 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { deviceFrom, record, visitorHash } from '@/lib/analytics/store'
-import type { AnalyticsEventType } from '@/lib/analytics/types'
+import { recordPageView } from '@/lib/analytics/store'
+import { clean, externalReferrer, isBot, requestContext, uuid } from '@/lib/analytics/request'
 
-const VALID: AnalyticsEventType[] = ['page_view', 'link_click']
+// A tab left visible for hours isn't reading time; cap what one view can claim.
+const MAX_DURATION_SECONDS = 4 * 60 * 60
 
-function clean(value: unknown, max: number): string | undefined {
-  if (typeof value !== 'string') return undefined
-  const trimmed = value.trim().slice(0, max)
-  return trimmed || undefined
+function boundedInt(value: unknown, max: number): number {
+  const n = Number(value)
+  return Number.isFinite(n) ? Math.min(Math.max(Math.round(n), 0), max) : 0
 }
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => null)
-  const type = body?.type as AnalyticsEventType
 
-  if (!VALID.includes(type)) {
-    return NextResponse.json({ error: 'Invalid event type' }, { status: 400 })
-  }
-
+  const id = uuid(body?.id)
+  const visitorId = uuid(body?.visitorId)
+  const sessionId = uuid(body?.sessionId)
   const path = clean(body?.path, 200)
-  if (!path) return NextResponse.json({ error: 'Missing path' }, { status: 400 })
-
-  const userAgent = req.headers.get('user-agent') ?? ''
-  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? req.headers.get('x-real-ip') ?? 'unknown'
-
-  let referrer = clean(body?.referrer, 200)
-  if (referrer) {
-    try {
-      const host = new URL(referrer).hostname
-      referrer = host === req.nextUrl.hostname ? undefined : host
-    } catch {
-      referrer = undefined
-    }
+  if (!id || !visitorId || !sessionId || !path) {
+    return NextResponse.json({ error: 'Invalid page view' }, { status: 400 })
   }
 
-  record({
-    type,
-    path,
-    label: clean(body?.label, 80),
-    href: clean(body?.href, 300),
-    referrer,
-    device: deviceFrom(userAgent),
-    country: req.headers.get('x-vercel-ip-country') ?? undefined,
-    visitor: visitorHash(ip, userAgent),
-  })
+  if (isBot(req)) return new NextResponse(null, { status: 204 })
+
+  const screenWidth = boundedInt(body?.screenWidth, 10_000)
+
+  try {
+    await recordPageView({
+      id,
+      visitorId,
+      sessionId,
+      path,
+      pageTitle: clean(body?.pageTitle, 200),
+      referrer: externalReferrer(body?.referrer, req.nextUrl.hostname),
+      utmSource: clean(body?.utmSource, 100),
+      utmMedium: clean(body?.utmMedium, 100),
+      utmCampaign: clean(body?.utmCampaign, 100),
+      screenWidth: screenWidth || undefined,
+      language: clean(body?.language, 35),
+      durationSeconds: boundedInt(body?.durationSeconds, MAX_DURATION_SECONDS),
+      maxScrollPercent: boundedInt(body?.maxScrollPercent, 100),
+      ...requestContext(req),
+    })
+  } catch (err) {
+    console.error('Analytics error:', err)
+    return NextResponse.json({ error: 'Failed to record page view' }, { status: 500 })
+  }
 
   return new NextResponse(null, { status: 204 })
 }

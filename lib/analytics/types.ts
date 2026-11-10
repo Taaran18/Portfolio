@@ -1,16 +1,23 @@
-export type AnalyticsEventType = 'page_view' | 'link_click'
-
-export interface AnalyticsEvent {
+export interface PageView {
   id: string
-  type: AnalyticsEventType
+  visitorId: string
+  sessionId: string
   path: string
-  label?: string
-  href?: string
+  pageTitle?: string
   referrer?: string
-  device: 'mobile' | 'tablet' | 'desktop'
+  utmSource?: string
+  utmMedium?: string
+  utmCampaign?: string
+  deviceType: string
+  browser?: string
+  os?: string
+  screenWidth?: number
+  language?: string
   country?: string
-  visitor: string
-  at: number
+  region?: string
+  city?: string
+  durationSeconds: number
+  maxScrollPercent: number
 }
 
 export interface CountRow {
@@ -18,20 +25,27 @@ export interface CountRow {
   count: number
 }
 
+export interface RecentView {
+  id: string
+  path: string
+  durationSeconds: number
+  at: string
+}
+
 export interface AnalyticsSummary {
   totals: {
     views: number
-    clicks: number
     visitors: number
     viewsToday: number
     visitorsToday: number
+    avgSeconds: number
   }
   series: { date: string; views: number; visitors: number }[]
   topPages: CountRow[]
-  topLinks: CountRow[]
+  /** Average seconds on each page, counting only views with a measured time. */
+  timeOnPage: CountRow[]
   referrers: CountRow[]
   devices: CountRow[]
   countries: CountRow[]
-  recent: AnalyticsEvent[]
-  storage: { driver: string; durable: boolean; note?: string }
+  recent: RecentView[]
 }

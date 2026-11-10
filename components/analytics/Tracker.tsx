@@ -2,6 +2,15 @@
 
 import { useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
+import { currentVisit, utmParams } from '@/lib/analytics/client'
+
+interface View {
+  payload: Record<string, unknown>
+  path: string
+  activeMs: number
+  visibleSince: number | null
+  maxScroll: number
+}
 
 function send(payload: Record<string, unknown>) {
   const body = JSON.stringify(payload)
@@ -17,43 +26,101 @@ function send(payload: Record<string, unknown>) {
   }).catch(() => {})
 }
 
+function scrollPercent(): number {
+  const scrollable = document.documentElement.scrollHeight - window.innerHeight
+  if (scrollable <= 0) return 100
+  return Math.min(100, Math.round((window.scrollY / scrollable) * 100))
+}
+
+function startView(path: string, firstOfPageLoad: boolean): View {
+  const visit = currentVisit()
+  return {
+    path,
+    payload: {
+      id: crypto.randomUUID(),
+      visitorId: visit.visitorId,
+      sessionId: visit.sessionId,
+      path,
+      pageTitle: document.title,
+      // After a client-side navigation document.referrer is stale, so only the first view reports it.
+      referrer: firstOfPageLoad ? document.referrer || undefined : undefined,
+      ...utmParams(),
+      screenWidth: window.screen.width,
+      language: navigator.language,
+    },
+    activeMs: 0,
+    visibleSince: document.visibilityState === 'visible' ? performance.now() : null,
+    maxScroll: 0,
+  }
+}
+
+function pause(view: View) {
+  if (view.visibleSince === null) return
+  view.activeMs += performance.now() - view.visibleSince
+  view.visibleSince = null
+}
+
+// Re-sending the same id is safe: the server only ever raises time and scroll depth.
+function report(view: View) {
+  const running = view.visibleSince === null ? 0 : performance.now() - view.visibleSince
+  send({
+    ...view.payload,
+    durationSeconds: Math.round((view.activeMs + running) / 1000),
+    maxScrollPercent: view.maxScroll,
+  })
+}
+
 export default function Tracker() {
   const pathname = usePathname()
-  const lastPath = useRef<string | null>(null)
+  const view = useRef<View | null>(null)
 
   useEffect(() => {
     if (pathname.startsWith('/admin')) return
-    if (lastPath.current === pathname) return
-    lastPath.current = pathname
-    send({ type: 'page_view', path: pathname, referrer: document.referrer || undefined })
+    if (view.current?.path === pathname) return
+
+    const previous = view.current
+    if (previous) {
+      pause(previous)
+      report(previous)
+    }
+    view.current = startView(pathname, previous === null)
+    report(view.current)
   }, [pathname])
 
   useEffect(() => {
-    if (pathname.startsWith('/admin')) return
-
-    function onClick(e: MouseEvent) {
-      const anchor = (e.target as HTMLElement | null)?.closest?.('a')
-      if (!anchor) return
-
-      const href = anchor.getAttribute('href')
-      if (!href || href.startsWith('#')) return
-
-      const isExternal = /^https?:\/\//i.test(href) && !href.includes(window.location.host)
-      const isMailto = href.startsWith('mailto:')
-      const isTel = href.startsWith('tel:')
-      if (!isExternal && !isMailto && !isTel) return
-
-      const label =
-        anchor.getAttribute('aria-label') ||
-        anchor.textContent?.trim().slice(0, 60) ||
-        new URL(href, window.location.origin).hostname
-
-      send({ type: 'link_click', path: pathname, label, href })
+    function measureScroll() {
+      if (view.current) view.current.maxScroll = Math.max(view.current.maxScroll, scrollPercent())
     }
 
-    document.addEventListener('click', onClick, { capture: true })
-    return () => document.removeEventListener('click', onClick, { capture: true })
-  }, [pathname])
+    function onVisibilityChange() {
+      const current = view.current
+      if (!current) return
+      if (document.visibilityState === 'visible') {
+        current.visibleSince ??= performance.now()
+        return
+      }
+      measureScroll()
+      pause(current)
+      report(current)
+    }
+
+    function onPageHide() {
+      if (!view.current) return
+      measureScroll()
+      pause(view.current)
+      report(view.current)
+    }
+
+    window.addEventListener('scroll', measureScroll, { passive: true })
+    document.addEventListener('visibilitychange', onVisibilityChange)
+    window.addEventListener('pagehide', onPageHide)
+    return () => {
+      window.removeEventListener('scroll', measureScroll)
+      document.removeEventListener('visibilitychange', onVisibilityChange)
+      window.removeEventListener('pagehide', onPageHide)
+      if (view.current) report(view.current)
+    }
+  }, [])
 
   return null
 }

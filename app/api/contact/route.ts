@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
+import { saveLead } from '@/lib/leads'
+import { clean, externalReferrer, requestContext, uuid } from '@/lib/analytics/request'
 
 const MAX_LENGTHS = { name: 100, email: 254, subject: 200, message: 5000 } as const
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -11,6 +13,15 @@ function escapeHtml(value: string): string {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;')
+}
+
+function pathFrom(url: string | null): string | undefined {
+  if (!url) return undefined
+  try {
+    return new URL(url).pathname.slice(0, 200)
+  } catch {
+    return undefined
+  }
 }
 
 type SafeFields = { name: string; email: string; subject: string; message: string }
@@ -130,31 +141,70 @@ export async function POST(req: NextRequest) {
       },
     })
 
-    await transporter.sendMail({
-      from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_USER,
-      replyTo: email,
-      subject: `Portfolio enquiry from ${name}${subject ? ` — ${subject}` : ''}`,
-      text: [
-        'NEW PORTFOLIO ENQUIRY',
-        '',
-        `Name:    ${name}`,
-        `Email:   ${email}`,
-        `Subject: ${subject || '—'}`,
-        `Received: ${receivedAt}`,
-        '',
-        'Message:',
-        message,
-        '',
-        '---',
-        'Sent from the contact form on taaranjain.com. Reply directly to respond.',
-      ].join('\n'),
-      html: emailTemplate(safe, receivedAt),
-    })
+    let emailSent = false
+    try {
+      await transporter.sendMail({
+        from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
+        to: process.env.EMAIL_USER,
+        replyTo: email,
+        subject: `Portfolio enquiry from ${name}${subject ? ` — ${subject}` : ''}`,
+        text: [
+          'NEW PORTFOLIO ENQUIRY',
+          '',
+          `Name:    ${name}`,
+          `Email:   ${email}`,
+          `Subject: ${subject || '—'}`,
+          `Received: ${receivedAt}`,
+          '',
+          'Message:',
+          message,
+          '',
+          '---',
+          'Sent from the contact form on taaranjain.com. Reply directly to respond.',
+        ].join('\n'),
+        html: emailTemplate(safe, receivedAt),
+      })
+      emailSent = true
+    } catch (err) {
+      console.error('Email error:', err)
+    }
 
-    return NextResponse.json({ message: 'Email sent!' })
+    // The lead is stored either way, so an SMTP outage never loses an enquiry.
+    const visit = body.visit ?? {}
+    const { deviceType, country, region, city } = requestContext(req)
+    let saved = false
+    try {
+      await saveLead({
+        source: 'contact_form',
+        name,
+        email,
+        subject: subject || undefined,
+        message,
+        pagePath: pathFrom(req.headers.get('referer')),
+        landingPath: clean(visit.landingPath, 200),
+        referrer: externalReferrer(visit.referrer, req.nextUrl.hostname),
+        utmSource: clean(visit.utmSource, 100),
+        utmMedium: clean(visit.utmMedium, 100),
+        utmCampaign: clean(visit.utmCampaign, 100),
+        visitorId: uuid(visit.visitorId),
+        sessionId: uuid(visit.sessionId),
+        deviceType,
+        country,
+        region,
+        city,
+        emailSent,
+      })
+      saved = true
+    } catch (err) {
+      console.error('Lead save error:', err)
+    }
+
+    if (!emailSent && !saved) {
+      return NextResponse.json({ error: 'Failed to send message' }, { status: 500 })
+    }
+    return NextResponse.json({ message: 'Message received' })
   } catch (err) {
-    console.error('Email error:', err)
-    return NextResponse.json({ error: 'Failed to send email' }, { status: 500 })
+    console.error('Contact error:', err)
+    return NextResponse.json({ error: 'Failed to send message' }, { status: 500 })
   }
 }

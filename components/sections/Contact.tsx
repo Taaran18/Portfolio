@@ -12,6 +12,7 @@ import { WhatsApp } from '@/components/ui/icons'
 import { SITE, whatsappUrl } from '@/lib/site'
 import { sectionEyebrow } from '@/content/sections'
 import { listWith } from '@/lib/format'
+import { currentVisit } from '@/lib/analytics/client'
 
 const PROFILE_LINKS = SOCIAL_LINKS.filter((s) => s.id === 'linkedin' || s.id === 'github')
 
@@ -50,6 +51,7 @@ export default function Contact() {
           email: fd.get('email'),
           subject: fd.get('subject'),
           message: fd.get('message'),
+          visit: currentVisit(),
         }),
       })
       if (res.ok) {

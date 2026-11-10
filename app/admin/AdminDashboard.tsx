@@ -2,19 +2,10 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import {
-  AlertTriangle,
-  Eye,
-  ExternalLink,
-  Globe,
-  LogOut,
-  MousePointerClick,
-  RefreshCw,
-  Trash2,
-  Users,
-} from 'lucide-react'
+import { Clock, Eye, Globe, LogOut, RefreshCw, Trash2, Users } from 'lucide-react'
 import toast from 'react-hot-toast'
 import ConfirmDialog from '@/components/ui/ConfirmDialog'
+import { formatDuration } from '@/lib/format'
 import type { AnalyticsSummary, CountRow } from '@/lib/analytics/types'
 
 const RANGES = [7, 30, 90] as const
@@ -22,7 +13,17 @@ const RANGES = [7, 30, 90] as const
 const card = 'surface rounded-3xl p-5'
 const heading = 'text-[11px] font-mono uppercase tracking-widest text-slate-500 mb-4'
 
-function StatTile({ icon: Icon, label, value, sub }: { icon: typeof Eye; label: string; value: number; sub?: string }) {
+function StatTile({
+  icon: Icon,
+  label,
+  value,
+  sub,
+}: {
+  icon: typeof Eye
+  label: string
+  value: number | string
+  sub?: string
+}) {
   return (
     <div className={card}>
       <div className="flex items-center gap-2 mb-3">
@@ -35,7 +36,17 @@ function StatTile({ icon: Icon, label, value, sub }: { icon: typeof Eye; label: 
   )
 }
 
-function BarList({ title, rows, empty }: { title: string; rows: CountRow[]; empty: string }) {
+function BarList({
+  title,
+  rows,
+  empty,
+  format = String,
+}: {
+  title: string
+  rows: CountRow[]
+  empty: string
+  format?: (count: number) => string
+}) {
   const max = Math.max(1, ...rows.map((r) => r.count))
   return (
     <div className={card}>
@@ -48,7 +59,7 @@ function BarList({ title, rows, empty }: { title: string; rows: CountRow[]; empt
             <li key={row.key}>
               <div className="flex items-center justify-between gap-3 mb-1">
                 <span className="text-sm text-slate-700 dark:text-slate-300 truncate">{row.key}</span>
-                <span className="text-xs font-mono text-slate-500 shrink-0">{row.count}</span>
+                <span className="text-xs font-mono text-slate-500 shrink-0">{format(row.count)}</span>
               </div>
               <div className="h-1.5 rounded-full bg-black/5 dark:bg-white/5 overflow-hidden">
                 <div
@@ -202,8 +213,8 @@ export default function AdminDashboard({ email }: { email: string }) {
           title="Delete All Analytics Data?"
           description={
             <p>
-              This permanently deletes every recorded page view and link click — all time, not just the last {days}{' '}
-              days. The dashboard will start counting again from zero. This can&apos;t be undone.
+              This permanently deletes every recorded page view — all time, not just the last {days} days. The dashboard
+              will start counting again from zero. This can&apos;t be undone.
             </p>
           }
           confirmLabel="Delete All Data"
@@ -212,13 +223,6 @@ export default function AdminDashboard({ email }: { email: string }) {
           onConfirm={clearData}
           onCancel={() => setConfirmClear(false)}
         />
-
-        {data?.storage && !data.storage.durable && (
-          <div className="flex items-start gap-3 rounded-3xl border border-amber-500/40 bg-amber-500/10 px-5 py-4 mb-6">
-            <AlertTriangle size={16} className="text-amber-600 dark:text-amber-500 shrink-0 mt-0.5" />
-            <p className="text-sm text-amber-800 dark:text-amber-300">{data.storage.note}</p>
-          </div>
-        )}
 
         {!data && !loading && (
           <div className={card}>
@@ -241,7 +245,7 @@ export default function AdminDashboard({ email }: { email: string }) {
                 value={data.totals.visitors}
                 sub={`${data.totals.visitorsToday} today`}
               />
-              <StatTile icon={MousePointerClick} label="Link clicks" value={data.totals.clicks} />
+              <StatTile icon={Clock} label="Avg. time on page" value={formatDuration(data.totals.avgSeconds)} />
               <StatTile icon={Globe} label="Referrer sources" value={data.referrers.length} />
             </div>
 
@@ -251,7 +255,12 @@ export default function AdminDashboard({ email }: { email: string }) {
 
             <div className="grid lg:grid-cols-2 gap-4 mb-4">
               <BarList title="Top pages" rows={data.topPages} empty="No page views yet." />
-              <BarList title="Most clicked links" rows={data.topLinks} empty="No link clicks yet." />
+              <BarList
+                title="Avg. time on page"
+                rows={data.timeOnPage}
+                empty="No measured visits yet."
+                format={formatDuration}
+              />
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
@@ -266,18 +275,17 @@ export default function AdminDashboard({ email }: { email: string }) {
                 <p className="text-sm text-slate-500">Nothing recorded yet.</p>
               ) : (
                 <ul className="divide-y divide-[var(--surface-border)]">
-                  {data.recent.map((event) => (
-                    <li key={event.id} className="flex items-center gap-3 py-2.5 text-sm">
-                      {event.type === 'page_view' ? (
-                        <Eye size={14} className="text-brand-600 shrink-0" />
-                      ) : (
-                        <ExternalLink size={14} className="text-accent-600 shrink-0" />
+                  {data.recent.map((view) => (
+                    <li key={view.id} className="flex items-center gap-3 py-2.5 text-sm">
+                      <Eye size={14} className="text-brand-600 shrink-0" />
+                      <span className="text-slate-700 dark:text-slate-300 truncate">{view.path}</span>
+                      {view.durationSeconds > 0 && (
+                        <span className="text-xs font-mono text-slate-500 shrink-0">
+                          {formatDuration(view.durationSeconds)}
+                        </span>
                       )}
-                      <span className="text-slate-700 dark:text-slate-300 truncate">
-                        {event.type === 'page_view' ? event.path : `${event.label} — from ${event.path}`}
-                      </span>
                       <span className="ml-auto text-xs font-mono text-slate-500 shrink-0">
-                        {new Date(event.at).toLocaleString('en-IN', {
+                        {new Date(view.at).toLocaleString('en-IN', {
                           day: '2-digit',
                           month: 'short',
                           hour: '2-digit',
